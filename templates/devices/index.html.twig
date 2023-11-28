@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="content">
+        <div class="content-row main">
+            <div class="content-column-left"></div>
+            <div class="content-column-center">
+                <h1 class="hidden-xs">Оборудование для полевых исследований грунтов</h1>
+            </div>
+        </div>
+        <div class="content-column-center">
+            <h1 class="visible-xs">Оборудование для полевых исследований грунтов</h1>
+
+            <h4 class="hidden-xs">Каталог</h4>
+
+            <div class="catalog">
+                {% for group in groups %}
+                    <div class="catalog-item">
+                        <div class="catalog-item-title">
+                            <a href="{{ path('devices/show', { 'id': group.getId() }) }}">{{ group.getFullname() }}</a>
+                        </div>
+                        {#                    <div class="catalog-item-desc">{{ group.getCnt() ~ ' ' ~ declension(group.getCnt(), ['наименование', 'наименования', 'наименований']) }}</div> #}
+                    </div>
+                {% endfor %}
+                <div class="catalog-item catalog-pdf">
+                    <div class="catalog-item-title hidden-xs"><a href="/docs/catalog.pdf">Скачать<br>каталог в PDF</a>
+                    </div>
+
+                    <a href="/docs/catalog.pdf" class="btn w100 visible-xs">Скачать каталог в PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

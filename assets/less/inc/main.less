@@ -1,0 +1,207 @@
+/* Главная */
+.main {
+  h1 {
+    margin-bottom: 37px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-bottom: 21px;
+    }
+  }
+
+  .content-column-left h4 {
+    margin-left: 17px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-left: 9px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+@news-item-bg: mix(#000000, @background-color, 4%);
+
+.news-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+
+  @media (max-width: @grid-float-breakpoint) {
+    overflow: visible;
+    margin: 0 -9px;
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    height: 40px;
+    background-image: linear-gradient(to bottom, transparent 22%, #ffffff 66%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    @media (max-width: @grid-float-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.news {
+  position: absolute;
+
+  @media (max-width: @grid-float-breakpoint) {
+    position: relative;
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: 13px;
+  }
+
+  &-item {
+    width: 243px;
+    min-width: 243px;
+    border-radius: 15px;
+    background-color: @news-item-bg;
+    padding: 14px 15px 18px;
+    margin-bottom: 9px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      padding: 10px 12px 15px;
+      margin-right: 6px;
+    }
+
+    &:first-child {
+      @media (max-width: @grid-float-breakpoint) {
+        margin-left: 9px;
+      }
+    }
+
+    &:last-child {
+      @media (max-width: @grid-float-breakpoint) {
+        margin-right: 9px;
+      }
+    }
+
+    &-title {
+      font-size: 17px;
+      font-weight: normal;
+      line-height: 1.41;
+      color: @text-color;
+      margin-bottom: 7px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 15px;
+        line-height: 1.4;
+        margin-bottom: 3px;
+      }
+    }
+
+    &-date {
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 1.5;
+      color: mix(@text-color, @news-item-bg, 30%);
+      margin-bottom: 26px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        margin-bottom: 16px;
+      }
+    }
+
+    &-author {
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.36;
+      letter-spacing: 1.5px;
+      color: @text-color;
+      text-transform: uppercase;
+    }
+  }
+}
+
+/* Каталог */
+.catalog {
+  &-item {
+    float: left;
+    width: 50%;
+    padding-right: 50px;
+    padding-bottom: 38px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      float: none;
+      width: 100%;
+      padding-right: 0;
+      padding-bottom: 16px;
+    }
+
+    &-title {
+      font-size: 21px;
+      font-weight: bold;
+      line-height: 1.29;
+      margin-bottom: 6px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 20px;
+        line-height: 1.1;
+        margin-bottom: 3px;
+      }
+    }
+
+    &-desc {
+      font-size: 15px;
+      font-weight: normal;
+      line-height: 1.2;
+      color: @label-color;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 12px;
+        line-height: 1.75;
+      }
+    }
+  }
+
+  &-pdf {
+    .catalog-item-title {
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.06;
+
+      > a {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      &:before {
+        display: inline-block;
+        content: '';
+        width: 30px;
+        height: 39px;
+        background: url("/public/img/pdf.png") center no-repeat;
+        background-size: contain;
+        margin-right: 11px;
+      }
+    }
+
+    .btn {
+      border-radius: 9px;
+      background-color: mix(@primary-color, @background-color, 12%);
+      margin-top: 4px;
+      height: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 1;
+      padding-top: 9px;
+
+      &:before {
+        display: inline-block;
+        content: '';
+        background: url("/public/img/pdf.png") center no-repeat;
+        background-size: contain;
+        width: 16px;
+        height: 20px;
+        margin-right: 6px;
+        position: relative;
+        top: 4px;
+      }
+    }
+  }
+}

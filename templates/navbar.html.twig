@@ -1,0 +1,28 @@
+<nav class="navbar">
+    <ul class="navbar-menu">
+        <li class="navbar-item">
+            <a href="{{ path('app_devices') }}">{{ app_menu_items.devices.title }}</a>
+            <span>{{ app_menu_items.devices.description }}</span>
+        </li>
+        <li class="navbar-item">
+            <a href="{{ path('app_devices') }}">{{ app_menu_items.about.title }}</a>
+            <span>{{ app_menu_items.about.description }}</span>
+        </li>
+        {% if app_menu_items.order.visible %}
+            <li class="navbar-item">
+                <a href="{{ path('app_devices') }}">{{ app_menu_items.order.title }}</a>
+                <span>{{ app_menu_items.order.description }}</span>
+            </li>
+        {% endif %}
+        {% if app_menu_items.order_save.visible %}
+            <li class="navbar-item">
+                <a href="{{ path('app_devices') }}">{{ app_menu_items.order_save.title }}</a>
+                <span>{{ app_menu_items.order_save.description }}</span>
+            </li>
+        {% endif %}
+    </ul>
+    <div class="navbar-user">
+{#        <span>{{ app_username }}</span>#}
+{#        <a href="mailto:{{ app_email }}">Contact</a>#}
+    </div>
+</nav>

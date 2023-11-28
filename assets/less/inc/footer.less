@@ -1,0 +1,144 @@
+@footer-bg: mix(#000, #fff, 5%);
+
+.footer {
+  background: @footer-bg;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.41;
+
+  @media (max-width: @grid-float-breakpoint) {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  &-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  p {
+    margin-bottom: 18px;
+    line-height: 1.41;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 50px;
+    background: @background-color;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      height: 16px;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+    }
+  }
+
+  &-row {
+    display: flex;
+    margin: 38px 40px 23px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      flex-direction: column;
+      margin: 25px 9px 0;
+    }
+  }
+
+  &-column {
+    width: 50%;
+    padding-right: 59px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      width: 100%;
+      padding-right: 0;
+    }
+  }
+
+  &-phones {
+    font-size: 33px;
+    font-weight: bold;
+    line-height: 40px;
+    margin-bottom: 18px;
+    margin-top: 8px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      font-size: 21px;
+      line-height: 1.14;
+      color: mix(@text-color, @footer-bg, 90%);
+      margin-bottom: 11px;
+    }
+  }
+
+  &-email {
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 1.24;
+    margin-bottom: 40px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+  }
+
+  &-addresses {
+    display: flex;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-bottom: 33px;
+    }
+  }
+
+  &-address {
+    width: 50%;
+    padding-right: 20px;
+
+    &-title {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: normal;
+      margin-bottom: 8px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 15px;
+      }
+    }
+
+    &-text {
+      font-size: 17px;
+      font-weight: normal;
+      line-height: 1.41;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  &-map {
+    width: 1113px;
+    height: 567px;
+    margin: 0 40px;
+
+    @media (max-width: @grid-float-breakpoint){
+      width: 100%;
+      //height: 392px;
+      height: auto;
+      margin: 23px 0 0;
+    }
+  }
+}
+
+#mymap {
+  width: 100%;
+  height: 509px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    height: 60vh;
+  }
+}

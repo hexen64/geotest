@@ -1,0 +1,91 @@
+/* Gallery */
+.owl-carousel {
+  margin-bottom: 32px;
+  max-width: 867px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    max-width: none;
+  }
+
+  .slide {
+    display: block;
+    width: 363px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 10px;
+    position: relative;
+    vertical-align: top;
+
+    @media (max-width: @grid-float-breakpoint) {
+      width: 318px;
+    }
+  }
+
+  .slide-img {
+    display: block;
+    width: 363px;
+    height: 484px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      width: 318px;
+      height: 424px;
+    }
+
+    > div {
+      width: 363px;
+      height: 484px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      @media (max-width: @grid-float-breakpoint) {
+        width: 318px;
+        height: 424px;
+      }
+    }
+  }
+
+  .slide-text {
+    opacity: 0.42;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-top: 8px;
+  }
+
+  .owl-nav {
+    button.owl-prev,
+    button.owl-next {
+      display: block;
+      height: 110px;
+      width: 110px;
+      box-sizing: content-box;
+      overflow: hidden;
+      cursor: pointer;
+      position: absolute;
+      top: 202px;
+      z-index: 2;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @media (max-width: @grid-float-breakpoint) {
+        display: none !important;
+        visibility: hidden;
+      }
+    }
+
+    button.owl-prev {
+      left: -4px;
+      background-image: url('/public/img/svg/gallery-button-left.svg');
+    }
+
+    button.owl-next {
+      right: -4px;
+      background-image: url('/public/img/svg/gallery-button-right.svg');
+    }
+
+    button.disabled {
+      display: none;
+    }
+  }
+}

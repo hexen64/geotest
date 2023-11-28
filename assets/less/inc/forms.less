@@ -1,0 +1,234 @@
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  font-family: "Roboto", "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+  height: 50px;
+  border-radius: 9px;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.06);
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.4;
+  padding: 13px 12px 16px;
+  outline: none;
+
+  &:focus {
+    border: solid 2px @primary-color;
+    background-color: #ffffff;
+    padding: 13px 10px 16px;
+  }
+}
+
+textarea {
+  min-height: 90px;
+
+  &:focus {
+    padding: 11px 10px 16px;
+  }
+}
+
+input.count {
+  width: 58px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1;
+  color: @label-color;
+  margin-bottom: 2px;
+}
+
+.radio_list {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  li {
+    margin: 0;
+    padding: 5px 0 1px 20px;
+    list-style: none;
+    min-height: 16px;
+    position: relative;
+
+    > label {
+      color: @text-color;
+      font-size: 15px;
+      line-height: 1.4;
+      cursor: pointer;
+
+      @media (max-width: @grid-float-breakpoint) {
+        line-height: 1.6;
+      }
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+
+    + label:before,
+    + label:after {
+      position: absolute;
+      display: block;
+      content: '';
+      border-radius: 50%;
+      left: 0;
+      top: 10px;
+      width: 16px;
+      height: 16px;
+    }
+
+    + label:before {
+      background-color: #f0f0f0;
+    }
+
+    &:checked {
+      + label:before {
+        background-color: @link-color;
+      }
+
+      + label:after {
+        width: 8px;
+        height: 8px;
+        left: 4px;
+        top: 14px;
+        background-color: @background-color;
+      }
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.18;
+  padding: 15px 24px;
+  height: 50px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+
+  @media (max-width: @grid-float-breakpoint) {
+    border-radius: 9px;
+    height: 45px;
+    font-size: 15px;
+    line-height: 1.33;
+    padding: 12px 19px 13px;
+  }
+}
+
+.btn-default {
+  &,
+  &:visited {
+    color: @link-color;
+    background: #f6f5f3;
+
+    .rubznak {
+      color: @link-color;
+    }
+  }
+
+  &:hover,
+  &:active {
+    color: @link-hover-color;
+    //background: #f6f5f3;
+    background-color: darken(#f6f5f3, 10%);
+
+    .rubznak {
+      color: @link-hover-color;
+    }
+  }
+}
+
+.btn-primary {
+  &,
+  &:visited {
+    color: #fff;
+    background: @primary-color;
+    box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.21);
+
+    .rubznak {
+      color: #fff;
+    }
+  }
+
+  &:hover,
+  &:active {
+    color: #fff;
+    //background: @primary-color;
+    background-color: darken(@primary-color, 10%);
+
+    .rubznak {
+      color: #fff;
+    }
+  }
+
+  &:disabled {
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+  }
+}
+
+.btn-sm {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.33;
+  height: 34px;
+  padding: 7px 13px;
+  border-radius: 9px;
+}
+
+.btn-md {
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.41;
+  height: 60px;
+  padding: 18px 50px;
+  border-radius: 15px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    height: 50px;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+}
+
+.btn-lg {
+  font-family: "MuseoSansCyrl", sans-serif;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.43;
+  height: 70px;
+  padding: 20px 50px;
+  border-radius: 12px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    height: 60px;
+    font-size: 17px;
+    line-height: 1.76;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+.error_list {
+  margin: 4px 0 0 12px;
+  padding: 0;
+  font-size: 15px;
+  color: @text-red;
+
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.form-row {
+  margin-bottom: 15px;
+}

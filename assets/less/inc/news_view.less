@@ -1,0 +1,237 @@
+/* Просмотр новости */
+
+.content-news-view {
+
+  @media (max-width: @grid-float-breakpoint) {
+    flex-direction: column-reverse;
+  }
+
+  .content-column-center > a {
+    display: block;
+    margin-top: 5px;
+    font-size: 15px;
+    line-height: 1.2;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-top: 7px;
+    }
+  }
+
+  .subscribe-form {
+    @media (max-width: @grid-float-breakpoint) {
+      margin-top: 0;
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.news-view {
+  max-width: 722px;
+  margin-bottom: 47px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    margin-bottom: 33px;
+  }
+
+  &-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin-bottom: 7px;
+    }
+
+    > span {
+      @media (max-width: @grid-float-breakpoint) {
+        font-weight: 900;
+      }
+    }
+  }
+
+  &-info {
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+    margin-bottom: 28px;
+
+    @media (max-width: @grid-float-breakpoint) {
+
+    }
+  }
+
+  &-tag {
+    display: inline-block;
+    height: 18px;
+    border-radius: 3px;
+    background-color: mix(#000000, @background-color, 6%);
+    padding: 0 7px;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1.8;
+    letter-spacing: 1.2px;
+    color: #787878;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+
+  &-date {
+    display: inline-block;
+    height: 18px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.2;
+    color: @date-color;
+  }
+
+  &-text {
+    p {
+      font-size: 18px;
+      font-weight: normal;
+      line-height: 1.56;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 27px;
+      font-weight: 900;
+      line-height: 1.33;
+      text-align: center;
+      margin-top: 28px;
+      margin-bottom: 35px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 24px;
+        line-height: 1.25;
+        margin-top: 36px;
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  &-author {
+    @media (max-width: @grid-float-breakpoint) {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+  }
+
+  &-author-position {
+    @media (max-width: @grid-float-breakpoint) {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+
+  .news-images {
+    margin-top: 33px;
+    margin-bottom: 34px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-top: 23px;
+    }
+
+    &-item {
+      display: inline-block;
+      width: 250px;
+      margin-right: 37px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 26px;
+      }
+
+      &-img {
+        width: 250px;
+        height: 167px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-bottom: 18px;
+
+        @media (max-width: @grid-float-breakpoint) {
+          margin-bottom: 11px;
+        }
+      }
+
+      &-desc {
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 1.33;
+
+        @media (max-width: @grid-float-breakpoint) {
+          font-size: 16px;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+.news-bottom {
+  max-width: 860px;
+  border-top: 2px solid mix(#000000, @background-color, 5%);
+  padding: 21px 25px 0 0;
+
+  @media (max-width: @grid-float-breakpoint) {
+    font-size: 16px;
+    line-height: 1.5;
+    padding-right: 0;
+    margin-right: -9px;
+    margin-bottom: 59px;
+  }
+
+  &-items {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-bottom: 11px;
+      overflow-x: scroll;
+    }
+  }
+
+  &-item {
+    width: 242px;
+    min-width: 242px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      padding-right: 15px;
+    }
+
+    &-title {
+      font-size: 17px;
+      font-weight: normal;
+      line-height: 1.41;
+      margin-bottom: 8px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 5px;
+      }
+    }
+
+    &-date {
+      font-size: 15px;
+      font-weight: normal;
+      line-height: 1.2;
+      color: @date-color;
+    }
+  }
+}

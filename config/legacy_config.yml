@@ -1,0 +1,24 @@
+parameters:
+  app_title: 'Геотест'
+  app_email: 'test@test.test'
+  app_username: '<username>'
+  app_password: '<password>'
+  app_cookie_expire: 2592000
+  app_menu_items:
+    devices:
+      title: 'Каталог'
+      description: 'Оборудование для полевых<br>исследований грунтов'
+    about:
+      title: 'О компании'
+      description: 'О компании'
+    news:
+      title: 'Новости и статьи'
+      description: 'Новости и статьи'
+    order:
+      title: 'Оформление заказа'
+      description: 'Оформление заказа'
+      visible: false
+    order_save:
+      title: 'Оформление заказа'
+      description: 'Оформление заказа'
+      visible: false

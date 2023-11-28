@@ -1,0 +1,155 @@
+/* Заказ */
+.order-form {
+  display: flex;
+  margin: 38px 30px 0 15px;
+
+  @media (max-width: @grid-float-breakpoint) {
+    flex-direction: column;
+    margin: 24px 0 0 0;
+  }
+
+  h1 {
+    margin-bottom: 14px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-bottom: 8px;
+      font-size: 27px;
+      font-weight: 900;
+      line-height: 1.11;
+    }
+  }
+
+  p {
+    margin: 13px 0 33px;
+    font-size: 15px;
+    line-height: 1.4;
+
+    @media (max-width: @grid-float-breakpoint) {
+      margin-top: 8px;
+      margin-bottom: 19px;
+    }
+  }
+
+  &-left {
+    width: 100%;
+    margin-top: 9px;
+  }
+
+  &-right {
+    width: 400px;
+    min-width: 400px;
+    margin-left: 50px;
+
+    @media (max-width: @grid-float-breakpoint) {
+      width: 100%;
+      margin-left: 0;
+      min-width: 0;
+    }
+  }
+
+  .variant {
+    margin-bottom: 20px;
+    max-width: initial;
+    background-color: mix(@primary-color, #fff, 8%);
+
+    @media (max-width: @grid-float-breakpoint) {
+      padding-top: 21px;
+    }
+  }
+
+  .order-complect {
+    &-title {
+      display: block;
+      font-family: 'MuseoSansCyrl', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.25;
+      color: @link-color;
+      margin-bottom: 4px;
+
+      @media (max-width: @grid-float-breakpoint) {
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1.14;
+      }
+    }
+
+    &-row {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: @grid-float-breakpoint) {
+        flex-direction: column;
+      }
+    }
+
+    &-row-count-sum {
+      display: flex;
+      justify-content: right;
+
+      @media (max-width: @grid-float-breakpoint) {
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+    }
+
+    &-row-price {
+      line-height: 1.7;
+    }
+
+    &-row-count {
+      text-align: right;
+
+      @media (max-width: @grid-float-breakpoint) {
+        text-align: left;
+      }
+    }
+
+    &-row-sum {
+      text-align: right;
+      width: 130px;
+      min-width: 130px;
+      line-height: 1.7;
+    }
+
+    &-diff {
+      margin-left: 10px;
+      font-size: 15px;
+      font-weight: normal;
+      line-height: 1.4;
+      color: @text-color;
+    }
+  }
+
+  .btn-delete {
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+
+    &:before {
+      display: inline-block;
+      content: '';
+      background: url("/public/img/svg/trash.svg") center no-repeat;
+      background-size: contain;
+      width: 14px;
+      height: 18px;
+    }
+  }
+
+  label {
+    font-size: 15px;
+  }
+
+  .radio_list {
+    margin-bottom: 28px;
+  }
+}
+
+.order-complect-diff {
+  > span {
+    display: inline-block;
+    width: 13px;
+  }
+}
