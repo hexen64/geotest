@@ -15,7 +15,7 @@ class News
     private ?int $id;
 
     #[ORM\Column(type: "integer")]
-    private ?int $news_order;
+    private ?int $newsOrder;
 
     #[ORM\Column(type: "date")]
     private ?\DateTimeInterface $date;
@@ -30,13 +30,13 @@ class News
     private ?string $author;
 
     #[ORM\Column(type: "string", length: 255)]
-    private ?string $author_position;
+    private ?string $authorPosition;
 
     #[ORM\Column(type: "string", length: 255)]
     private ?string $tag;
 
     #[ORM\Column(type: "string", length: 50)]
-    private ?string $group_id;
+    private ?string $groupId;
 
     // Getters and setters for the fields
 
@@ -47,12 +47,12 @@ class News
 
     public function getNewsOrder(): ?int
     {
-        return $this->news_order;
+        return $this->newsOrder;
     }
 
-    public function setNewsOrder(int $news_order): self
+    public function setNewsOrder(int $newsOrder): self
     {
-        $this->news_order = $news_order;
+        $this->newsOrder = $newsOrder;
         return $this;
     }
 
@@ -102,12 +102,12 @@ class News
 
     public function getAuthorPosition(): ?string
     {
-        return $this->author_position;
+        return $this->authorPosition;
     }
 
-    public function setAuthorPosition(string $author_position): self
+    public function setAuthorPosition(string $authorPosition): self
     {
-        $this->author_position = $author_position;
+        $this->authorPosition = $authorPosition;
         return $this;
     }
 
@@ -124,12 +124,12 @@ class News
 
     public function getGroupId(): ?string
     {
-        return $this->group_id;
+        return $this->groupId;
     }
 
-    public function setGroupId(string $group_id): self
+    public function setGroupId(string $groupId): self
     {
-        $this->group_id = $group_id;
+        $this->groupId = $groupId;
         return $this;
     }
 }

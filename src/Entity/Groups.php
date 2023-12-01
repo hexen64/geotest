@@ -33,7 +33,7 @@ class Groups
     private ?string $file;
 
     #[ORM\Column(type: "integer", nullable: true)]
-    private ?int $news_id;
+    private ?int $newsId;
 
     // Getters and setters for the fields
 
@@ -121,12 +121,12 @@ class Groups
 
     public function getNewsId(): ?int
     {
-        return $this->news_id;
+        return $this->newsId;
     }
 
-    public function setNewsId(?int $news_id): self
+    public function setNewsId(?int $newsId): self
     {
-        $this->news_id = $news_id;
+        $this->newsId = $newsId;
         return $this;
     }
 

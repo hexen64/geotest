@@ -7,6 +7,23 @@
                 <h1 class="hidden-xs">Оборудование для полевых исследований грунтов</h1>
             </div>
         </div>
+
+    <div class="content-row main">
+        {#            <div class="content-column-left"> #}
+        {#                <div class="news-wrapper"> #}
+        {#                    <h4>Новости и статьи</h4> #}
+
+        {#                    <div class="news"> #}
+        {#                        {% for news_item in news %} #}
+        {#                            <div class="news-item"> #}
+        {#                                <div class="news-item-title">{{ news_item.getTitleLink() }}</div> #}
+        {#                                <div class="news-item-date">{{ news_item.getDate()|format_date('d.m.Y') }}</div> #}
+        {#                                <div class="news-item-author">{{ news_item.getAuthor() }}</div> #}
+        {#                            </div> #}
+        {#                        {% endfor %} #}
+        {#                    </div> #}
+        {#                </div> #}
+        {#            </div> #}
         <div class="content-column-center">
             <h1 class="visible-xs">Оборудование для полевых исследований грунтов</h1>
 
@@ -16,7 +33,7 @@
                 {% for group in groups %}
                     <div class="catalog-item">
                         <div class="catalog-item-title">
-                            <a href="{{ path('devices/show', { 'id': group.getId() }) }}">{{ group.getFullname() }}</a>
+                            <a href="{{ path('app_devices_show', { 'groupId': group.getId() }) }}">{{ group.getFullname() }}</a>
                         </div>
                         {#                    <div class="catalog-item-desc">{{ group.getCnt() ~ ' ' ~ declension(group.getCnt(), ['наименование', 'наименования', 'наименований']) }}</div> #}
                     </div>

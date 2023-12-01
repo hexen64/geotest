@@ -12,11 +12,11 @@ class GroupsComplects
 {
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 50)]
-    private string $group_id;
+    private string $groupId;
 
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 50)]
-    private string $complect_id;
+    private string $complectId;
 
     #[ORM\Column(type: "integer")]
     private int $position;
@@ -25,23 +25,23 @@ class GroupsComplects
 
     public function getGroupId(): ?string
     {
-        return $this->group_id;
+        return $this->groupId;
     }
 
-    public function setGroupId(string $group_id): self
+    public function setGroupId(string $groupId): self
     {
-        $this->group_id = $group_id;
+        $this->groupId = $groupId;
         return $this;
     }
 
     public function getComplectId(): ?string
     {
-        return $this->complect_id;
+        return $this->complectId;
     }
 
-    public function setComplectId(string $complect_id): self
+    public function setComplectId(string $complectId): self
     {
-        $this->complect_id = $complect_id;
+        $this->complectId = $complectId;
         return $this;
     }
 

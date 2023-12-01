@@ -11,11 +11,11 @@ class GroupsRows
 {
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 50)]
-    private string $group_id;
+    private string $groupId;
 
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 32)]
-    private string $row_id;
+    private string $rowId;
 
     #[ORM\Column(type: "integer")]
     private int $position;
@@ -24,23 +24,23 @@ class GroupsRows
 
     public function getGroupId(): ?string
     {
-        return $this->group_id;
+        return $this->groupId;
     }
 
-    public function setGroupId(string $group_id): self
+    public function setGroupId(string $groupId): self
     {
-        $this->group_id = $group_id;
+        $this->groupId = $groupId;
         return $this;
     }
 
     public function getRowId(): ?string
     {
-        return $this->row_id;
+        return $this->rowId;
     }
 
-    public function setRowId(string $row_id): self
+    public function setRowId(string $rowId): self
     {
-        $this->row_id = $row_id;
+        $this->rowId = $rowId;
         return $this;
     }
 
@@ -49,7 +49,7 @@ class GroupsRows
         return $this->position;
     }
 
-    public function setposition(int $position): self
+    public function setPosition(int $position): self
     {
         $this->position = $position;
         return $this;

@@ -26,7 +26,7 @@ class Complects
     private string $tag;
 
     #[ORM\Column(type: "date")]
-    private \DateTimeInterface $tag_end;
+    private \DateTimeInterface $tagEnd;
 
     #[ORM\Column(type: "boolean", options: ["default" => true])]
     private bool $visible;
@@ -93,12 +93,12 @@ class Complects
 
     public function getTagEnd(): ?\DateTimeInterface
     {
-        return $this->tag_end;
+        return $this->tagEnd;
     }
 
-    public function setTagEnd(\DateTimeInterface $tag_end): self
+    public function setTagEnd(\DateTimeInterface $tagEnd): self
     {
-        $this->tag_end = $tag_end;
+        $this->tagEnd = $tagEnd;
         return $this;
     }
 
