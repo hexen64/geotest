@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RowsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RowsRepository::class)]
@@ -129,4 +131,76 @@ class Rows
 
         return $this;
     }
+
+    #[ORM\ManyToMany(targetEntity: Variants::class, inversedBy: "rows")]
+    #[ORM\JoinTable(name: "variants_rows")]
+    #[ORM\JoinColumn(name: "row_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "variant_id", referencedColumnName: "id")]
+    private Collection $variants;
+
+    public function __construct()
+    {
+        $this->variants = new ArrayCollection();
+        $this->variantsRows = new ArrayCollection();
+    }
+
+    // ... getters and setters for other properties
+
+    public function getVariants(): Collection
+    {
+        return $this->variants;
+    }
+
+    public function addVariant(Variants $variant): self
+    {
+        if (!$this->variants->contains($variant)) {
+            $this->variants[] = $variant;
+            $variant->addRow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariant(Variants $variant): self
+    {
+        if ($this->variants->removeElement($variant)) {
+            $variant->removeRow($this);
+        }
+
+        return $this;
+    }
+
+
+    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "row", cascade: ["persist"])]
+    private Collection $variantsRows;
+
+
+    public function getVariantsRows(): Collection
+    {
+        return $this->variantsRows;
+    }
+
+    public function addVariantsRow(VariantsRows $variantsRow): self
+    {
+        if (!$this->variantsRows->contains($variantsRow)) {
+            $this->variantsRows[] = $variantsRow;
+            $variantsRow->setRow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariantsRow(VariantsRows $variantsRow): self
+    {
+        if ($this->variantsRows->removeElement($variantsRow)) {
+            // Set the owning side to null (unless already changed)
+            if ($variantsRow->getRow() === $this) {
+                $variantsRow->setRow(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

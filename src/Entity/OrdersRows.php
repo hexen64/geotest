@@ -14,9 +14,8 @@ class OrdersRows
     #[ORM\Column(type: "integer")]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: "App\Entity\Orders")]
-    #[ORM\JoinColumn(name: "order_id", referencedColumnName: "id")]
-    private $order;
+    #[ORM\Column(type: "integer", name: "order_id")]
+    private $orderId;
 
     #[ORM\Column(type: "string", length: 32, name: "row_id")]
     private $rowId;
@@ -32,14 +31,14 @@ class OrdersRows
         return $this->id;
     }
 
-    public function getOrder(): ?Orders
+    public function getOrderId(): int
     {
-        return $this->order;
+        return $this->orderId;
     }
 
-    public function setOrder(?Orders $order): self
+    public function setOrderId(int $orderId): self
     {
-        $this->order = $order;
+        $this->orderId = $orderId;
 
         return $this;
     }

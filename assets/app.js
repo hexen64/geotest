@@ -7,3 +7,4 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './less/main.less';
+import './js/main.js';

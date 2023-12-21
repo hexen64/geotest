@@ -64,7 +64,7 @@ class DevicesController extends BaseController
                 $complects[$k]['tag_show'] = false;
             }
             $complects[$k]['url'] = $this->generateUrl('app_complect_group', array(
-                'id' => $complect['id'], 'group' => $groupId));
+                'id' => $complect['id'], 'groupId' => $groupId));
             $complects[$k]['img'] = preg_replace('/^([^\.]+)\.(.+)$/', '$1.$2', $complect['img']);
         }
 

@@ -12,22 +12,22 @@ class OrdersVariants
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: "integer", name: "order_id")]
-    private $orderId;
+    private int $orderId;
 
     #[ORM\Column(type: "string", length: 50, name: "variant_id")]
-    private $variantId;
+    private string $variantId;
 
     #[ORM\Column(type: "boolean", name: "is_base")]
-    private $isBase;
+    private bool $isBase;
 
     #[ORM\Column(type: "integer")]
-    private $cnt;
+    private int $cnt;
 
     #[ORM\Column(type: "string", length: 1, columnDefinition: "ENUM('k','l')", options: ["default" => "k"])]
-    private $type;
+    private ?string $type;
 
     public function getId(): ?int
     {
@@ -87,7 +87,7 @@ class OrdersVariants
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 

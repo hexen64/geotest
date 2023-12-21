@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\NewsRepository;
+use App\Repository\OrdersRepository;
 use App\Repository\OrderssRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,35 +13,35 @@ class Orders
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
-    private $id;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(type: "text")]
-    private $fio;
+    private string $fio;
 
     #[ORM\Column(type: "string", length: 250)]
-    private $phone;
+    private string $phone;
 
     #[ORM\Column(type: "string", length: 250)]
-    private $email;
+    private string $email;
 
     #[ORM\Column(type: "text")]
-    private $firm;
+    private string $firm;
 
     #[ORM\Column(type: "text")]
-    private $address;
+    private string $address;
 
     #[ORM\Column(type: "text")]
-    private $comment;
+    private string $comment;
 
     #[ORM\Column(type: "string", columnDefinition: "ENUM('firm','firm+sklad','self')", length: 10, options: ["default" => "firm"])]
-    private $delivery;
+    private string $delivery;
 
     #[ORM\Column(type: "float")]
-    private $total;
+    private float $total;
 
     #[ORM\Column(type: "boolean", options: ["default" => false])]
-    private $submit;
+    private bool $submit;
 
     // Getters and setters for the properties
 

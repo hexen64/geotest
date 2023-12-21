@@ -57,7 +57,7 @@
                         <div class="complect-title">{{ complect['name'] }}{% if complect['tag_show'] %}<span class="new">{{ complect['tag'] }}</span>{% endif %}</div>
                         <div class="complect-desc">{{ complect['description'] }}</div>
                         {% if complect['priceBase'] %}
-                            <div class="complect-price">{{ complect['priceBase']|format_rub }}</div>
+                            <div class="complect-price">{{ complect['priceBase']|format_rub|raw }}</div>
                         {% endif %}
                     </a>
                 {% endfor %}
@@ -80,7 +80,7 @@
                             <a href="{{ path('app_row_show', {'rowId': row.getId(), 'groupId': group.getId()}) }}">{{ row.getName() }}</a>
                         </td>
                         <td class="complect-item-price text-nowrap">
-                            {{ row.getPrice()|format_rub }}
+                            {{ row.getPrice()|format_rub|raw }}
                         </td>
                     </tr>
                 {% endfor %}

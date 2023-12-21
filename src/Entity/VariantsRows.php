@@ -24,7 +24,14 @@ class VariantsRows
     private $isBase;
 
     #[ORM\Column(type: "smallint", options: ["default" => 0])]
-    private $order;
+    private $position;
+
+
+    #[ORM\ManyToOne(targetEntity: Rows::class, inversedBy: 'variantsRows')]
+    private Rows $row;
+
+    #[ORM\ManyToOne(targetEntity: Variants::class, inversedBy: 'variantsRows')]
+    private ?Variants $variant;
 
     public function getVariantId(): ?string
     {
@@ -74,15 +81,46 @@ class VariantsRows
         return $this;
     }
 
-    public function getOrder(): ?int
+    public function getPosition(): ?int
     {
-        return $this->order;
+        return $this->position;
     }
 
-    public function setOrder(int $order): self
+    public function setPosition(int $position): self
     {
-        $this->order = $order;
+        $this->position = $position;
 
         return $this;
+    }
+
+
+    public function getRow(): ?Rows
+    {
+        return $this->row;
+
+    }
+
+
+    public function setRow(?Rows $row): self
+    {
+        $this->row = $row;
+
+        return $this;
+
+    }
+
+    public function getVariant(): ?Variants
+    {
+        return $this->variant;
+
+    }
+
+
+    public function setVariant(?Variants $variant): self
+    {
+        $this->variant = $variant;
+
+        return $this;
+
     }
 }

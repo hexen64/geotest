@@ -1,8 +1,7 @@
 <?php
 
 function format_rub($v){
-    return '<span class="text-nowrap">'.number_format($v, 0, ',', ' ').'</span><span class="rubznak">p</span>';
-}
+    return "<span class=\"text-nowrap\">" . number_format($v, 0, ',', ' ') . "</span><span class=\"rubznak\">p</span>";}
 
 function format_rub_num($v){
     return number_format($v, 0, ',', ' ');
