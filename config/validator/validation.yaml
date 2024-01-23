@@ -1,0 +1,5 @@
+App\Entity\VariantsRows:
+  properties:
+    cnt:
+      - NotBlank: ~
+      - Type: integer

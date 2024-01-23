@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="order-done">
+        <button type="button" class="btn btn-primary pull-right" id="print">Распечатать</button>
+
+        <h1>Заказ №{{ id }} принят</h1>
+
+        <h3>Благодарим за заказ!</h3>
+
+        <p>В&nbsp;ближайшее время, наши специалисты свяжуться с&nbsp;вами для подтверждения заказа и&nbsp;согласования
+            сроков, условий доставки и&nbsp;оплаты.</p>
+
+        <p>В&nbsp;случае возникновения дополнительных вопросов&nbsp;&mdash; звоните: <span class="text-nowrap">+7 343 368-75-77</span>
+            или&nbsp;<span class="text-nowrap">+7 343 383-64-73</span>.</p>
+
+        <div class="order-done-row order-done-header-row">
+            <div class="order-done-row-name">
+                <h3>Состав заказа</h3>
+            </div>
+            <div class="order-done-row-price-count-sum hidden-xs">
+                <div class="order-done-row-price">
+                    <div class="label">Цена</div>
+                </div>
+                <div class="order-done-row-count-sum">
+                    <div class="order-done-row-count">
+                        <div class="label">Кол-во</div>
+                    </div>
+                    <div class="order-done-row-sum">
+                        <div class="label">Сумма</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% for variant in variants %}
+            <div class="order-done-row">
+                <div class="order-done-row-name">
+                    <a href="{{ url('app_complect', { 'id': variant.id }) }}"
+                       class="order-complect-title">{{ variant.name }}</a>
+                    {% if variant.type %}
+                        <div>Тип соединительной резьбы: {{ variant.type == 'k' ? 'коническая' : 'ленточная' }}</div>
+                    {% endif %}
+                    {% for row in variant.rows %}
+                        {% if row.diff %}
+                            <div class="order-complect-diff">
+                                {{ row.diff> 0 ? '<span class="text-green">+</span>' : '<span class="text-red">-</span>' }}
+                                &nbsp;{{ row.name }} &mdash; {{ row.diff|abs }}&nbsp;шт
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="order-done-row-price-count-sum">
+                    <div class="order-done-row-price">
+                        <div class="label visible-xs">Цена</div>{{ variant.price|format_rub|raw }}</div>
+                    <div class="order-done-row-count-sum">
+                        <div class="order-done-row-count">
+                            <div class="label visible-xs">Кол-во</div>{{ variant.cnt }}&nbsp;шт.
+                        </div>
+                        <div class="order-done-row-sum">
+                            <div class="label visible-xs">Сумма
+                            </div>{{ (variant.price * variant.cnt)|format_rub|raw }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for row in rows %}
+            <div class="order-done-row">
+                <div class="order-done-row-name">
+                    <a href="{{ url('app_row_show', { 'rowId': row.id }) }}"
+                       class="order-complect-title">{{ row.name }}</a>
+                    {% if row.type %}
+                        <p>Тип соединительной резьбы: {{ row.type == 'k' ? 'коническая' : 'ленточная' }}</p>
+                    {% endif %}
+                </div>
+                <div class="order-done-row-price-count-sum">
+                    <div class="order-done-row-price">
+                        <div class="label visible-xs">Цена</div>{{ row.price|format_rub|raw }}</div>
+                    <div class="order-done-row-count-sum">
+                        <div class="order-done-row-count">
+                            <div class="label visible-xs">Кол-во</div>{{ row.cnt }}&nbsp;шт.
+                        </div>
+                        <div class="order-done-row-sum">
+                            <div class="label visible-xs">Сумма</div>{{ (row.price* row.cnt)|format_rub|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="order-done-row">
+            <div class="order-done-row-name">
+                <div class="order-done-total">Итоговая сумма</div>
+            </div>
+            <div class="order-done-row-price-count-sum">
+                <div id="order_total2">
+                    <div class="order-done-total">{{ orderTotal|format_rub|raw }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="order-done-footer-row">
+            <p>НДС&nbsp;&mdash; не&nbsp;предусмотрен. Упрощенная система налогообложения (Глава&nbsp;26.2 Налогового
+                кодекса&nbsp;РФ).</p>
+        </div>
+        <table class="table contact">
+            <tr>
+                <th colspan="2" class="text-left">
+                    <h3>Контактные данные</h3>
+                </th>
+            </tr>
+            <tr>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="label">Организация:</div>
+                        </td>
+                        <td>{{ contact.firm }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Контактное лицо:</div>
+                        </td>
+                        <td>{{ contact.fio }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Телефон:</div>
+                        </td>
+                        <td>{{ contact.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Электронная почта:</div>
+                        </td>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Адрес:</div>
+                        </td>
+                        <td>{{ contact.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Дополнительные сведения:</div>
+                        </td>
+                        <td>{{ contact.comment }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label">Способ доставки:</div>
+                        </td>
+                        <td>{{ contact.delivery }}</td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+    {% block javascripts %}
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                const printButton = document.getElementById("print");
+                printButton.addEventListener("click", function () {
+                    window.print();
+                    return false;
+                });
+            });
+        </script>
+    {% endblock %}

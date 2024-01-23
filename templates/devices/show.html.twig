@@ -1,126 +1,128 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-{% if group %}
+    {% if group %}
+        <div class="content-row content-group">
+            <div class="content-column-left"></div>
+            <div class="content-column-center">
+                <a href="/" class="visible-xs">Каталог</a>
+                <h1>{{ group.getFullName() }}</h1>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="content-row content-group">
+        <div class="content-column-left">
+            {% if complects and group and group.getFile() %}
+                <div class="overview">
+                    <div class="overview-link">
+                        <a href="#">Краткий обзор оборудования</a>
+                    </div>
+                    <div class="overview-popup">
+                        <div class="overview-popup-text">
+                            <div class="overview-popup-close"></div>
+                            {{ include('html/groups/' ~ group.getFile() ~ '.htm') }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if group_news %}
+                <div class="group-news">
+                    <div class="group-news-content">
+                        <div class="group-news-title">{{ group_news.getTitleLink|raw }}</div>
+                        <div class="group-news-date hidden-xs">{{ group_news.getDate|date('d.m.Y') }}</div>
+                    </div>
+                    <div class="group-news-author">{{ group_news.getAuthor }}</div>
+                    <div class="group-news-author-position">{{ group_news.getAuthorPosition }}</div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="content-column-center">
+            <div class="last-news">
+                <div class="last-news-item">
+                    <div class="last-news-item-title">{{ last_news.getTitleLink|raw }}</div>
+                    <div class="last-news-item-date">{{ last_news.getDate|date('d.m.Y') }}</div>
+                    <div class="last-news-item-author visible-xs">{{ last_news.getAuthor }}</div>
+                </div>
+                <div class="last-news-button">
+                    <a href="/news">Все<br>новости</a>
+                </div>
+            </div>
+
+            {% if complects %}
+                <div class="complects">
+                    {% for complect in complects %}
+                        <a href="{{ complect['url'] }}" class="complect">
+                            <div class="complect-img" style="background-image: url('/i/{{ complect['img'] }}')"></div>
+                            <div class="complect-title">{{ complect['name'] }}{% if complect['tag_show'] %}<span
+                                        class="new">{{ complect['tag'] }}</span>{% endif %}</div>
+                            <div class="complect-desc">{{ complect['description'] }}</div>
+                            {% if complect['priceBase'] %}
+                                <div class="complect-price">{{ complect['priceBase']|format_rub|raw }}</div>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     <div class="content-row content-group">
         <div class="content-column-left"></div>
         <div class="content-column-center">
-            <a href="/" class="visible-xs">Каталог</a>
-            <h1>{{ group.getFullName() }}</h1>
+            {% if rows|length > 0 %}
+                <h2 id="complect_items">Комплектующие</h2>
+
+                <table class="table complect-items">
+                    <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td class="complect-item-name">
+                                <a href="{{ path('app_row_show', {'rowId': row.getId(), 'groupId': group.getId()}) }}">{{ row.getName() }}</a>
+                            </td>
+                            <td class="complect-item-price text-nowrap">
+                                {{ row.getPrice()|format_rub|raw }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            <p>НДС&nbsp;&mdash; не&nbsp;предусмотрен. Упрощенная система налогообложения (Глава&nbsp;26.2 Налогового
+                кодекса&nbsp;РФ).</p>
         </div>
     </div>
-{% endif %}
-
-<div class="content-row content-group">
-    <div class="content-column-left">
-        {% if complects and group and group.getFile() %}
-            <div class="overview">
-                <div class="overview-link">
-                    <a href="#">Краткий обзор оборудования</a>
-                </div>
-                <div class="overview-popup">
-                    <div class="overview-popup-text">
-                        <div class="overview-popup-close"></div>
-                        {{ include('html/groups/' ~ group.getFile() ~ '.htm') }}
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-{#        {% if group_news %}#}
-{#            <div class="group-news">#}
-{#                <div class="group-news-content">#}
-{#                    <div class="group-news-title">{{ group_news.getTitleLink() }}</div>#}
-{#                    <div class="group-news-date hidden-xs">{{ group_news.getDate()|format_date('dd.MM.yyyy') }}</div>#}
-{#                </div>#}
-{#                <div class="group-news-author">{{ group_news.getAuthor() }}</div>#}
-{#                <div class="group-news-author-position">{{ group_news.getAuthorPosition() }}</div>#}
-{#            </div>#}
-{#        {% endif %}#}
-    </div>
-
-{#    <div class="content-column-center">#}
-{#        <div class="last-news">#}
-{#            <div class="last-news-item">#}
-{#                <div class="last-news-item-title">{{ last_news.getTitleLink() }}</div>#}
-{#                <div class="last-news-item-date">{{ last_news.getDate()|format_date('dd.MM.yyyy') }}</div>#}
-{#                <div class="last-news-item-author visible-xs">{{ last_news.getAuthor() }}</div>#}
-{#            </div>#}
-{#            <div class="last-news-button">#}
-{#                <a href="/news">Все<br>новости</a>#}
-{#            </div>#}
-{#        </div>#}
-
-        {% if complects %}
-            <div class="complects">
-                {% for complect in complects %}
-                    <a href="{{ complect['url'] }}" class="complect">
-                        <div class="complect-img" style="background-image: url('/i/{{ complect['img'] }}')"></div>
-                        <div class="complect-title">{{ complect['name'] }}{% if complect['tag_show'] %}<span class="new">{{ complect['tag'] }}</span>{% endif %}</div>
-                        <div class="complect-desc">{{ complect['description'] }}</div>
-                        {% if complect['priceBase'] %}
-                            <div class="complect-price">{{ complect['priceBase']|format_rub|raw }}</div>
-                        {% endif %}
-                    </a>
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-</div>
-
-<div class="content-row content-group">
-    <div class="content-column-left"></div>
-    <div class="content-column-center">
-        {% if rows|length > 0 %}
-            <h2 id="complect_items">Комплектующие</h2>
-
-            <table class="table complect-items">
-                <tbody>
-                {% for row in rows %}
-                    <tr>
-                        <td class="complect-item-name">
-                            <a href="{{ path('app_row_show', {'rowId': row.getId(), 'groupId': group.getId()}) }}">{{ row.getName() }}</a>
-                        </td>
-                        <td class="complect-item-price text-nowrap">
-                            {{ row.getPrice()|format_rub|raw }}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-
-        <p>НДС&nbsp;&mdash; не&nbsp;предусмотрен. Упрощенная система налогообложения (Глава&nbsp;26.2 Налогового кодекса&nbsp;РФ).</p>
-    </div>
-</div>
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        const overviewLink = document.querySelector('.overview-link');
-        const overviewPopup = document.querySelector('.overview-popup');
-        const overviewPopupClose = document.querySelector('.overview-popup-close');
-        const overviewPopupText = document.querySelector('.overview-popup-text');
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const overviewLink = document.querySelector('.overview-link');
+            const overviewPopup = document.querySelector('.overview-popup');
+            const overviewPopupClose = document.querySelector('.overview-popup-close');
+            const overviewPopupText = document.querySelector('.overview-popup-text');
 
-        overviewLink.addEventListener('click', function(e) {
-            overviewPopup.style.display = 'block';
-            document.body.classList.add('no-scroll');
-            e.stopPropagation();
-        });
+            overviewLink.addEventListener('click', function (e) {
+                overviewPopup.style.display = 'block';
+                document.body.classList.add('no-scroll');
+                e.stopPropagation();
+            });
 
-        overviewPopupClose.addEventListener('click', function(e) {
-            overviewPopup.style.display = 'none';
-            document.body.classList.remove('no-scroll');
-            e.stopPropagation();
-        });
+            overviewPopupClose.addEventListener('click', function (e) {
+                overviewPopup.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+                e.stopPropagation();
+            });
 
-        overviewPopupText.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+            overviewPopupText.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
 
-        window.addEventListener('click', function() {
-            overviewPopup.style.display = 'none';
-            document.body.classList.remove('no-scroll');
+            window.addEventListener('click', function () {
+                overviewPopup.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}

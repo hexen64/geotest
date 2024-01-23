@@ -34,17 +34,9 @@ class Complects
     #[ORM\Column(type: "string", length: 50, nullable: true)]
     private ?string $file;
 
-    // Getters and setters for the fields
-
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function getName(): ?string

@@ -21,6 +21,18 @@ class OrdersVariantsRepository extends ServiceEntityRepository
         parent::__construct($registry, OrdersVariants::class);
     }
 
+//    public function findWithRows(): array
+//    {
+//        $this->createQueryBuilder('ov')
+//            ->leftJoin('App::Variant', 'v', 'WITH', 'ov.variantId = v.id')
+//            ->leftJoin('App::VariantsRows', 'vr', 'WITH', 'ov.variantId = vr.variant_id')
+//            ->leftJoin('App::OrdersVariantsRows', 'ovr', 'WITH', 'ov.orderId = ovr.orderId',
+//                'ov.variantId = ovr.variantId')
+//            ->leftJoin('App::Rows', 'r', 'WITH', 'r.id = ovr.rowId')
+//
+//
+//    }
+
 //    /**
 //     * @return OrdersVariants[] Returns an array of OrdersVariants objects
 //     */

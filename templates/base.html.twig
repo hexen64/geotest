@@ -2,40 +2,72 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}YYY!{% endblock %}</title>
-    <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <title>{% block title %}Геотест{% endblock %}</title>
+    {#    <link rel="shortcut icon" href="/img/favicon.ico"> #}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
+{#        <link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />#}
     {% endblock %}
 
     {% block javascripts %}
+        {{ importmap() }}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
 <body>
+{% set orderId = app.request.cookies.get('order_id') %}
+{% if orderId and done is not defined %}
+    {% set total = getTotal(orderId) %}
+    <div class="header-order">
+        <div class="order-total">
+            <div id="order_total">
+                <span class="hidden-xs">Ваш заказ:&nbsp;</span>
+                {{ total|format_rub|raw }}
+            </div>
+            <div id="btn_order_total">
+                <a href="{{ path('app_order', {'orderId': orderId}) }}">Состав заказа</a>
+                <a href="{{ path('app_order', {'orderId': orderId}) }}" class="btn btn-primary btn-sm">Оформить</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
 <div class="mobile-menu visible-xs" id="mobile_menu" style="display: none;">
     <div class="mobile-menu-close-btn" id="mobile_menu_close_btn"></div>
-    {#        <?php include_partial('global/menu'); ?> #}
+    {% include('menu.html.twig') %}
 </div>
-
-<div class="header">
-    <div class="header-menu">
-        {#            <?php include_partial('global/menu'); ?> #}
-    </div>
-    <a href="/" class="header-logo"></a>
-    <div class="header-phones">
-        <div class="phone text-nowrap">+7 343 383-64-73</div>
-        ,
-        <div class="phone text-nowrap">+7 343 368-75-77</div>
-    </div>
-    <a href="#footer_phones" class="header-mobile-phone visible-xs"></a>
-    <div id="mobile_menu_btn" class="header-mobile-menu-btn visible-xs"></div>
-</div>
+{% include('header.html.twig') %}
 <div class="content">
     {% block content %}
     {% endblock %}
 </div>
-{# {% include 'footer.html.twig' %} #}
+{# {% include('footer.html.twig') %} #}
+{#<!--<script src="/lib/jquery/jquery-1.12.4.min.js"></script>-->#}
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel();
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile_menu_btn');
+        const mobileMenu = document.getElementById('mobile_menu');
+        const mobileMenuCloseBtn = document.getElementById('mobile_menu_close_btn');
+
+        mobileMenuBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.body.classList.add('no-scroll');
+            mobileMenu.style.display = 'block';
+        });
+
+        mobileMenuCloseBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.body.classList.remove('no-scroll');
+            mobileMenu.style.display = 'none';
+        });
+    });
+</script>
 </body>
 </html>

@@ -5,20 +5,20 @@ parameters:
   app_password: '<password>'
   app_cookie_expire: 2592000
   app_menu_items:
-    devices:
+    app_devices:
       title: 'Каталог'
       description: 'Оборудование для полевых<br>исследований грунтов'
-    about:
+    app_about:
       title: 'О компании'
       description: 'О компании'
-    news:
+    app_news:
       title: 'Новости и статьи'
       description: 'Новости и статьи'
-    order:
+    app_order:
       title: 'Оформление заказа'
       description: 'Оформление заказа'
       visible: false
-    order_save:
+    app_order_save:
       title: 'Оформление заказа'
       description: 'Оформление заказа'
       visible: false

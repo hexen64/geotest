@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RowsController!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <div class="content-row">
+        <div class="content-column-left"></div>
+        <div class="content-column-center">
+            {% if group %}
+                <div><a href="{{ path('app_devices_show', {'id': group.getId}) }}">{{ group.getName }}</a></div>
+            {% endif %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="content-row">
+                <div class="content-column-center">
+                    <h1>{{ row.getName }}</h1>
+                </div>
+                <div class="content-column-right">
+                    {% if minPrice %}
+                        <a href="#order_form"
+                           class="btn btn-primary text-nowrap">Купить&nbsp;&nbsp;•&nbsp;&nbsp;от&nbsp;{{ minPrice|format_rub|raw }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/new_geotest/src/Controller/RowsController.php'|file_link(0) }}">src/Controller/RowsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/new_geotest/templates/rows/show.html.twig'|file_link(0) }}">templates/rows/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="content-row">
+        <div class="content-column-left">
+            <ul class="complect-left-menu hidden-xs">
+                {% for left_menu_item in leftMenu %}
+                    <li {% if left_menu_item.getId() == row.getId() %}class="active"{% endif %}>
+                        <a href="{{ path('app_row_show', {'id': left_menu_item.getId()}) ~ (group ? '&group=' ~ group.getId() : '') }}">
+                            {{ left_menu_item.getName() }}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if group %}
+                    <li>
+                        <a class="devices-all" href="{{ path('app_devices_show', {'id': group.getId()}) }}">Все
+                            категории</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="content-column-center complect-html">
+            {% include 'html/rows/' ~ row.getFile() ~ '.htm' %}
+            {% include 'rows/order.html.twig' with {form:form, params:params} %}
+        </div>
+    </div>
+
+
+
 {% endblock %}

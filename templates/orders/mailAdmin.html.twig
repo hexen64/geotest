@@ -1,0 +1,68 @@
+<table width="600" align="center" bgcolor="#ffffff" cellpadding="0" cellspacing="0"
+       style="border-collapse:collapse;">
+    <tr>
+        <td>
+            <h2>Заказ № {{ id }} от {{ "now"|date("d.m.Y") }}</h2>
+            <p><b>Контактные данные:</b></p>
+            <div style="padding-left:20px;">Организация: {{ contact.firm }}</div>
+            <div style="padding-left:20px;">Контактное лицо: {{ contact.fio }}</div>
+            <div style="padding-left:20px;">Телефон: {{ contact.phone }}</div>
+            <div style="padding-left:20px;">Электронная почта: {{ contact.email }}</div>
+            <div style="padding-left:20px;">Адрес: {{ contact.address }}</div>
+            <div style="padding-left:20px;">Дополнительные сведения: {{ contact.comment }}</div>
+            <div style="padding-left:20px;">Способ доставки: {{ contact.delivery }}</div>
+            <br>
+            <p><b>Состав заказа:</b></p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:0;">
+                {% set total = 0 %}
+                {% if variants is defined %}
+                    {% for variant in variants %}
+                        {% set diff_str = '' %}
+                        {% for row in variant.rows %}
+                            {% if row.cnt + row.diff %}
+                                {% set diff_str = diff_str ~ '<tr><td valign="top" style="padding-left: 40px;padding-right:10px;padding-bottom:5px;" colspan="2"><nobr>' ~ row.name ~ ' ' ~ (variant.type ? ' ' ~ (variant.type == 'k' ? row.idk : row.idl) : '') ~ '</nobr></td><td valign="top" align="right" style="padding-right:10px;padding-bottom:5px;">' ~ (row.cnt + row.diff) ~ '&nbsp;шт.</td><td style="padding-bottom:5px;">&nbsp;</td></tr>' %}
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <td valign="top"
+                                style="padding-left: 20px;padding-right:10px;padding-top:10px;padding-bottom:5px;">
+                                <b>{{ variant.name }}</b>{{ variant.type? '<br><i>Тип соединительной резьбы: ' ~ (variant.type == 'k' ? 'коническая' : 'ленточная') ~ '</i>' }}
+                            </td>
+                            <td valign="top" align="right"
+                                style="padding-right:10px;padding-top:10px;padding-bottom:5px;">
+                                <b>{{ variant.price|format_rub|replace({' ': '&nbsp;'}) }}&nbsp;руб.</b></td>
+                            <td valign="top" align="right"
+                                style="padding-right:10px;padding-top:10px;padding-bottom:5px;">
+                                <b>{{ variant.cnt }}&nbsp;шт.</b></td>
+                            <td valign="top" align="right" style="padding-top:10px;padding-bottom:5px;">
+                                <b>{{ (variant.price * variant.cnt)|format_rub|replace({' ': '&nbsp;'}) }}
+                                    &nbsp;руб.</b>
+                            </td>
+                        </tr>
+                        {{ diff_str ? diff_str : '' }}
+                    {% endfor %}
+                {% endif %}
+                {% if rows is defined %}
+                    {% for row in rows %}
+                        <tr>
+                            <td valign="top"
+                                style="padding-left: 20px;padding-right:10px;padding-top:10px;padding-bottom:5px;">
+                                <b>{{ row.name }}</b>{{ row.type ? '<br><i>Тип соединительной резьбы: ' ~ (row.type == 'k' ? 'коническая' : 'ленточная') ~ '</i>' }}
+                            </td>
+                            <td valign="top" align="right"
+                                style="padding-right:10px;padding-top:10px;padding-bottom:5px;">
+                                <b>{{ row.price|format_rub|replace({' ': '&nbsp;'}) }}&nbsp;руб.</b></td>
+                            <td valign="top" align="right"
+                                style="padding-right:10px;padding-top:10px;padding-bottom:5px;"><b>{{ row.cnt }}
+                                    &nbsp;шт.</b></td>
+                            <td valign="top" align="right" style="padding-top:10px;padding-bottom:5px;">
+                                <b>{{ (row.price * row.cnt)|format_rub|replace({' ': '&nbsp;'}) }}&nbsp;руб.</b></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+            <br>
+            <p><b>Итоговая сумма: {{ orderTotal|format_rub|replace({' ': '&nbsp;'}) }}&nbsp;руб.</b></p>
+        </td>
+    </tr>
+</table>

@@ -1,58 +1,53 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    {# <div class="content-row content-complect"> #}
-    {#    <div class="content-column-left"></div> #}
-    {#    <div class="content-column-center"> #}
+     <div class="content-row content-complect">
+        <div class="content-column-left"></div>
+        <div class="content-column-center">
 
-    {#        {% if group %} #}
-    {#            <a href="{{path('app_devices_show', {'groupId': group.getId})  }}">{{ group.getName }}</a> #}
-    {#        {% endif %} #}
+            {% if group %}
+                <a href="{{path('app_devices_show', {'groupId': group.getId})  }}">{{ group.getName }}</a>
+            {% endif %}
 
-    {#        <div class="content-row"> #}
-    {#            <div class="content-column-center"> #}
-    {#                <h1>{{ complect.getName }}</h1> #}
-    {#            </div> #}
-    {#            <div class="content-column-right"> #}
-    {#                <?php if($min_price): ?> #}
-    {#                <a href="#order_form" #}
-    {#                   class="btn btn-primary text-nowrap">Купить&nbsp;&nbsp;•&nbsp;&nbsp;от&nbsp;<?= format_rub($min_price) ?></a> #}
-    {#                <?php endif; ?> #}
-    {#            </div> #}
-    {#        </div> #}
-    {#    </div> #}
-    {# </div> #}
+            <div class="content-row">
+                <div class="content-column-center">
+                    <h1>{{ complect.getName }}</h1>
+                </div>
+                <div class="content-column-right">
+                    {% if min_price %}
+                        <a href="#order_form"
+                           class="btn btn-primary text-nowrap">Купить&nbsp;&nbsp;•&nbsp;&nbsp;от&nbsp;{{ min_price|format_rub|raw }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+     </div>
 
-    {# <div class="content-row content-complect"> #}
-    {#    <div class="content-column-left"> #}
-    {#        <ul class="complect-left-menu hidden-xs"> #}
-    {#            <?php foreach ($left_menu as $left_menu_item): ?> #}
-    {#            <li <?php if ($left_menu_item->getId() === $complect->getId()): ?>class="active"<?php endif; ?>> #}
-    {#            <a href="<?php echo url_for('complect/show?id='.urlencode($left_menu_item->getId()).($group ? '&group='.urlencode($group->getId()) : '')); ?>"> #}
-    {#                <?= $left_menu_item->getName() ?> #}
-    {#            </a> #}
-    {#            </li> #}
-    {#            <?php endforeach; ?> #}
+    <div class="content-row content-complect">
+        <div class="content-column-left">
+            <ul class="complect-left-menu hidden-xs">
+                {% for left_menu_item in left_menu %}
+                    <li {% if left_menu_item.id == complect.getId %}class="active"{% endif %}>
+                        <a href="{{ path('app_complect_group', {'id': left_menu_item.id, 'groupId': group.getId()}) }}">
+                            {{ left_menu_item.name }}
+                        </a>
+                    </li>
+                {% endfor %}
 
-    {#            <?php if ($group and $rows_count > 0): ?> #}
-    {#            <li> #}
-    {#                <a href="<?php echo url_for('devices/show?id='.urlencode($group->getId())); ?>#complect_items">Комплектующие</a> #}
-    {#            </li> #}
-    {#            <?php endif; ?> #}
-    {#        </ul> #}
-    {#    </div> #}
-    {#    <div class="content-column-center complect-html"> #}
-    {#        <?php include_once(sfConfig::get('sf_data_dir').'/html/complects/'.$complect->getFile().'.htm'); ?> #}
-    {#    </div> #}
-    {# </div> #}
-
-    <div class="content-column-center complect-html">
-        {{ include('html/complects/' ~ complect.getFile() ~ '.htm') }}
-        <div class="block">
-            {% include 'complects/order.html.twig' with {form:form, params:params} %}
+                {% if group and rows_count > 0 %}
+                    <li>
+                        <a href="{{ path('app_devices_show', {'groupId': group.getId()}) }}#complect_items">Комплектующие</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="content-column-center complect-html">
+            {{ include('html/complects/' ~ complect.getFile() ~ '.htm') }}
+            <div class="block">
+                <div id="order_form"></div>
+                {% include 'complects/order.html.twig' with {form:form, params:params} %}
+            </div>
         </div>
     </div>
-
-
 {% endblock %}
 
 

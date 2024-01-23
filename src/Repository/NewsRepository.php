@@ -45,4 +45,36 @@ class NewsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByLimit(int $limit): array
+    {
+        return $this->createQueryBuilder('n')
+            ->orderBy('n.date', 'ASC')
+            ->orderBy('n.newsOrder', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findBottomNews(int $value): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.id != :val')
+            ->setParameter('val', $value)
+            ->orderBy('n.date', 'DESC')
+            ->orderBy('n.newsOrder', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findNewsTotal():  int
+    {
+        return $this->createQueryBuilder('n')
+            ->select('count(n.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

@@ -1,8 +1,11 @@
-$(function() {
+import Cookies from 'js-cookie';
+import $ from 'jquery';
+
+$(function () {
 
     /* complects ============================================================= */
 
-    $(".btn_order").click(function(e) {
+    $("#variant_save").click(function (e) {
         e.preventDefault();
 
         var label = $(this).val();
@@ -11,7 +14,7 @@ $(function() {
         var form_index = $(this).attr('data-index');
         var $inputs = $('#form_order_' + form_index + ' input');
         var data = {};
-        $inputs.each(function() {
+        $inputs.each(function () {
             var $this = $(this);
 
             var name = $this.attr('name');
@@ -24,13 +27,12 @@ $(function() {
         });
 
         data['json'] = 1;
-
         $.ajax({
             url: "/complect/order",
             data: data,
             dataType: "json",
             type: "post",
-            success: function(data, textStatus, jqXHR) {
+            success: function (data, textStatus, jqXHR) {
                 $(this).attr('disabled', false).val(label);
                 if (data.error) {
                     if (data.result.errors.global) {
@@ -39,59 +41,76 @@ $(function() {
                             .show();
                     }
                     if (data.result.errors.form) {
-                        for (var key in data.result.errors.form) {
-                            var k = key.replace('variant_', 'variant_'+form_index+'_');
+                        console.log(data.result.errors.form);
+
+                        Object.keys(data.result.errors.form).forEach(function (key, index) {
+                            var k = key.replace('variant_', 'variant_' + form_index + '_' + index);
                             var $el = $('#' + k + '_error');
-                            if (!$el.get(0)) {
-                                $('<ul><li id="' + k + '_error" class="error_list">' + data.result.errors.form[key] + '</li></ul>').appendTo($('#' + k).parent());
-                            } else {
-                                $el.html(data.result.errors.form[key]).show();
-                            }
-                        }
+                            var x = key;
+                            Object.keys(data.result.errors.form[key]).forEach(function (kk, index) {
+                                // console.log(data.result.errors.form[key][kk].cnt[0]);
+                                if (!$el.get(0)) {
+                                    if (key === 'cnt') {
+                                        $('<ul><li id="' + k + '_error" class="error_list">' + data.result.errors.form[key][0] + '</li></ul>').appendTo($('#' + k).parent());
+                                    }
+                                    $('<ul><li id="' + k + '_error" class="error_list">' + data.result.errors.form[key][kk].cnt[0] + '</li></ul>').appendTo($('#' + key + '_' + kk).parent());
+                                } else {
+                                    $el.html(data.result.errors.form[key]).show();
+                                }
+                            });
+
+                            // if (!$el.get(0)) {
+                            //     $('<ul><li id="' + k + '_error" class="error_list">' + data.result.errors.form[key] + '</li></ul>').appendTo($('#' + k).parent());
+                            // } else {
+                            //     $el.html(data.result.errors.form[key]).show();
+                            // }
+                        });
                     }
                 } else {
                     $('.error_list').hide();
-                    $.cookie('idorder', data.result.idorder, {expires: 2592000, path: '/'});
-                    window.location.href = '/order/' + data.result.idorder;
+                    Cookies.set('order_id', data.result.order_id, {expires: 2592000, path: '/'});
+                    window.location.href = '/order/' + data.result.order_id;
                 }
             }
         });
     });
 
-    $(".row-count input.count").bind('change keyup', function(event) {
+    $(".row-count input.count").bind('change keyup', function (event) {
         var value = parseInt($(this).val());
-        var match = this.name.match(/\[([^\[]+)\]\[count\]/);
 
+        var match = this.name.match(/\[([^\[]+)\]\[cnt\]/);
         if (match) {
-            var id = match[1];
+            var index = match[1];
+            var id = $(this).parent().parent().parent().attr('id').substring("row_".length);
 
-            if (value === $("#row_" + id + " .base_count").val()) {
+            var base_count = parseInt($("#variant_base_" + index + "_base_count").val());
+            if (value === base_count) {
                 $("#undo_" + id).hide();
             } else {
                 $("#undo_" + id).show();
             }
-
-            $("#row_" + id + " .row-sum span.text-nowrap").html(format_rub(value * $("#row_" + id + " input.price").val()));
+            var price = $("#row_" + id + " input.price").val();
+            $("#row_" + id + " .row-sum span.text-nowrap").html(format_rub(value * price));
             calc_complect_price();
             order_total();
         }
     });
 
-    $(".btn-undo").click(function() {
+    $(".btn-undo").click(function () {
         var match = this.id.match(/undo_(.+)/);
-
         if (match) {
             var id = match[1];
             $(this).hide();
             var value = $("#row_" + id + " input.base_count").val();
             $("#row_" + id + " input.count").val(value);
+            console.log(value * $("#row_" + id + " input.price").val());
             $("#row_" + id + " .row-sum span.text-nowrap").html(format_rub(value * $("#row_" + id + " input.price").val()));
             calc_complect_price();
         }
     });
 
-    $('form').each(function(index, form) {
-        $('#variant_' + index + '_count').bind('change keyup', function() {
+    $('form').each(function (index, form) {
+        $('#variant_' + index + '_count').bind('change keyup', function () {
             calc_complect_price();
         });
     });
@@ -100,16 +119,15 @@ $(function() {
 
     /* rows ================================================================== */
 
-    $("#btn_order_row").click(function(e) {
+    $("#row_save").click(function (e) {
         e.preventDefault();
-
         var label = $(this).html();
         $(this).attr('disabled', true).html('Добавляется к заказу');
 
         var $inputs = $('#form_order_row :input');
         var data = {};
 
-        $inputs.each(function() {
+        $inputs.each(function () {
             var $this = $(this);
 
             if ($this.attr('type') === 'radio') {
@@ -128,9 +146,8 @@ $(function() {
             data: data,
             dataType: "json",
             type: "post",
-            success: function(data, textStatus, jqXHR) {
+            success: function (data, textStatus, jqXHR) {
                 $(this).attr('disabled', false).html(label);
-
                 if (data.error) {
                     if (data.result.errors.global) {
                         $("#error_global")
@@ -154,25 +171,26 @@ $(function() {
                     }
                 } else {
                     $(".error_list").hide();
-                    $.cookie("idorder", data.result.idorder, {expires: 2592000, path: '/'});
-                    window.location.href = '/order/' + data.result.idorder;
+                    console.log(data.result.order_id);
+                    Cookies.set('order_id', data.result.order_id, {expires: 30, path: '/'});
+                    window.location.href = '/order/' + data.result.order_id;
                 }
             }
         });
     });
 
-    $("#row_count").bind('change keyup', function() {
+    $("#row_count").bind('change keyup', function () {
         $("#row_total_price span.text-nowrap").html(format_rub(parseInt($("#row_price").val()) * parseInt($("#row_count").val())));
     });
 
     /* ======================================================================= */
 
-    $('.expand-title').click(function() {
+    $('.expand-title').click(function () {
         $(this).parent().toggleClass('open');
     });
 
     if (document.location.hash) {
-        $('.variant').each(function(index, el) {
+        $('.variant').each(function (index, el) {
             var $el = $(el),
                 id = '#' + $el.attr('data-id');
             if (id === document.location.hash) {
@@ -182,7 +200,7 @@ $(function() {
         });
     }
 
-    $('.variant-header').click(function() {
+    $('.variant-header').click(function () {
         var el = $(this).parent();
         if (!el.hasClass('open')) {
             document.location.hash = el.attr('data-id');
@@ -194,10 +212,10 @@ $(function() {
 });
 
 function calc_complect_price() {
-    $('form').each(function(index, form) {
+    $('form').each(function (index, form) {
         var total = 0;
         var $form = $(form);
-        $('.row', $form).each(function(index_tr, tr) {
+        $('.row', $form).each(function (index_tr, tr) {
             total += parseInt($('.price', $(tr)).val()) * parseInt($('.count', $(tr)).val());
         });
         $('#variant_price_' + index + ' span.text-nowrap').html(format_rub(total));
@@ -208,12 +226,12 @@ function calc_complect_price() {
 function order_total() {
     var total = 0;
 
-    $(".order-complect").each(function() {
+    $(".order-complect").each(function () {
         var id = $(this).attr("id").match(/(\d+)/)[1];
         total += parseInt($("#row_" + id + " .price").val()) * parseInt($("#row_" + id + " .count").val());
     });
 
-    $(".order-row").each(function() {
+    $(".order-row").each(function () {
         var id = $(this).attr("id").match(/(\d+)/)[1];
         total += parseInt($("#row_" + id + " .price").val()) * parseInt($("#row_" + id + " .count").val());
     });
@@ -232,7 +250,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
         sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
         dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
         s = '',
-        toFixedFix = function(n, prec) {
+        toFixedFix = function (n, prec) {
             var k = Math.pow(10, prec);
             return '' + Math.round(n * k) / k;
         };

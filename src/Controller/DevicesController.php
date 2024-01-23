@@ -3,42 +3,50 @@
 namespace App\Controller;
 
 use App\Entity\News;
+use App\Services\NewsService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DevicesController extends BaseController
 {
-    #[Route('/', name: 'app_devices')]
-    public function index(EntityManagerInterface $entityManager): Response
-    {
 
-        $qb = $entityManager->createQueryBuilder()
+    private $entityManager;
+    private $newsRepository;
+
+    public function __construct(EntityManagerInterface $entityManager,
+                                ParameterBagInterface  $parameterBagInterface)
+    {
+        $this->entityManager = $entityManager;
+        $this->newsRepository = $entityManager->getRepository(News::class);
+        parent::__construct($parameterBagInterface);
+    }
+
+    #[Route('/', name: 'app_devices')]
+    #[Route('/', name: 'app_homepage')]
+    public function index(): Response
+    {
+        $qb = $this->entityManager->createQueryBuilder()
             ->select('g')
             ->from('App:Groups', 'g')
             ->where('g.visible = 1')
             ->orderBy('g.position', 'ASC');
         $groups = $qb->getQuery()->getResult();
-//
-//        $qb>select('n')
-//        ->from('App:News', 'n')
-//            ->orderBy('n.date', 'DESC')
-//            ->orderBy('n.news_order', 'DESC')
-//            ->setMaxResults(10);
-//        $news = $qb>getQuery()->getResult();
+
+        $news = $this->newsRepository->findByLimit(2);
 
         return $this->render('devices/index.html.twig', [
             'groups' => $groups,
-//            'news' => $news,
+            'news' => $news,
         ]);
-
     }
 
     #[Route('/devices/{groupId}', name: 'app_devices_show')]
     public function show(string $groupId, EntityManagerInterface $entityManager): Response
     {
 
-        $qb = $entityManager->createQueryBuilder()
+        $qb = $this->entityManager->createQueryBuilder()
             ->select('g')
             ->from('App:Groups', 'g')
             ->where('g.id = :id')
@@ -46,7 +54,7 @@ class DevicesController extends BaseController
             ->orderBy('g.position', 'ASC');
         $group = $qb->getQuery()->getSingleResult();
 
-        $qb = $entityManager->createQueryBuilder()
+        $qb = $this->entityManager->createQueryBuilder()
             ->select('c.id', 'c.name', 'c.img', 'c.description', 'c.tag', 'c.tagEnd', 'c.visible', 'c.file', 'v.priceBase')
             ->from('App:GroupsComplects', 'gc')
             ->leftJoin('App:Complects', 'c', 'WITH', 'gc.complectId = c.id')
@@ -69,7 +77,7 @@ class DevicesController extends BaseController
         }
 
 
-        $qb = $entityManager->createQueryBuilder()
+        $qb = $this->entityManager->createQueryBuilder()
             ->select('r')
             ->from('App:Rows', 'r')
             ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'r.id = vr.rowId')
@@ -84,38 +92,38 @@ class DevicesController extends BaseController
             ->setParameter('group_id', $groupId);
         $rows = $qb->getQuery()->getResult();
 
-//        $qb = $entityManager->createQueryBuilder()
-//            ->select('n')
-//            ->from('App:News', 'n')
-//            ->where('n.groupId = :group_id')
-//            ->orderBy('n.date', 'DESC')
-//            ->addOrderBy('n.newsOrder', 'DESC')
-//            ->setMaxResults(1)
-//            ->setParameter('group_id', $groupId);
-//
-//        $lastNews = $qb->getQuery()->getOneOrNullResult();
-//
-//        if (!$lastNews) {
-//            $qb = $entityManager->createQueryBuilder()
-//                ->select('n')
-//                ->from('App:News', 'n')
-//                ->orderBy('n.date', 'DESC')
-//                ->addOrderBy('n.newsOrder', 'DESC')
-//                ->setMaxResults(1);
-//
-//            $lastNews = $qb->getQuery()->getOneOrNullResult();
-//        }
+        $qb = $this->entityManager->createQueryBuilder()
+            ->select('n')
+            ->from('App:News', 'n')
+            ->where('n.groupId = :group_id')
+            ->orderBy('n.date', 'DESC')
+            ->addOrderBy('n.newsOrder', 'DESC')
+            ->setMaxResults(1)
+            ->setParameter('group_id', $groupId);
+        $lastNews = $qb->getQuery()->getOneOrNullResult();
 
-//        $groupNews = null;
-//
-//        if ($group && $group->getNewsId()) {
-//            $groupNews = $entityManager->getRepository(News::class)->find($group->getNewsId());
-//        }
+        if (!$lastNews) {
+            $qb = $this->entityManager->createQueryBuilder()
+                ->select('n')
+                ->from('App:News', 'n')
+                ->orderBy('n.date', 'DESC')
+                ->addOrderBy('n.newsOrder', 'DESC')
+                ->setMaxResults(1);
+
+            $lastNews = $qb->getQuery()->getOneOrNullResult();
+        }
+
+        $groupNews = null;
+
+        if ($group && $group->getNewsId()) {
+            $groupNews = $entityManager->getRepository(News::class)->find($group->getNewsId());
+        }
         return $this->render('devices/show.html.twig', [
             'group' => $group,
             'complects' => $complects,
             'rows' => $rows,
-//            'news' => $news,
+            'group_news' => $groupNews,
+            'last_news' => $lastNews,
         ]);
 
     }

@@ -23,12 +23,30 @@ class OrdersRows
     #[ORM\Column(type: "integer")]
     private $cnt;
 
-    #[ORM\Column(type: "string", columnDefinition: "ENUM('k','l')", length: 1, options: ["default" => "k"])]
-    private $type;
+    #[ORM\Column(type: "string", columnDefinition: "ENUM('k','l')", length: 1)]
+    private ?string $type;
+
+    #[ORM\ManyToOne(targetEntity: Rows::class, inversedBy: 'ordersRows', cascade: ['persist'])]
+    private $row;
+
+    #[ORM\ManyToOne(targetEntity: Orders::class, inversedBy: 'ordersRows', cascade: ['persist'])]
+    private $order;
+
+    private string $name;
+
+    private ?float $price;
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getOrderId(): int
@@ -72,10 +90,60 @@ class OrdersRows
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
+
+    public function getRow(): ?Rows
+    {
+        return $this->row;
+
+    }
+
+    public function setRow(?Rows $row): self
+    {
+        $this->row = $row;
+
+        return $this;
+    }
+
+    public function getOrder(): ?Orders
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?Orders $order): self
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setName(): self
+    {
+        $this->name = $this->getRow()->getName();
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->getRow()->getName();
+    }
+
+    #[ORM\PrePersist]
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    public function getPrice(): float|null
+    {
+        return $this->price;
+    }
+
 }

@@ -6,6 +6,8 @@ use App\Repository\VariantsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VariantsRepository::class)]
 #[ORM\Table(name: '`variants`')]
@@ -34,16 +36,42 @@ class Variants
     #[ORM\Column(type: "text")]
     private $description;
 
-    #[ORM\ManyToMany(targetEntity: Rows::class, inversedBy: "variants")]
+    #[ORM\ManyToMany(targetEntity: Rows::class, mappedBy: "variants")]
     #[ORM\JoinTable(name: "variants_rows")]
     #[ORM\JoinColumn(name: "variant_id", referencedColumnName: "id")]
     #[ORM\InverseJoinColumn(name: "row_id", referencedColumnName: "id")]
     private Collection $rows;
 
+    #[ORM\ManyToMany(targetEntity: Orders::class, mappedBy: 'variants')]
+    #[ORM\JoinTable(name: "orders_variants")]
+    #[ORM\JoinColumn(name: "variant_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "order_id", referencedColumnName: "id")]
+    private Collection $orders;
+
+
+    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "variant", orphanRemoval: true)]
+    #[Assert\Valid]
+    private Collection $variantsRows;
+
+    #[ORM\OneToMany(targetEntity: OrdersVariants::class, mappedBy: "variant", orphanRemoval: true)]
+    private Collection $ordersVariants;
+
+    private ?string $type;
+    private string $price;
+
+    #[Assert\Type(
+        type: 'integer',
+        message: 'Некорректное значение.',
+    )]
+    private int $cnt;
+
+
     public function __construct()
     {
         $this->rows = new ArrayCollection();
         $this->variantsRows = new ArrayCollection();
+        $this->ordersVariants = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -154,10 +182,6 @@ class Variants
         return $this;
     }
 
-    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "variant", cascade: ["persist"])]
-    private Collection $variantsRows;
-
-
     public function getVariantsRows(): Collection
     {
         return $this->variantsRows;
@@ -174,12 +198,117 @@ class Variants
     }
 
     public function removeVariantsRow(VariantsRows $variantsRow): self
+
     {
-            // Set the owning side to null (unless already changed)
+        if ($this->variantsRows->removeElement($variantsRow)) {
             if ($variantsRow->getVariant() === $this) {
                 $variantsRow->setVariant(null);
             }
+        }
 
         return $this;
     }
+
+    public function getOrdersVariants(): Collection
+    {
+        return $this->ordersVariants;
+
+
+    }
+
+    public function addOrdersVariants(OrdersVariants $ordersVariants): self
+    {
+        if (!$this->ordersVariants->contains($ordersVariants)) {
+            $this->ordersVariants[] = $ordersVariants;
+            $ordersVariants->setVariant($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeOrdersVariants(OrdersVariants $ordersVariants): self
+    {
+        if ($this->ordersVariants->removeElement($ordersVariants)) {
+            // set the owning side to null (unless already changed)
+            if ($ordersVariants->getVariant() === $this) {
+                $ordersVariants->setVariant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addVariant($this);
+        }
+
+        return $this;
+
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeVariant($this);
+        }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrice(): string
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string $price
+     */
+    public function setPrice(string $price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCnt(): int
+    {
+        return $this->cnt;
+    }
+
+    /**
+     * @param int $cnt
+     */
+    public function setCnt(int $cnt): void
+    {
+        $this->cnt = $cnt;
+    }
+
+
 }

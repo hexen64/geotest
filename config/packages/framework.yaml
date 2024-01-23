@@ -1,7 +1,7 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+    csrf_protection: ~
     http_method_override: false
     handle_all_throwables: true
 
@@ -17,8 +17,6 @@ framework:
     #fragments: true
     php_errors:
         log: true
-
-    csrf_protection: true
 
 when@test:
     framework:

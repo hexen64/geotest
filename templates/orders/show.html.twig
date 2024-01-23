@@ -1,0 +1,213 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {{ form_start(form,
+        {
+            'action': path('app_order_save', {orderId:orderId}),
+            'attr': {'class': 'form',
+        }}) }}
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.id) }}
+    <div class="order-form">
+        <div class="order-form-left">
+            <h1 class="visible-xs">Ваш заказ: <span id="order_total2"
+                                                    class="row-sum">{{ order_total|format_rub|raw }}</span></h1>
+
+            <p class="visible-xs">НДС&nbsp;&mdash; не&nbsp;предусмотрен. Упрощенная система налогообложения (Глава&nbsp;26.2
+                Налогового кодекса&nbsp;РФ).</p>
+
+            {% for variant in form.ordersVariants %}
+                {% set entity = variant.vars.value %}
+                <div class="variant">
+                    <div class="order-complect" id="row_{{ entity.id }}">
+                        <div>
+                            <a class="order-complect-title"
+                               href="{{ path('app_complect', {id : entity.variantId} ) }}">{{ entity.name }}</a>
+                            {% if entity.type is defined %}
+                                <p>
+                                    <i>
+                                        {% if entity.type == 'k' %}
+                                            Тип соединительной резьбы: коническая
+                                        {% elseif entity.type == 'l' %}
+                                            Тип соединительной резьбы: ленточная
+                                        {% endif %}
+                                    </i>
+                                </p>
+                            {% endif %}
+                            {% for row in entity.getRows() %}
+                                {% if row.getDiff() %}
+                                    <div class="order-complect-diff">
+                                        {% if row.getDiff() > 0 %}
+                                            <span class="text-green">+</span>
+                                        {% else %}
+                                            <span class="text-red">-</span>
+                                        {% endif %}
+                                        &nbsp;{{ row.name }} &mdash; {{ row.getDiff() }}&nbsp;шт.
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="order-complect-row">
+                            <div class="order-complect-row-price">
+                                <div class="label">Стоимость комплекта</div>
+                                <div>{{ entity.getPrice|format_rub|raw }}
+                                    <input type="hidden" class="price"
+                                           value="{{ entity.getPrice }}">
+                                </div>
+                            </div>
+                            <div class="order-complect-row-count-sum">
+                                <div class="order-complect-row-count">
+                                    <div class="label">Кол-во комплектов</div>
+                                    <div>
+                                        <a href="#" class="btn-delete" title="Удалить"
+                                           onclick="deleteItem({{ entity.getId }}, 'variant'); return false;"></a>
+                                        {{ form_widget(variant.cnt) }}&nbsp;шт
+                                        {#                                        {% if errors %} #}
+                                        {#                                            #}
+                                        {#                                        {% endif %} #}
+                                        {#                                        <ul> #}
+                                        {#                                            <li class="error_list"></li> #}
+                                        {#                                        </ul> #}
+                                    </div>
+                                </div>
+                                <div class="order-complect-row-sum">
+                                    <div class="label">Итого</div>
+                                    <div><strong>{{ (entity.getPrice()*entity.getCnt())|format_rub|raw }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for row in form.ordersRows %}
+                {% set entity = row.vars.value %}
+                <div class="variant">
+                    <div class="order-row" id="row_{{ entity.id }}">
+                        <div>
+                            <a class="order-complect-title"
+                               href="{{ path('app_row_show', {rowId : entity.rowId} ) }}">{{ entity.name }}</a>
+                            {% if entity.type is defined %}
+                                <p>
+                                    <i>
+                                        {% if entity.type == 'k' %}
+                                            Тип соединительной резьбы: коническая
+                                        {% elseif entity.type == 'l' %}
+                                            Тип соединительной резьбы: ленточная
+                                        {% endif %}
+                                    </i>
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="order-complect-row">
+                            <div class="order-complect-row-price">
+                                <div class="label">Стоимость комплекта</div>
+                                <div>{{ entity.getRow.getPrice|format_rub|raw }}
+                                    {{ form_widget(row.price) }}
+                                </div>
+                            </div>
+                            <div class="order-complect-row-count-sum">
+                                <div class="order-complect-row-count">
+                                    <div class="label">Кол-во комплектов</div>
+                                    <div>
+                                        <a href="#" class="btn-delete" title="Удалить"
+                                           onclick="deleteItem({{ entity.getId }}, 'row'); return false;"></a>
+                                        {{ form_widget(row.cnt) }}&nbsp;шт
+                                    </div>
+                                </div>
+                                <div class="order-complect-row-sum">
+                                    <div class="label">Итого</div>
+                                    <div><strong>{{ (entity.getRow.getPrice*entity.getCnt())|format_rub|raw }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="order-form-right">
+            <h1 class="hidden-xs">Ваш заказ:<br>
+                <span id="order_total2" class="row-sum">{{ order_total|format_rub|raw }}</span></h1>
+
+            <p class="hidden-xs">НДС&nbsp;&mdash; не&nbsp;предусмотрен. Упрощенная система налогообложения
+                (Глава&nbsp;26.2
+                Налогового кодекса&nbsp;РФ).</p>
+
+            <div class="form-row">
+                {{ form_widget(form.fio) }}
+                {{ form_errors(form.fio) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.firm) }}
+                {{ form_errors(form.firm) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.phone) }}
+                {{ form_errors(form.phone) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.address) }}
+                {{ form_errors(form.address) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.comment) }}
+                {{ form_errors(form.comment) }}
+            </div>
+            <div class="form-row">
+                <label for="orders_delivery">Способ доставки</label>
+                <ul class="radio_list">
+                    <li><input name="orders[delivery]" type="radio" value="firm"
+                               id="orders_delivery_firm"/>&nbsp;<label for="orders_delivery_firm">На склад
+                            заказчика</label>
+                    </li>
+                    <li><input name="orders[delivery]" type="radio" value="firm+sklad"
+                               id="orders_delivery_firm_sklad"/>&nbsp;<label for="orders_delivery_firm_sklad">На
+                            склад транспортной компании</label></li>
+                    <li><input name="orders[delivery]" type="radio" value="self"
+                               id="orders_delivery_self"/>&nbsp;<label
+                                for="orders_delivery_self">Самовывоз</label>
+                    </li>
+                </ul>
+            </div>
+            {{ form_rest(form) }}
+            {#            {{ form_widget(form.save, { #}
+            {#                'attr': {'class': 'btn btn-primary btn-lg w100 btn_order'} #}
+            {#            }) }} #}
+            <p class="text-center">Мы свяжемся с вами в течение рабочего дня</p>
+        </div>
+    </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function deleteItem(itemId, type) {
+            if (confirm('Удалить?')) {
+                let route;
+                if (type === 'variant') {
+                    route = '{{ path('app_order_delete_variant', {'id': '__ITEM_ID__'}) }}';
+                } else if (type === 'row') {
+                    route = '{{ path('app_order_delete_row', {'id': '__ITEM_ID__'}) }}';
+                }
+                fetch(route.replace('__ITEM_ID__', itemId), {
+                    method: 'POST'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Order deleted successfully');
+                            location.reload();
+                        } else {
+                            console.log('Failed to delete order');
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        }
+    </script>
+{% endblock %}

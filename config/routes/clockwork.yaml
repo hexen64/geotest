@@ -1,0 +1,3 @@
+when@dev:
+  clockwork:
+    resource: '@ClockworkBundle/Resources/config/routing/clockwork.php'

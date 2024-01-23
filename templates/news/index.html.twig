@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="content-row content-news-list">
+        <div class="content-column-left"></div>
+        <div class="content-column-center">
+            <h1>Новости и статьи</h1>
+        </div>
+    </div>
+
+    <div class="content-row content-news-list">
+        <div class="content-column-left">
+{#            <?php include_partial('subscribe_form', array('subscribe_form' => $subscribe_form)); ?>#}
+        </div>
+        <div class="content-column-center">
+            <div class="news-list" id="news_list">
+                {% for news_item in news %}
+                    <div class="news-list-item">
+                        <div class="news-list-item-title">
+                            <a href="{{ path('app_news_show', {'id': news_item.getId}) }}">{{ news_item.getTitleLink|raw }}</a>
+                        </div>
+                        <div class="news-list-item-date">{{ news_item.getDate|date('d.m.Y') }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+{#            {% if newsTotal > news|length %}#}
+{#                <button class="btn btn-default btn-md w100" id="load_more_btn">Показать еще</button>#}
+{#            {% endif %}#}
+        </div>
+    </div>
+{% endblock %}

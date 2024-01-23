@@ -1,0 +1,52 @@
+<a id="order_form"></a>
+
+<div class="variant open">
+    <div class="variant-header">
+        <div class="variant-name">{{ params['row'].getName }}</div>
+    </div>
+    {{ form_start(form,
+        {'attr': {
+            'action': path('app_row_order'),
+            'class': 'variant-form',
+            'id': 'form_order_row',}}) }}
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.id) }}
+    {{ form_widget(form.price) }}
+    {% if form.type is defined %}
+        <h4>Тип соединительной резьбы:</h4>
+        <ul class="radio_list">
+            <li><input name="row[0][type]" type="radio" value="l" id="row_0_type_l" checked="checked"/>&nbsp;<label
+                        for="row_0_type_l">ленточная</label></li>
+            <li><input name="row[0][type]" type="radio" value="k" id="row_0_type_k"/>&nbsp;<label
+                        for="row_0_type_k">коническая</label></li>
+        </ul>
+    {% endif %}
+    <div class="variant-flex" style="padding: 12px 12px 20px 0;">
+        <div class="variant-flex-left">
+            <div class="variant-flex">
+                <div class="variant-flex-left">
+                    <div class="label">Стоимость</div>
+                    <div>
+                        {{ params['row'].getPrice|format_rub|raw }}
+                    </div>
+                </div>
+                <div class="variant-flex-right text-right text-nowrap">
+                    <div class="label text-nowrap">Количество</div>
+                    <div style="display: flex; flex-direction: row" class="text-nowrap">{{ form_row(form.count) }}&nbsp;шт</div>
+                    <div id="count"></div>
+                </div>
+            </div>
+        </div>
+        <div class="variant-flex-right text-right row-sum">
+            <div class="label">Итого</div>
+            <div>
+                <b id="row_total_price">{{ (form.count.vars.value * params['row'].getPrice)|format_rub|raw }}</b>
+            </div>
+        </div>
+    </div>
+    {{ form_widget(form.save, {
+        'attr': {'class': 'btn btn-primary btn-lg w100 btn_order',
+            'id': 'btn_order_row'
+        }
+    }) }}
+</div>

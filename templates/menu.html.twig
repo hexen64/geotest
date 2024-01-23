@@ -1,0 +1,35 @@
+{% set menu = app_parameter('app_menu_items') %}
+{% set current_route = app.request.attributes.get('_route') %}
+{% set current_controller = app.request.attributes.get('_controller')|split('::')[0] %}
+{% set current_method = app.request.attributes.get('_controller')|split('::')[1]|split('Action')[0] %}
+
+{% if current_route == 'app_homepage' %}
+    {% set current_route = 'app_devices' %}
+{% endif %}
+
+{% set level = 1 %}
+{% if current_controller in ['App\\Controller\\ComplectsController', 'App\\Controller\\RowsController']
+    or (current_controller == 'App\\Controller\\DevicesController' and current_method == 'show') %}
+    {% set level = 2 %}
+{% endif %}
+
+<ul class="menu">
+    {% for key, item in menu %}
+        {% set current = false %}
+        {% if current_route == key or (key == 'app_devices' and level == 2) %}
+            {% set current = true %}
+        {% endif %}
+        {% if item.visible is not defined %}
+            {% set item = item|merge({'visible': true}) %}
+        {% endif %}
+        {% if item.visible %}
+            {% if current and level == 1 %}
+                <li class="current">{{ item.title }}</li>
+            {% else %}
+                <li{{ current ? ' class="current"' : '' }}>
+                    <a href="{{ path(key) }}">{{ item.title }}</a>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>

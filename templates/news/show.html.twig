@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="content-row content-news-view">
+        <div class="content-column-left"></div>
+        <div class="content-column-center">
+            <a href="/news">Новости и статьи</a>
+        </div>
+    </div>
+
+    <div class="content-row content-news-view">
+        <div class="content-column-left">
+            {#            <?php include_partial('subscribe_form', array('subscribe_form' => $subscribe_form)); ?> #}
+        </div>
+
+        <div class="content-column-center">
+            <div class="news-view">
+                <h1 class="news-view-title">{{ news.getTitleView|raw }}</h1>
+                <div class="news-view-info">
+                    <div class="news-view-tag">{{ news.getTag }}</div>
+                    <div class="news-view-date">{{ news.getDate|date('d.m.Y') }}</div>
+                </div>
+                <div class="news-view-text">{{ news.getText|raw }}</div>
+                <div class="news-view-author">{{ news.getAuthor }}</div>
+                <div class="news-view-author-position">{{ news.getAuthorPosition }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-row content-news-view">
+        <div class="content-column-left"></div>
+        <div class="content-column-center">
+            <div class="news-bottom">
+                <div class="news-bottom-items">
+                    {% for bottomNewsItem in newsBottom %}
+                        <div class="news-bottom-item">
+                            <div class="news-bottom-item-title">{{ bottomNewsItem.getTitleLink|raw }}</div>
+                            <div class="news-bottom-item-date">{{ bottomNewsItem.getDate|date('d.m.Y') }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <a href="/news">Все новости</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

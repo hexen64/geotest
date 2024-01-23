@@ -17,7 +17,7 @@ class News
     #[ORM\Column(type: "integer")]
     private ?int $newsOrder;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(type: "datetime")]
     private ?\DateTimeInterface $date;
 
     #[ORM\Column(type: "text")]
@@ -131,5 +131,15 @@ class News
     {
         $this->groupId = $groupId;
         return $this;
+    }
+
+    public function getTitleLink(): string
+    {
+        return preg_replace('/^(.*)<link>(.*)<\/link>(.*)$/is', '$1<a href="/news/'.$this->id.'">$2</a>$3', $this->title);
+    }
+
+    public function getTitleView(): string
+    {
+        return preg_replace('/^(.*)<link>(.*)<\/link>(.*)$/is', '$1<span>$2</span>$3', $this->title);
     }
 }

@@ -1,4 +1,5 @@
 {% for index, f in form %}
+    <a name="{{ params.variants[index].entity.id }}"></a>
     <div class="variant{{ params.variants[index].is_base ? ' open' : '' }}"
          data-id="{{ params.variants[index].entity.id }}">
         <div class="variant-header">
@@ -6,26 +7,34 @@
             <div class="variant-name">{{ params.variants[index].entity.name }}</div>
             <div class="variant-price">от {{ params.variants[index].entity.priceBase|format_rub|raw }}</div>
         </div>
-        {#                <form class="variant-form" method="post" action="{{ path('app_complect_order') }}" #}
-        {#                      id="form_order_{{ index }}"> #}
-        {#                    <h3 class="hidden-xs">Состав комплекта</h3> #}
         {{ form_start(f,
-            {'action': path('app_complect_order'),
-                'method': 'POST',
+            {
+                'action': path('app_complect_order'),
                 'attr': {'class': 'variant-form',
                 'id': 'form_order_'~ index
             }}) }}
+{#        {{ form_widget(f._token) }}#}
+        {{ form_widget(f.id) }}
+        {% if f.isBase is defined %}
+            {{ form_widget(f.isBase) }}
+        {% endif %}
+
         <h3 class="hidden-xs">Состав комплекта</h3>
-        {% for variant_row in f.base %}
-            <div class="row variant-row">
+
+        {% for key,variant_row in f.base %}
+            <div id="row_{{ variant_row.row.id.vars.value }}" class="row variant-row">
                 <div class="variant-row-name">
-                    {{ form_widget(variant_row.row) }}
+                    {{ form_row(variant_row.row.id) }}
+                    {{ form_row(variant_row.row.price) }}
                 </div>
                 <div class="variant-row-count-sum">
                     <div class="variant-row-count row-count">
                         {{ form_widget(variant_row.cnt) }}
+                        <div id='base_{{ key }}'></div>
                         {{ form_widget(variant_row.base_count) }}
-                        {#                            <div>'.$undo_button.'</div> #}
+                        {% if variant_row.row.fixed is not defined %}
+                            <div id="undo_{{ variant_row.row.id.vars.value }}" class="btn-undo">отменить</div>
+                        {% endif %}
                     </div>
                     <div class="variant-row-sum row-sum">
                         {{ (variant_row.cnt.vars.value * variant_row.row.price.vars.value)|format_rub|raw }}
@@ -33,25 +42,40 @@
                 </div>
             </div>
         {% endfor %}
-
         {% if f.not_base|length %}
             <h3>Дополнительные комплектующие</h3>
-            {% for variant_row in f.not_base %}
-                <div class="row variant-row">
-                    {{ form_row(variant_row) }}
+            {% for key,variant_row in f.not_base %}
+                <div id="row_{{ variant_row.row.id.vars.value }}" class="row variant-row">
+                    <div class="variant-row-name">
+                        {{ form_row(variant_row.row.id) }}
+                        {{ form_row(variant_row.row.price, {'label': variant_row.row.price.vars.value|format_rub|raw}) }}
+                    </div>
+                    <div class="variant-row-count-sum">
+                        <div class="variant-row-count row-count">
+                            {{ form_widget(variant_row.cnt) }}
+                            <div id='not_base_{{ key }}'></div>
+                            {{ form_widget(variant_row.base_count) }}
+                            {% if variant_row.row.fixed is not defined %}
+                                <div id="undo_{{ variant_row.row.id.vars.value }}" class="btn-undo">отменить</div>
+                            {% endif %}
+                        </div>
+                        <div class="variant-row-sum row-sum">
+                            {{ (variant_row.cnt.vars.value * variant_row.row.price.vars.value)|format_rub|raw }}
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         {% endif %}
 
         {% if f.type is defined %}
             <h4>Тип соединительной резьбы:</h4>
-            {{ form_row(f.type) }}
+            <ul class="radio_list">
+                <li><input name="variant[0][type]" type="radio" value="l" id="variant_0_type_l" checked="checked"/>&nbsp;<label
+                            for="variant_0_type_l">ленточная</label></li>
+                <li><input name="variant[0][type]" type="radio" value="k" id="variant_0_type_k"/>&nbsp;<label
+                            for="variant_0_type_k">коническая</label></li>
+            </ul>
         {% endif %}
-
-        {#            {% if params.variants[index].carving %} #}
-        {#                <h4>Тип соединительной резьбы:</h4> #}
-        {#                {{ form.type.renderRow() }} #}
-        {#            {% endif %} #}
 
         <div class="variant-row variant-row-total">
             <div class="variant-row-name">
@@ -63,19 +87,30 @@
             <div class="variant-row-count-sum">
                 <div class="variant-row-count">
                     <div class="label text-nowrap">Кол-во комплектов</div>
-                    <div class="text-nowrap">{{ form_widget(f.count) }}&nbsp;шт</div>
-                    <div colspan="2" id="order_status_{{ index }}">
+                    <div class="text-nowrap">
+                        {{ form_widget(
+                            f.cnt,
+                            {
+                                'id': 'variant_' ~ index ~ '_count',
+                                'name': 'variant[' ~ index ~ '][count]'
+                            }
+                        ) }}
+                        &nbsp;шт
+                        <div id="cnt"></div>
+                    </div>
+                    <div colspan="2" id="order_status_"{{ index }}>
                         {{ params.variants[index].status }}
                     </div>
                 </div>
                 <div class="variant-row-sum row-sum">
                     <div class="label">Итого</div>
                     <div id="total_price_{{ index }}">
-                        <b>{{ (params.variants[index].variant_price * f.count.vars.value)|format_rub|raw }}</b>
+                        <b>{{ (params.variants[index].variant_price * params.variants[index].variant_count)|format_rub|raw }}</b>
                     </div>
                 </div>
             </div>
         </div>
+
 
         {{ form_widget(f.save, {
             'attr': {'class': 'btn btn-primary btn-lg w100 btn_order',
@@ -84,10 +119,9 @@
             }
         }) }}
 
-        {{ form_end(f) }}
-
         {% if params.variants[index].entity.description %}
             <div class="variant-desc">{{ params.variants[index].entity.description }}</div>
         {% endif %}
     </div>
 {% endfor %}
+

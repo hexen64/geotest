@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Rows;
 use App\Entity\VariantsRows;
+use App\Services\Formatter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,33 +27,38 @@ class RowsType extends AbstractType
 
     private $router;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, private Formatter $formatter)
     {
         $this->router = $router;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event): void {
+
                 $form = $event->getForm();
                 $data = $event->getData();
-                $name = $data->getName();
-                $linkName = $this->router->generate('app_row_show', [
-                    'rowId' => $data->getId(),
-                    'groupId' => null
+                $rowId = $data->getId();
+
+                if ($data->getFixed()) {
+                    $name = $data->getName();
+                } else {
+                    $nameRoute = $this->router->generate('app_row_show', [
+                        'rowId' => $rowId,
+                        'groupId' => null
                     ], UrlGeneratorInterface::ABSOLUTE_URL);
-                $name = '<a href="'.$linkName.'">'.$name.'</a>';
+                    $name = '<a href="' . $nameRoute . '">' . $data->getName() . '</a>';
+                }
+
                 $price = $data->getPrice();
-                $formattedPrice = format_rub($price);
+                $formattedPrice = $this->formatter->formatRub($price);
 
                 $form
                     ->add('id', TextType::class, [
                         'label_html' => true,
                         'label' => $name,
-                        'disabled' => true,
                         'attr' => [
                             'class' => 'row-name',
                             'readonly' => 'readonly',
@@ -64,20 +71,16 @@ class RowsType extends AbstractType
                     ->add('price', TextType::class, [
                         'label_html' => true,
                         'label' => $formattedPrice,
-                        'disabled' => true,
                         'attr' => [
-                            'class' => 'row-price',
+                            'class' => 'price',
                             'readonly' => 'readonly',
                             'style' => 'display:none'
-                        ],
-                        'constraints' => [
-                            new NotBlank(['message' => 'This field is required']),
-                            new Type([
-                                'type' => 'numeric',
-                                'message' => 'Invalid value',
-                            ]),
-                        ],
+                        ]
                     ]);
+
+                if ($data->getFixed()) {
+                    $form->add('fixed', HiddenType::class, ['mapped' => false]);
+                }
             }
         );
     }

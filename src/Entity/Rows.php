@@ -6,6 +6,7 @@ use App\Repository\RowsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: RowsRepository::class)]
 #[ORM\Table(name: '`rows_t`')]
@@ -35,6 +36,41 @@ class Rows
 
     #[ORM\Column(type: "boolean", options: ["default" => 1])]
     private $visible;
+
+    #[ORM\ManyToMany(targetEntity: Variants::class, inversedBy: "rows")]
+    #[ORM\JoinTable(name: "variants_rows")]
+    #[ORM\JoinColumn(name: "row_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "variant_id", referencedColumnName: "id")]
+    private Collection $variants;
+
+
+    #[ORM\ManyToMany(targetEntity: Orders::class, inversedBy: "rows")]
+    #[ORM\JoinTable(name: "orders_rows")]
+    #[ORM\JoinColumn(name: "row_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "order_id", referencedColumnName: "id")]
+    private Collection $orders;
+
+    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "row", orphanRemoval: true)]
+    private Collection $variantsRows;
+
+    #[ORM\OneToMany(targetEntity: OrdersRows::class, mappedBy: "row", orphanRemoval: true)]
+    private Collection $ordersRows;
+
+
+    #[ORM\OneToMany(mappedBy: 'row', targetEntity: OrdersVariantsRows::class, orphanRemoval: true)]
+    private Collection $ordersVariantsRows;
+
+    private int $count;
+
+    private int $diff;
+
+    private ?string $type;
+
+    public function __construct()
+    {
+        $this->variants = new ArrayCollection();
+        $this->variantsRows = new ArrayCollection();
+    }
 
     public function getId(): ?string
     {
@@ -132,20 +168,6 @@ class Rows
         return $this;
     }
 
-    #[ORM\ManyToMany(targetEntity: Variants::class, inversedBy: "rows")]
-    #[ORM\JoinTable(name: "variants_rows")]
-    #[ORM\JoinColumn(name: "row_id", referencedColumnName: "id")]
-    #[ORM\InverseJoinColumn(name: "variant_id", referencedColumnName: "id")]
-    private Collection $variants;
-
-    public function __construct()
-    {
-        $this->variants = new ArrayCollection();
-        $this->variantsRows = new ArrayCollection();
-    }
-
-    // ... getters and setters for other properties
-
     public function getVariants(): Collection
     {
         return $this->variants;
@@ -170,11 +192,6 @@ class Rows
         return $this;
     }
 
-
-    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "row", cascade: ["persist"])]
-    private Collection $variantsRows;
-
-
     public function getVariantsRows(): Collection
     {
         return $this->variantsRows;
@@ -198,6 +215,131 @@ class Rows
                 $variantsRow->setRow(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+
+    }
+
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addRow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeRow($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrdersRows(): Collection
+    {
+        return $this->ordersRows;
+
+    }
+
+
+    public function addOrdersRow(OrdersRows $ordersRow): self
+    {
+        if (!$this->ordersRows->contains($ordersRow)) {
+            $this->ordersRows[] = $ordersRow;
+            $ordersRow->setRow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersRow(OrdersRows $ordersRow): self
+    {
+        if ($this->ordersRows->removeElement($ordersRow)) {
+            // Set the owning side to null (unless already changed)
+            if ($ordersRow->getRow() === $this) {
+                $ordersRow->setRow(null);
+            }
+        }
+
+        return $this;
+
+
+    }
+
+    public function getOrdersVariantsRows(): Collection
+    {
+        return $this->ordersVariantsRows;
+
+    }
+
+
+    public function addOrdersVariantsRow(OrdersVariantsRows $ordersVariantsRow): self
+    {
+        if (!$this->ordersVariantsRows->contains($ordersVariantsRow)) {
+            $this->ordersVariantsRows[] = $ordersVariantsRow;
+            $ordersVariantsRow->setRow($this);
+        }
+
+        return $this;
+
+    }
+
+    public function removeOrdersVariantsRow(OrdersVariantsRows $ordersVariantsRow): self
+    {
+        if ($this->ordersVariantsRows->removeElement($ordersVariantsRow)) {
+            // Set the owning side to null (unless already changed)
+            if ($ordersVariantsRow->getRow() === $this) {
+                $ordersVariantsRow->setRow(null);
+            }
+        }
+
+        return $this;
+
+    }
+
+    public function getCount(): int
+    {
+        return $this->count;
+
+    }
+
+    public function setCount(int $count): self
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    public function getDiff(): int
+    {
+        return $this->diff;
+    }
+
+    public function setDiff(int $diff): self
+    {
+         $this->diff = $diff;
+
+        return $this;
+    }
+
+    public function getType(): string|null
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

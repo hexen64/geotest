@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\VariantsRowsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VariantsRowsRepository::class)]
 #[ORM\Table(name: '`variants_rows`')]
@@ -11,26 +13,29 @@ class VariantsRows
 {
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 50, name: "variant_id")]
-    private $variantId;
+    private string $variantId;
 
     #[ORM\Id]
     #[ORM\Column(type: "string", length: 32, name: "row_id")]
-    private $rowId;
+    private string $rowId;
 
-    #[ORM\Column(type: "integer", options: ["default" => 1])]
-    private $cnt;
+    #[ORM\Column(type: "integer", options: ["default" => 0])]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'Некорректное значение.',
+    )]
+    private int $cnt;
 
     #[ORM\Column(type: "boolean", options: ["default" => 0])]
-    private $isBase;
+    private bool $isBase;
 
     #[ORM\Column(type: "smallint", options: ["default" => 0])]
-    private $position;
+    private int $position;
 
+    #[ORM\ManyToOne(targetEntity: Rows::class, inversedBy: 'variantsRows', cascade: ["persist"])]
+    private ?Rows $row;
 
-    #[ORM\ManyToOne(targetEntity: Rows::class, inversedBy: 'variantsRows')]
-    private Rows $row;
-
-    #[ORM\ManyToOne(targetEntity: Variants::class, inversedBy: 'variantsRows')]
+    #[ORM\ManyToOne(targetEntity: Variants::class, inversedBy: 'variantsRows', cascade: ["persist"])]
     private ?Variants $variant;
 
     public function getVariantId(): ?string
@@ -61,13 +66,13 @@ class VariantsRows
     {
         return $this->cnt;
     }
-
     public function setCnt(int $cnt): self
     {
         $this->cnt = $cnt;
 
         return $this;
     }
+
 
     public function getIsBase(): ?bool
     {
@@ -93,13 +98,11 @@ class VariantsRows
         return $this;
     }
 
-
     public function getRow(): ?Rows
     {
         return $this->row;
 
     }
-
 
     public function setRow(?Rows $row): self
     {
@@ -114,7 +117,6 @@ class VariantsRows
         return $this->variant;
 
     }
-
 
     public function setVariant(?Variants $variant): self
     {
