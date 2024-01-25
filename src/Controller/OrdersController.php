@@ -112,7 +112,8 @@ class OrdersController extends AbstractController
     public function done(array $orderData, Request $request)
     {
         $order = $this->entityManager->getRepository(Orders::class)->find($orderData['id']);
-        if (!$order || ($order->getEmail() && $order->getEmail() != $request->cookies->get('email'))) {
+
+        if (!$order || ($order->getEmail() && $order->getEmail() !== $request->cookies->get('email'))) {
             $this->addFlash('notice', 'Заказ не найден.');
             throw new NotFoundHttpException();
         }
