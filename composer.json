@@ -10,7 +10,6 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.16",
-        "itsgoingd/clockwork": "^5.1",
         "symfony/asset": "6.3.*",
         "symfony/asset-mapper": "6.3.*",
         "symfony/console": "6.3.*",
