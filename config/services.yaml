@@ -46,6 +46,12 @@ services:
   App\Services\OrderService:
     arguments:
       - '@doctrine.orm.default_entity_manager'
+
+  App\Services\ReceiptService:
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+
   App\Services\EmailService:
     arguments:
       $mailer: '@mailer'

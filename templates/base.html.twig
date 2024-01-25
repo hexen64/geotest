@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Геотест{% endblock %}</title>
-    {#    <link rel="shortcut icon" href="/img/favicon.ico"> #}
+    <link rel="shortcut icon" href="/img/favicon.ico">
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-{#        <link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />#}
     {% endblock %}
 
     {% block javascripts %}
@@ -40,13 +39,13 @@
     {% block content %}
     {% endblock %}
 </div>
-{# {% include('footer.html.twig') %} #}
-{#<!--<script src="/lib/jquery/jquery-1.12.4.min.js"></script>-->#}
+{% include('footer.html.twig') %}
+
 <script src="/node_modules/jquery/dist/jquery.js"></script>
 <script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.owl-carousel').owlCarousel();
         });
 

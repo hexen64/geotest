@@ -9,20 +9,20 @@ use Doctrine\ORM\Query\Expr\Join;
 class ReceiptService
 {
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private OrderService $orderService)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
     }
 
-    public static function create(Orders $order, EntityManagerInterface $entityManager)
+    public function create(Orders $order)
     {
         $orderVariants = $order->getOrdersVariants();
         if (!empty($orderVariants->toArray())) {
             foreach ($orderVariants as $i => $orderVariant) {
                 if ($orderVariant->getCnt() <= 0) {
-                    $entityManager->remove($orderVariant);
-                    $entityManager->flush();
+                    $this->entityManager->remove($orderVariant);
+                    $this->entityManager->flush();
                 } else {
-                    $qb = $entityManager->createQueryBuilder()
+                    $qb = $this->entityManager->createQueryBuilder()
                         ->select('r.id', 'r.name', 'vr.cnt', 'r.name', 'r.idl', 'r.idk')
                         ->from('App:OrdersVariants', 'ov')
                         ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'ov.variantId = vr.variantId')
@@ -73,7 +73,7 @@ class ReceiptService
         $orderRows = $order->getOrdersRows();
         if (!empty($orderRows->toArray())) {
             foreach ($orderRows as $i => $orderRow) {
-                $qb = $entityManager->createQueryBuilder()
+                $qb = $this->entityManager->createQueryBuilder()
                     ->select('r.id', 'r.name', 'orows.cnt', 'r.price')
                     ->from('App:OrdersRows', 'orows')
                     ->leftJoin('App:Rows', 'r', 'WITH', 'r.id = orows.rowId')

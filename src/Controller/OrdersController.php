@@ -11,8 +11,6 @@ use App\Services\OrderService;
 use App\Services\ReceiptService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,14 +25,21 @@ class OrdersController extends AbstractController
     private EntityManagerInterface $entityManager;
     private OrderService $orderService;
     private SerializerInterface $serializer;
+    private EmailService $mailer;
+
+    private ReceiptService $receiptService;
 
     public function __construct(EntityManagerInterface $entityManager,
                                 OrderService           $orderService,
-                                SerializerInterface    $serializer)
+                                SerializerInterface    $serializer,
+                                EmailService           $mailer,
+                                ReceiptService         $receiptService)
     {
         $this->entityManager = $entityManager;
         $this->orderService = $orderService;
         $this->serializer = $serializer;
+        $this->mailer = $mailer;
+        $this->receiptService = $receiptService;
     }
 
     #[Route('/order/{orderId}', name: 'app_order', methods: ['GET'])]
@@ -73,7 +78,7 @@ class OrdersController extends AbstractController
     }
 
     #[Route('/order/{orderId}', name: 'app_order_save', methods: ['POST'])]
-    public function save(int $orderId, Request $request, EmailService $mailer)
+    public function save(int $orderId, Request $request)
     {
         $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
         $form = $this->createForm(OrdersType::class, $order);
@@ -87,12 +92,7 @@ class OrdersController extends AbstractController
                 $response->sendHeaders();
                 $order = $form->getData();
                 $this->entityManager->flush();
-                $orderData = ReceiptService::create($order, $this->entityManager);
-                $mailer->execute($orderData);
-                $mailer->sendReceipt();
-                $mailer->toAdmin();
-
-                return $this->done($orderData, $request, $response);
+                return $this->redirectToRoute('app_order_done', ['orderId' => $order->getId()]);
             }
             $formErrors = $form->getErrors(true, true);
             foreach ($formErrors as $error) {
@@ -101,17 +101,20 @@ class OrdersController extends AbstractController
                 $errors['form'][$fieldName] = $fieldError;
             }
         }
-//        $response->headers->setCookie(new Cookie('errors', $errors, time() + $this->getParameter('app_cookie_expire')));
-
 
         return $this->redirectToRoute('app_order', ['orderId' => $order->getId()]);
     }
 
 
     #[Route('/order/done/{orderId}', name: 'app_order_done', methods: ['GET'])]
-    public function done(array $orderData, Request $request)
+    public function done(int $orderId, Request $request)
     {
-        $order = $this->entityManager->getRepository(Orders::class)->find($orderData['id']);
+        $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
+        $orderData = $this->receiptService->create($order);
+
+        $this->mailer->execute($orderData);
+        $this->mailer->sendReceipt();
+        $this->mailer->toAdmin();
 
         if (!$order || ($order->getEmail() && $order->getEmail() !== $request->cookies->get('email'))) {
             $this->addFlash('notice', 'Заказ не найден.');
