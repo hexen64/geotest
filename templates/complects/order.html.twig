@@ -13,7 +13,7 @@
                 'attr': {'class': 'variant-form',
                 'id': 'form_order_'~ index
             }}) }}
-{#        {{ form_widget(f._token) }}#}
+        {{ form_widget(f._token) }}
         {{ form_widget(f.id) }}
         {% if f.isBase is defined %}
             {{ form_widget(f.isBase) }}

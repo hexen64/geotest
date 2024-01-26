@@ -78,7 +78,7 @@
                     {% for row in rows %}
                         <tr>
                             <td class="complect-item-name">
-                                <a href="{{ path('app_row_show', {'rowId': row.getId(), 'groupId': group.getId()}) }}">{{ row.getName() }}</a>
+                                <a href="{{ path('app_row_show_group', {'rowId': row.getId(), 'groupId': group.getId()}) }}">{{ row.getName() }}</a>
                             </td>
                             <td class="complect-item-price text-nowrap">
                                 {{ row.getPrice()|format_rub|raw }}

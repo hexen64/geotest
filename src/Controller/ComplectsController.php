@@ -38,7 +38,7 @@ class ComplectsController extends AbstractController
 
     #[Route('/complect/{id}/{groupId}', name: 'app_complect_group', methods: ['GET'])]
     #[Route('/complect/{id}', name: 'app_complect', methods: ['GET'])]
-    public function show(string $id, ?string $groupId, Request $request, FormFactoryInterface $formFactory): Response
+    public function show(string $id, ?string $groupId, FormFactoryInterface $formFactory): Response
     {
         $complect = $this->entityManager->getRepository(Complects::class)->find($id);
         $qb = $this->entityManager->createQueryBuilder();

@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Orders;
+use App\Entity\Groups;
 use App\Entity\OrdersRows;
 use App\Entity\Rows;
-use App\Form\RowsType;
 use App\Form\RowType;
 use App\Services\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +28,8 @@ class RowsController extends AbstractController
     }
 
     #[Route('/row/{rowId}', name: 'app_row_show', methods: ['GET'])]
-    public function show(string $rowId, Request $request): Response
+    #[Route('/row/{rowId}/{groupId}', name: 'app_row_show_group', methods: ['GET'])]
+    public function show(string $rowId, ?string $groupId, Request $request): Response
     {
         $row = $this->entityManager->getRepository(Rows::class)->find($rowId);
 
@@ -37,33 +37,34 @@ class RowsController extends AbstractController
             $this->addFlash('notice', 'Запчасть не найдена.');
             throw $this->createNotFoundException();
         }
-//
         $group = null;
-//        if ($groupId) {
-//            $group = $this->entityManager->getRepository(Rows::class)->find($groupId);
-//        }
-//
+
+        if ($groupId) {
+            $group = $this->entityManager->getRepository(Groups::class)->find($groupId);
+        }
+
+
         $leftMenu = [];
-//
-//        $qb = $this->entityManager->createQueryBuilder()
-//            ->select('r')
-//            ->from(Rows::class, 'r')
-//            ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'vr.rowId = r.id')
-//            ->leftJoin('App:Variants', 'v', 'WITH', 'v.id = vr.variantId')
-//            ->leftJoin('App:GroupsComplects', 'gc', 'WITH', 'gc.complectId = v.complectId')
-//            ->leftJoin('App:Groups', 'g', 'WITH', 'g.id = gc.groupId')
-//            ->where('gc.groupId = :group_id')
-//            ->andWhere('r.visible = :visible')
-//            ->andWhere('r.fixed = :fixed')
-//            ->orderBy('r.price', 'DESC')
-//            ->distinct()
-//            ->setParameter('group_id', $groupId)
-//            ->setParameter('visible', 1)
-//            ->setParameter('fixed', 0);
-//        $rows = $qb->getQuery()->getResult();
-//        foreach ($rows as $rowItem) {
-//            $leftMenu[] = $rowItem;
-//        }
+
+        $qb = $this->entityManager->createQueryBuilder()
+            ->select('r.id', 'r.name', 'r.price', 'r.visible', 'r.fixed')
+            ->from(Rows::class, 'r')
+            ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'vr.rowId = r.id')
+            ->leftJoin('App:Variants', 'v', 'WITH', 'v.id = vr.variantId')
+            ->leftJoin('App:GroupsComplects', 'gc', 'WITH', 'gc.complectId = v.complectId')
+            ->leftJoin('App:Groups', 'g', 'WITH', 'g.id = gc.groupId')
+            ->where('gc.groupId = :group_id')
+            ->andWhere('r.visible = :visible')
+            ->andWhere('r.fixed = :fixed')
+            ->orderBy('r.price', 'DESC')
+            ->distinct()
+            ->setParameter('group_id', $groupId)
+            ->setParameter('visible', 1)
+            ->setParameter('fixed', 0);
+        $rows = $qb->getQuery()->getResult();
+        foreach ($rows as $rowItem) {
+            $leftMenu[] = $rowItem;
+        }
 
         $form = $this->createForm(RowType::class, $row);
 
@@ -76,7 +77,7 @@ class RowsController extends AbstractController
             'minPrice' => $minPrice,
             'params' => [
                 'row' => $row,
-//                'curr_group' => $groupId,
+                'curr_group' => $groupId,
             ],
             'group' => $group,
             'leftMenu' => $leftMenu,

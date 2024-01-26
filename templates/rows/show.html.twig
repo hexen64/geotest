@@ -6,7 +6,7 @@
         <div class="content-column-left"></div>
         <div class="content-column-center">
             {% if group %}
-                <div><a href="{{ path('app_devices_show', {'id': group.getId}) }}">{{ group.getName }}</a></div>
+                <div><a href="{{ path('app_devices_show', {'groupId': group.getId}) }}">{{ group.getName }}</a></div>
             {% endif %}
 
             <div class="content-row">
@@ -27,16 +27,16 @@
         <div class="content-column-left">
             <ul class="complect-left-menu hidden-xs">
                 {% for left_menu_item in leftMenu %}
-                    <li {% if left_menu_item.getId() == row.getId() %}class="active"{% endif %}>
-                        <a href="{{ path('app_row_show', {'id': left_menu_item.getId()}) ~ (group ? '&group=' ~ group.getId() : '') }}">
-                            {{ left_menu_item.getName() }}
+                    <li {% if left_menu_item.id == row.getId() %}class="active"{% endif %}>
+                        <a href="{{ path('app_row_show_group', {'rowId': left_menu_item.id, 'groupId': group ? group.getId() : ''}) }}">
+                        {{ left_menu_item.name }}
                         </a>
                     </li>
                 {% endfor %}
                 {% if group %}
                     <li>
-                        <a class="devices-all" href="{{ path('app_devices_show', {'id': group.getId()}) }}">Все
-                            категории</a>
+                        <a class="devices-all" href="{{ path('app_devices_show', {'groupId': group.getId()}) }}">
+                            Все категории</a>
                     </li>
                 {% endif %}
             </ul>

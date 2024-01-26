@@ -80,7 +80,7 @@ class OrdersType extends AbstractType
                     'data' => $fio,
                     'constraints' => [
                         new NotBlank(['message' => 'Не заполнено']),
-                        new Length(['max' => 2]),
+                        new Length(['max' => 255]),
                     ],
                 ]
             )->add(

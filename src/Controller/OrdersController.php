@@ -121,51 +121,21 @@ class OrdersController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm(OrdersType::class, $order);
-        $labels = [];
-
-        foreach ($form->createView()->children as $name => $field) {
-            $label = $field->vars['label'];
-
-            if ($label) {
-                $labels[$name] = $label;
-            }
-        }
-
-        $info = [];
-        $labels_order = [
-            'fio',
-            'firm',
-            'phone',
-            'email',
-            'address',
-            'comment',
-            'delivery',
-        ];
-
-        foreach ($labels_order as $name) {
-            $val = $labels[$name] ?? '';
-
-            if ($name === 'delivery') {
-                $delivery = $form->get('delivery')->getData();
-                $delivery_val = $order->getDelivery();
-                $info[$name] = [
-                    'label' => $val,
-                    'value' => isset($delivery[$delivery_val]) ? $delivery[$delivery_val] : '',
-                ];
-                continue;
-            }
-
-            $info[$name] = [
-                'label' => $val,
-                'value' => $order->{'get' . ucfirst($name)}(),
-            ];
-        }
-
 
         $order->setSubmit(1);
         $order->setTotal($orderData['orderTotal']);
         $this->entityManager->flush();
+
+        $delivery = [
+            "firm" => "На склад заказчика",
+            "firm+sklad" => "На склад транспортной компании",
+            "self" => "Самовывоз",
+        ];
+
+        $orderData['contact'] = array_map(function ($value) use ($delivery) {
+            return isset($delivery[$value]) ? $delivery[$value] : $value;
+        }, $orderData['contact']);
+
 
         return $this->render('orders/done.html.twig', [
             'id' => $orderData['id'],

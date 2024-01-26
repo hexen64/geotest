@@ -9,7 +9,6 @@
     {% endblock %}
 
     {% block javascripts %}
-        {{ importmap() }}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
@@ -41,14 +40,10 @@
 </div>
 {% include('footer.html.twig') %}
 
-<script src="/node_modules/jquery/dist/jquery.js"></script>
-<script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
+{#<script src="/node_modules/jquery/dist/jquery.js"></script>#}
+{#<script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>#}
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        $(document).ready(function () {
-            $('.owl-carousel').owlCarousel();
-        });
-
         const mobileMenuBtn = document.getElementById('mobile_menu_btn');
         const mobileMenu = document.getElementById('mobile_menu');
         const mobileMenuCloseBtn = document.getElementById('mobile_menu_close_btn');
