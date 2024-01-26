@@ -80,6 +80,7 @@ class RowsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'allow_extra_fields' => true,
             'data_class' => Rows::class,
         ]);
     }

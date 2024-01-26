@@ -33,7 +33,8 @@ class OrdersVariantsType extends AbstractType
             ->add('type', HiddenType::class)
             ->add('cnt', TextType::class, [
                 'attr' => [
-                    'class' => 'count'
+                    'class' => 'count',
+                    'autocomplete' => 'off'
                 ],
                 'constraints' => [
                     new Type([

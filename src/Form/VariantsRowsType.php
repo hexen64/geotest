@@ -55,7 +55,8 @@ class VariantsRowsType extends AbstractType implements FormTypeInterface
                         'class' => 'variant-row-count-sum',
                     ],
                     'attr' => [
-                        'class' => 'count'
+                        'class' => 'count',
+                        'autocomplete' => 'off'
                     ],
                     'label' => false,
                     'constraints' => [
@@ -75,6 +76,7 @@ class VariantsRowsType extends AbstractType implements FormTypeInterface
     function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'allow_extra_fields' => true,
             'data_class' => VariantsRows::class,
             'row' => Rows::class,
         ]);

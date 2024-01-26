@@ -5,7 +5,7 @@ $(function () {
 
     /* complects ============================================================= */
 
-    $("#variant_save").click(function (e) {
+    $(".btn_order").click(function (e) {
         e.preventDefault();
 
         var label = $(this).val();

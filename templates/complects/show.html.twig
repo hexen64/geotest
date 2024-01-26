@@ -44,7 +44,7 @@
             {{ include('html/complects/' ~ complect.getFile() ~ '.htm') }}
             <div class="block">
                 <div id="order_form"></div>
-                {% include 'complects/order.html.twig' with {form:form, params:params} %}
+                {% include 'complects/order.html.twig' with {forms:forms, params:params} %}
             </div>
         </div>
     </div>

@@ -55,7 +55,7 @@ class RowType extends AbstractType
                         [
                             'label' => false,
                             'mapped' => false,
-                            'attr' => ['class' => 'count'],
+                            'attr' => ['class' => 'count', 'autocomplete' => 'off'],
                             'data' => 1,
                             'constraints' => [
                                 new Type([

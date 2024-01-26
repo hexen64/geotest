@@ -1,4 +1,4 @@
-{% for index, f in form %}
+{% for index, f in forms %}
     <a name="{{ params.variants[index].entity.id }}"></a>
     <div class="variant{{ params.variants[index].is_base ? ' open' : '' }}"
          data-id="{{ params.variants[index].entity.id }}">
@@ -111,13 +111,19 @@
             </div>
         </div>
 
+        {#        <button type="submit" #}
+        {#                class="btn btn-primary btn-lg w100 btn_order" #}
+        {#                id="{{ 'btn_order_' ~ index }}" #}
+        {#                data-index="{{ index }}">Добавить к заказу #}
+        {#        </button> #}
 
         {{ form_widget(f.save, {
             'attr': {'class': 'btn btn-primary btn-lg w100 btn_order',
-                'id': 'btn_order' ~ index ,
+                'id': 'btn_order_' ~ index ,
                 'data-index': index
-            }
-        }) }}
+            }}) }}
+
+        {{ form_end(f) }}
 
         {% if params.variants[index].entity.description %}
             <div class="variant-desc">{{ params.variants[index].entity.description }}</div>

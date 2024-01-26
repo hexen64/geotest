@@ -135,7 +135,7 @@ class ComplectsController extends AbstractController
         }
 
         return $this->render('complects/show.html.twig', [
-            'form' => $forms,
+            'forms' => $forms,
             'complect' => $complect,
             'params' => $params,
             'group' => $group,
@@ -231,8 +231,7 @@ class ComplectsController extends AbstractController
     }
 
 // Generate an array contains a key -> value with the errors where the key is the name of the form field
-    protected
-    function getErrorMessages(FormInterface $form, $prefix = '')
+    protected function getErrorMessages(FormInterface $form, $prefix = '')
     {
         $errors = array();
 
