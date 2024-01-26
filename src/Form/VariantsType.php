@@ -99,7 +99,7 @@ class VariantsType extends AbstractType
             'data_class' => Variants::class,
             'base_rows' => null,
             'not_base_rows' => null,
-            'csrf_protection' => false,
+            'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'variants',
         ]);
