@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
 use SimpleXMLElement;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 final class XmlRenderer
 {
@@ -82,10 +79,10 @@ final class XmlRenderer
 //</div>';
             $html .= '
             <div class="slide">
-                <a href="/i/'.$ph['src'].'" target="_blank" class="slide-img">
-                    <div style="background-image: url(/i/'.$ph['thumb'].')" alt="Фото №'.$i.'" title="'.$ph['alt'].'"></div>
+                <a href="/i/' . $ph['src'] . '" target="_blank" class="slide-img">
+                    <div style="background-image: url(/i/' . $ph['thumb'] . ')" alt="Фото №' . $i . '" title="' . $ph['alt'] . '"></div>
                 </a>
-                <div class="slide-text">'.$ph['alt'].'</div>
+                <div class="slide-text">' . $ph['alt'] . '</div>
             </div>
             ';
             $i++;
@@ -213,7 +210,7 @@ final class XmlRenderer
         }
         if ($thumb = self::convertImg($src, $type)) {
             $img_name = preg_replace('/(.*)\./', '$1', $src);
-            $str = '<a href="/i/'.$src.'" class="img"'.($type == 'gallery' ? ' data-action="showBigPhoto" id="'.$img_name.'"' : '').'><img src="/i/'.$thumb.'" '.$str.'></a>';
+            $str = '<a href="/i/' . $src . '" class="img"' . ($type == 'gallery' ? ' data-action="showBigPhoto" id="' . $img_name . '"' : '') . '><img src="/i/' . $thumb . '" ' . $str . '></a>';
         }
         return $str;
     }
@@ -241,15 +238,19 @@ final class XmlRenderer
             $md5 = md5_file($img_dir . '/' . $file);
 
             if (file_exists($img_dir . '/' . $thumb)) {
-                if (exif_imagetype($img_dir . '/' . $thumb) !== IMAGETYPE_PNG){
-                    $exif = exif_read_data($img_dir . '/' . $thumb);
+
+                $imageType = exif_imagetype($img_dir . '/' . $thumb);
+                if ($imageType !== false) {
+                    if (exif_imagetype($img_dir . '/' . $thumb) !== IMAGETYPE_PNG) {
+                        $exif = exif_read_data($img_dir . '/' . $thumb);
+                    }
                 }
+                return $thumb;
             }
 //            if (!isset($exif) or !isset($exif['COMMENT'][0]) or $exif['COMMENT'][0] != $md5) {
 //                $cmd = 'gm convert -interlace line -resize ' . $params[$type]['resize'] . ' -comment \'' . $md5 . '\' ' . $img_dir . '/' . $file . ' ' . $img_dir . '/' . $thumb;
 //                exec($cmd);
 //            }
-            return $thumb;
         } else {
             return false;
         }
@@ -344,7 +345,7 @@ final class XmlRenderer
 
                         $str .= '
                         <div class="right-link-group-item">
-                            <div class="right-link-group-item-img" style="background-image: url(/i/'.$row['img'].')"></div>
+                            <div class="right-link-group-item-img" style="background-image: url(/i/' . $row['img'] . ')"></div>
                             <div class="right-link-group-item-title">
                                 <a href="/complect/' . $id . '">' . $row['name'] . '</a>
                             </div>
