@@ -62,6 +62,8 @@ final class XmlRenderer
                 $id = preg_replace('/(.*)\./', '$1', $ph['src']);
                 $ph['id'] = $id;
                 $ph['thumb'] = $thumb;
+            } else {
+                $ph['thumb'] = $ph['src'];
             }
             if (!isset($ph['alt'])) $ph['alt'] = '';
             $photos[] = $ph;
