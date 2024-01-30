@@ -1,0 +1,16 @@
+<root>
+	<block>
+	<p>Удлинитель А предназначен для увеличения глубины погружения анкера Ø 200 (см. комплект анкерный 
+	<link_row to="А1Ш.00.00.00.00">А1</link_row>, <link_row to="А2Ш.00.00.00.00">А2</link_row>, <link_row to="А3Ш.00.00.00.00">А3</link_row>).</p>
+		<gallery title="Фотографии">
+			<img src="sUdl.jpg" alt="Общий вид." />
+			<img src="sUdl1.jpg" alt="Общий вид." />
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

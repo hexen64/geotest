@@ -1,0 +1,18 @@
+<root>
+	<block>
+		<p>Предназначено для настройки и проверки аппаратуры.</p>
+		<p>В комплект входит: тарировочное устройство, опора З и наконечник З.</p>
+		<gallery title="Фотографии">
+			<img src="szTarU.jpg" alt="Общий вид" />
+			<img src="szTarU1.jpg" alt="Опора З" />
+			<img src="szTarU3.jpg" alt="Наголовник З (для зондов А2/350)" />
+			<!-- <img src="szTarU2.jpg" alt="Наголовник ЗД (для зондов А2/150 и А2/250)" />			 -->
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

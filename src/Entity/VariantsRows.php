@@ -33,10 +33,10 @@ class VariantsRows
     private int $position;
 
     #[ORM\ManyToOne(targetEntity: Rows::class, inversedBy: 'variantsRows', cascade: ["persist"])]
-    private ?Rows $row;
+    private Rows $row;
 
     #[ORM\ManyToOne(targetEntity: Variants::class, inversedBy: 'variantsRows', cascade: ["persist"])]
-    private ?Variants $variant;
+    private Variants $variant;
 
     public function getVariantId(): ?string
     {
@@ -66,6 +66,7 @@ class VariantsRows
     {
         return $this->cnt;
     }
+
     public function setCnt(int $cnt): self
     {
         $this->cnt = $cnt;

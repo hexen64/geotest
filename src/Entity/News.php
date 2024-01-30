@@ -94,7 +94,7 @@ class News
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?string $author): self
     {
         $this->author = $author;
         return $this;
@@ -105,7 +105,7 @@ class News
         return $this->authorPosition;
     }
 
-    public function setAuthorPosition(string $authorPosition): self
+    public function setAuthorPosition(?string $authorPosition): self
     {
         $this->authorPosition = $authorPosition;
         return $this;
@@ -127,7 +127,7 @@ class News
         return $this->groupId;
     }
 
-    public function setGroupId(string $groupId): self
+    public function setGroupId(?string $groupId): self
     {
         $this->groupId = $groupId;
         return $this;

@@ -1,0 +1,20 @@
+<root>
+	<block>
+		<p>Предназначен для погружения зондировочных штанг буровыми установками типа ПБУ, УГБ, УБШМ. Соединение - шестигранник 55.</p>
+		<!-- <img src="/i/szNagol55.jpg" alt="Общий вид." /> -->
+	</block>
+	
+	<block>		
+		<gallery title="Фотографии">		
+			<img src="szNagol55.jpg" />
+		</gallery>
+	</block>			
+	
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

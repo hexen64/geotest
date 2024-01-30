@@ -1,0 +1,11 @@
+<root>
+	<block>
+		<img src="/i/hVorot.jpg" alt="Общий вид." />
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

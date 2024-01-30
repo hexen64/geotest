@@ -1,0 +1,14 @@
+<root>
+	<block>
+		<gallery title="Фотографии">
+			<img src="hWood.jpg" alt="Деревянный ящик" />
+			<img src="hWood1.jpg" alt="Деревянный ящик" />
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

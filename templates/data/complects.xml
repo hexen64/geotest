@@ -1,0 +1,364 @@
+<?xml version="1.0" ?>
+<complects>
+    <!-- СТАТИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+    <complect name="Комплект ТЕСТ-К2M" id="ТЕСТ-К2М" tag="" tag_end="" file="test-k2m" img="C_sz_K2M.jpg">
+        <description>Предназначен для зондирования немерзлых песчаных и глинистых грунтов электрическими аналоговыми
+            зондами А2/350
+        </description>
+        <variants>
+            <variant name="Комплект ТЕСТ-К2M" id="ТЕСТ-К2М" base="1"/>
+        </variants>
+    </complect>
+
+    <complect name="Комплект ТЕСТ-К4М" id="ТЕСТ-К4М" tag="" tag_end="" file="test-k4m" img="C_sz_K4M.jpg">
+        <description>Предназначен для зондирования грунтов трех- и четырехканальными цифровыми зондами, дополненными
+			инклинометром и датчиком температуры
+        </description>
+        <variants>
+            <variant name="Комплект ТЕСТ-К4М" id="ТЕСТ-К4М" base="1">
+                <description>
+                    Базовая комплектация, которую вы можете заказать в соответствии с вашими пожеланиями, изменив
+                    количество и вид штанг, тип наголовника, количество кабелей и зондов.
+                </description>
+            </variant>
+            <!-- <variant name="Комплект ТЕСТ-К4 Б" id="ТЕСТ-К4Б">
+                <description>Базовая комплектация, которую вы можете заказать в соответствии с вашими пожеланиями,
+                    изменив количество и вид штанг, тип наголовника, количество кабелей и зондов. В период эксплуатации
+                    винтового штампа, требуется лишь проведение контрольных испытаний, для проверки герметичности
+                    нагрузочной системы, и устранение, при необходимости, утечек воздуха.
+                </description>
+            </variant> -->
+            <!-- <variant name="Комплект ТЕСТ-К4 У" id="ТЕСТ-К4У"/> -->
+            <variant name="Комплект ТЕСТ-К4+БПД1" id="ТЕСТ-К4БПД"/>
+        </variants>
+    </complect>
+
+    <complect name="Комплект ТЕСТ-К4М CPTU" id="ТЕСТ-К4U" tag="" tag_end="" file="test-k4cptu"
+              img="C_sz_CPTU.jpg">
+        <description>Отличается от базового комплекта ТЕСТ-К4М тем, что имеет в своём составе два зонда А4/350 CPTU с датчиками порового давления и один зонд А3/350
+        </description>
+        <variants>
+            <variant name="Комплект ТЕСТ-К4 CPTU" id="ТЕСТ-К4U"/>
+        </variants>
+    </complect>
+
+    <complect name="Комплект ТЕСТ-12" id="ТЕСТ-12" tag="" tag_end="" file="test-12"
+              img="C_sz_K12.jpg">
+        <description>Аналоговый комплект, модификация ТЕСТ-К2М, имеет расширенную шкалу измерений (1000 делений) и
+            возможность сохранения в памяти тарировочных параметров пяти зондов
+        </description>
+        <variants>
+            <variant name="Комплект ТЕСТ-12" id="ТЕСТ-12"/>
+        </variants>
+    </complect>
+
+    <complect name="Комплект БПД1" id="БПД" tag="" tag_end="" file="BPD" img="C_sz_BPD.jpg">
+        <description>Предназначен для бескабельной передачи данных зондирования от цифровых зондов А3, А4/350 к измерительному
+            прибору ТЕСТ-К4
+        </description>
+        <variants>
+            <variant name="Комплект БПД1" id="БПД"/>
+        </variants>
+    </complect>
+
+    <complect name="Установка статического зондирования грунтов УСЗ 15/36А (15/36Г)" id="УСЗ" tag="" tag_end=""
+              file="usz" img="C_sz_USZ.jpg">
+        <description>Предназначена для статического зондирования грунтов по ГОСТ 19912-2012.</description>
+        <variants>
+            <variant name="Установка статического зондирования грунтов УСЗ 15/36А (15/36Г)" id="УСЗ"/>
+        </variants>
+    </complect>
+
+    <complect name="Переносная установка статического зондирования ПУСЗ-1М" id="ПУСЗ" tag="Новинка" tag_end="31.12.2017"
+              file="PUSZ" img="C_sz_PUSZ.jpg">
+        <description>Переносная установка статического зондирования (ПУСЗ-1М) предназначена для испытания грунтов статическим зондированием и бурения геологических скважин шнеком (Ø 60 мм) или колонковым способом, для отбора проб грунтов при инженерно-геологических изысканиях
+        </description>
+        <variants>
+            <variant name="ПУСЗ" id="ПУСЗ"/>
+        </variants>
+    </complect>
+
+    <!-- <complect name="Пробоотборник Р45/100" id="ПРОБ" tag="" tag_end="" file="Prob" img="C_sz_Prob.jpg">
+        <description>Пробоотборник Р 45/100 предназначен для отбора проб глинистых и песчаных грунтов, с помощью
+            установок статического зондирования.</description>
+        <variants>
+            <variant name="Пробоотборник Р45/100" id="ПРОБ"/>
+        </variants>
+    </complect> -->
+    
+    <complect name="Формирователь отсчётов ФО-5" id="ФО5" tag="Новинка" tag_end="01.04.2021" file="szFO5" img="C_sz_FO5.jpg">
+        <description>Предназначен для автоматического снятия отсчётов при статическом зондировании грунтов (при работе с комплектами аппаратуры ТЕСТ или с блоком связи БС-3).</description>
+        <variants>
+            <variant name="Формирователь отсчётов ФО-5" id="ФО5"/>
+        </variants>
+    </complect>    
+
+    <!-- ДИНАМИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+    <complect name="Адаптер динамического зондирования АДЗ-2" id="АДЗ" tag="" tag_end="" file="dzADZ" img="C_dz_ADZ2.jpg">
+        <description>Предназначен для динамического зондирования грунтов по ГОСТ 19912-2012.</description>
+        <variants>
+            <variant name="Адаптер динамического зондирования АДЗ-2" id="АДЗ"/>
+        </variants>
+    </complect>
+    <complect name="Ручной динамический комплект РДК" id="РДК" tag="" tag_end="" file="dzRDK" img="C_dz_RDK.jpg">
+        <description>Предназначен для динамического зондирования грунтов и относится к установкам легкого типа.</description>
+        <variants>
+            <variant name="Ручной динамический комплект РДК" id="РДК"/>
+        </variants>
+    </complect>
+    <complect name="Формирователь отсчётов AdzFo" id="AdzFo" tag="Новинка" tag_end="01.04.2021" file="dzAdzFo" img="C_dz_AdzFo.jpg">
+        <description>Предназначен для цифровой регистрации результатов динамического зондирования при работе с комплектом АДЗ-2 на буровых установках.</description>
+        <variants>
+            <variant name="Формирователь отсчётов AdzFo" id="AdzFo"/>
+        </variants>
+    </complect>
+
+    <!-- ПРЕССИОМЕТРИЯ -->
+    <complect name="Электровоздушный радиальный прессиометр ПЭВ-89МК" id="ПЭВ" tag="" tag_end="" file="PEV"
+              img="C_pr_PEV.jpg">
+        <description>Предназначен для определения деформационных характеристик грунтов в буровых скважинах.
+        </description>
+        <variants>
+            <variant name="Электровоздушный радиальный прессиометр ПЭВ-89МК" id="ПЭВ" base="1"/>
+            <variant name="Прессиометр ПЭВ-89МК + Блок Давления БД-1" id="ПЭВ_БД"/>
+        </variants>
+    </complect>
+    <!-- <complect name="Прессиометр ПЭВ-89МК с комплектом автоматизации КАП2" id="ПЭВ_КАП" tag="" tag_end="" file="PEV+KAP"
+              img="C_pr_PEV_KAP.jpg">
+        <description>Предназначен для использования с прессиометрами ПЭВ-89МК. Комплект КАП2
+            позволяет полностью автоматизировать процесс выполнения полевых испытаний грунтов прессиометрами, сохранить
+            и
+            обработать результаты испытаний.
+        </description>
+        <variants>
+            <variant name="Прессиометр ПЭВ-89МК с комплектом автоматизации КАП2" id="ПЭВ_КАП"/>
+        </variants>
+    </complect> -->
+    <complect name="Блок Давления БД-1" id="БД" tag="Новинка" tag_end="08.07.2020" file="BD" img="C_pr_BD.jpg">
+        <description>Предназначен для автоматизации процесса проведения прессиометрических испытаний грунтов при работе
+            с электровоздушным прессиометром ПЭВ-89МК.
+        </description>
+        <variants>
+            <variant name="Блок Давления БД-1" id="БД"/>
+        </variants>
+    </complect>
+    <complect name="Прессиометр ПЭВ-89МК + Блок П" id="ПЭВ+БП" tag="Новинка" tag_end="01.04.2021" file="PEV+BP" img="C_pr_PEV+BP.jpg">
+        <description>Устройство Блок П используется при проведении испытаний грунтов прессиометрами ПЭВ-89МК в полуавтоматическом режиме.</description>
+        <variants>
+            <variant name="Прессиометр ПЭВ-89МК + Блок П" id="ПЭВ+БП"/>
+        </variants>
+    </complect>
+    <complect name="Универсальный Блок УБ1" id="УБ_П" tag="Новинка" tag_end="01.04.2021" file="UB_P" img="C_UB.jpg">
+        <description>Универсальный Блок УБ1 является универсальным устройством, используется вместо контроллеров ТЕСТ-ПРК и ТЕСТ-ШВК при проведении испытаний грунтов в полуавтоматическом режиме прессиометрами ПЭВ-89МК и штампами ШВ60, ШП20.</description>
+        <variants>
+            <variant name="Универсальный Блок УБ1" id="УБ_П"/>
+        </variants>
+    </complect>
+
+    <!-- ШТАМП -->
+    <complect name="Штамп ШВ60" id="ШВ" tag="" tag_end="" file="SHW" img="C_sh_SHW.jpg">
+        <description>Предназначен для определения деформационных характеристик грунтов в буровых скважинах.
+        </description>
+        <variants>
+            <variant name="Штамп ШВ60" id="ШВ"/>
+        </variants>
+    </complect>
+
+    <complect name="Штамп ШВ60 с комплектом регистрации КРП1" id="ШВ_КРП" tag="" tag_end="" file="SHW+KRP"
+              img="C_sh_SHW_KRP.jpg">
+        <description>Комплект КРП1 используется в составе штампа ШВ60 и предназначен для проведения штамповых испытаний
+            в полуавтоматическом режиме в соответствии с ГОСТ 20276.1-2020.
+        </description>
+        <variants>
+            <variant name="Штамп ШВ60 с комплектом регистрации КРП1" id="ШВ_КРП" base="1"/>
+            <variant name="Штамп ШВ60 + КРП1 + Блок Давления БД-1" id="ШВ_КРП_БД"/>
+        </variants>
+    </complect>
+
+    <!-- <complect name="Штамп ШВ60 с комплектом автоматизации КАП2" id="ШВ_КАП" tag="" tag_end="" file="SHW+KAP"
+              img="C_sh_SHW_KAP.jpg">
+        <description>Комплект КАП2 может использоваться со штампами ШВ60 с комплектом регистрации КРП1 и предназначен
+            для полной автоматизации процесса проведения полевых испытаний грунтов штампами ШВ60 III и IV типов.
+        </description>
+        <variants>
+            <variant name="Штамп ШВ60 с комплектом автоматизации КАП2" id="ШВ_КАП"/>
+        </variants>
+    </complect> -->
+
+    <complect name="Штамп ШП20" id="ШП" tag="" tag_end="" file="SHP" img="C_sh_SHP.jpg">
+        <description>Предназначен для определения деформационных характеристик грунтов в забое горной выработки.
+        </description>
+        <variants>
+            <variant name="Штамп ШП20" id="ШП"/>
+        </variants>
+    </complect>
+
+    <complect name="Штамп ШП20 с комплектом регистрации КРП1/ВД" id="ШП_КРП" tag="" tag_end="" file="SHP+KRP"
+              img="C_sh_SHP_KRP.jpg">
+        <description>Комплект КРП1/ВД является модификацией комплекта КРП1 и предназначен для работы со штампом ШП20 с
+            гидравлической нагрузочной системой.
+        </description>
+        <variants>
+            <variant name="Штамп ШП20 с комплектом регистрации КРП1/ВД" id="ШП_КРП"/>
+        </variants>
+    </complect>
+
+    <complect name="Штамп горячий ШП5000Т (ШП2500Т)" id="ШГ" tag="" tag_end="" file="SHG" img="C_sh_SHG.jpg">
+        <description>Предназначен для определения деформационных характеристик мерзлых грунтов.</description>
+        <variants>
+            <variant name="Штамп горячий ШП5000Т (ШП2500Т)" id="ШГ"/>
+        </variants>
+    </complect>
+
+    <complect name="Ворот" id="Ворот" tag="" tag_end="" file="sVorot" img="C_sh_Vorot.jpg">
+        <description>Предназначен для установки винтовых анкеров производства АО «Геотест» в массив грунта.
+        </description>
+        <variants>
+            <variant name="Ворот" id="Ворот"/>
+        </variants>
+    </complect>
+
+    <complect name="Компенсатор ГП" id="Компенсатор" tag="" tag_end="" file="sCompensator" img="C_sh_KGP.jpg">
+        <description>Предназначен для снижения жёсткости и регулирования давления в гидравлических нагрузочных
+            системах.
+        </description>
+        <variants>
+            <variant name="Компенсатор" id="Компенсатор"/>
+        </variants>
+    </complect>
+
+    <complect name="Блок Давления БД-1 (КРП1)" id="БД_Ш" tag="" tag_end="" file="BD_SH" img="C_sh_BD.jpg">
+        <description>Предназначен для автоматизации процесса проведения штамповых испытаний грунтов при
+            работе с комплектом регистрации пневматическим КРП1.
+        </description>
+        <variants>
+            <variant name="Блок Давления БД-1 (КРП1)" id="БД_Ш"/>
+        </variants>
+    </complect>
+    
+    <complect name="Комплект ШВ60 + КРП1 + Блок П" id="ШВ+КРП+БП" tag="Новинка" tag_end="01.04.2021" file="SHW+KRP+BP" img="C_sh_SHW+KRP+BP.jpg">
+        <description>Блок П используется при проведении испытаний в полуавтоматическом режиме грунтов штампами в составе комплекта аппаратуры ШВ60+КРП1+Блок П.</description>
+        <variants>
+            <variant name="Комплект ШВ60 + КРП1 + Блок П" id="ШВ+КРП+БП"/>
+        </variants>
+    </complect>
+    
+    <complect name="Комплект Штамп ШП20 + КРП1/ВД + Блок П" id="ШП+КРП+ВД+БП" tag="Новинка" tag_end="01.04.2021" file="SHP+KRP+VD+BP" img="C_sh_SHP+KRP+VD+BP.jpg">
+        <description>Комплект ШВ60+КРП1/ВД+Блок П является модификацией комплекта КРП1 и предназначен для работы со штампом ШП20 с гидравлической нагрузочной системой и комплектом Блок П.</description>
+        <variants>
+            <variant name="Комплект Штамп ШП20 + КРП1/ВД + Блок П" id="ШП+КРП+ВД+БП"/>
+        </variants>
+    </complect>        
+    
+    <complect name="Универсальный Блок УБ1 (КРП1)" id="УБ_Ш" tag="Новинка" tag_end="01.04.2021" file="UB_SH" img="C_UB.jpg">
+        <description>Универсальный Блок УБ1 является универсальным устройством, используется вместо контроллеров ТЕСТ-ПРК и ТЕСТ-ШВК при проведении испытаний грунтов в полуавтоматическом режиме прессиометрами ПЭВ-89МК и штампами ШВ60, ШП20.</description>
+        <variants>
+            <variant name="Универсальный Блок УБ1 (КРП1)" id="УБ_Ш"/>
+        </variants>
+    </complect>    
+
+    <!-- РУЧНОЙ ИНСТРУМЕНТ -->
+    <complect name="Ручной буровой комплект геолога" id="РБК" tag="" tag_end="" file="hRBK" img="C_h_RBK.jpg">
+        <description>Предназначен для бурения скважин вручную в труднодоступных для техники местах.</description>
+        <variants>
+            <variant name="Ручной буровой комплект геолога" id="РБК"/>
+        </variants>
+    </complect>
+
+    <complect name="Сдвигомер-крыльчатка" id="КР" tag="" tag_end="" file="hKR" img="C_h_KR.jpg">
+        <description>Предназначен для испытаний слабых грунтов методом вращательного среза.</description>
+        <variants>
+            <variant name="Сдвигомер-крыльчатка" id="КР"/>
+        </variants>
+    </complect>
+
+    <complect name="Ручной пенетрометр РП-1" id="ПН" tag="" tag_end="" file="hPN" img="C_h_PN.jpg">
+        <description>Предназначен для испытаний слабых грунтов методом зондирования.</description>
+        <variants>
+            <variant name="Ручной пенетрометр РП-1" id="ПН"/>
+        </variants>
+    </complect>
+
+    <!-- РАЗНОЕ -->
+    <complect name="Комплект оборудования КВП1" id="КВП" tag="" tag_end="" file="rKVP" img="C_m_KVP.jpg">
+        <description>Предназначен для определения в полевых условиях относительной водопроницаемости трещиноватых
+            скальных грунтов в массиве.
+        </description>
+        <variants>
+            <variant name="Комплект оборудования КВП1" id="КВП"/>
+        </variants>
+    </complect>
+
+    <!-- ПРОГРАММЫ -->
+    <complect name="GeoExplorer" id="GeoExplorer" tag="" tag_end="" file="pGeoExplorer" img="C_pg_Geoexplorer.jpg">
+        <description>Программы серии Geoexplorer предназначены для обработки результатов статического зондирования
+            грунтов и используются с комплектами аппаратуры ТЕСТ-К4, ТЕСТ-К2М, ТЕСТ-12
+        </description>
+        <variants>
+            <variant name="GeoExplorer" id="GeoExplorer"/>
+        </variants>
+    </complect>
+
+    <complect name="GeoPush" id="GeoPush" tag="" tag_end="" file="pGeoPush" img="C_pg_GeoPush.jpg">
+        <description>Программы серии Geoepush предназначены для обработки результатов динамического зондирования
+            грунтов
+            и используются с комплектами оборудования Адаптер динамического зондирования АДЗ-2 и Ручной динамический
+            комплект РДК
+        </description>
+        <variants>
+            <variant name="GeoPush" id="GeoPush"/>
+        </variants>
+    </complect>
+
+    <complect name="Pneumator" id="Pneumator" tag="" tag_end="" file="pPneumator" img="C_pg_Pneumator.jpg">
+        <description>Программа Pneumator предназначена для автоматизации проведения и обработки результатов прессиометрических и штамповых испытаний
+        </description>
+        <variants>
+            <variant name="Pneumator" id="Pneumator"/>
+        </variants>
+    </complect>
+
+    <!-- <complect name="PressPW" id="PressPW" tag="" tag_end="" file="pPressPW" img="C_pg_PressPW.jpg">
+        <description>Программа PressPW.MA предназначена для обработки данных результатов испытаний грунтов
+            радиальным прессиометром ПЭВ-89МК
+        </description>
+        <variants>
+            <variant name="PressPW" id="PressPW"/>
+        </variants>
+    </complect> -->
+
+    <complect name="ShwPW" id="ShwPW" tag="" tag_end="" file="pShwPW" img="C_pg_ShwPW.jpg">
+        <description>Программа ShwPW предназначена для обработки результатов штамповых опытов проведенных с
+            применением штампов серии ШВ60 и ШП20
+        </description>
+        <variants>
+            <variant name="ShwPW" id="ShwPW"/>
+        </variants>
+    </complect>
+
+    <complect name="Impeller" id="Impeller" tag="" tag_end="" file="pImpeller" img="C_pg_Impeller.jpg">
+        <description>Программа Impeller предназначена для обработки результатов испытаний слабых грунтов методом
+            вращательного среза cдвигомером-крыльчаткой и методом статического зондирования, выполняемым ручным
+            пенетрометром
+        </description>
+        <variants>
+            <variant name="Impeller" id="Impeller"/>
+        </variants>
+    </complect>
+    
+    <complect name="Cheker" id="Cheker" tag="Новинка" tag_end="01.04.2021" file="pCheker" img="C_pg_Cheker.jpg">
+        <description>Предназначено для контроля опытов, выполняемых в автоматическом режиме, с помощью комплектов оборудования ПЭВ-89МК+БД1 для прессиометрических испытаний и КРП-1+БД1+ШВ60 для штамповых испытаний.</description>
+        <variants>
+            <variant name="Cheker" id="Cheker"/>
+        </variants>
+    </complect>
+
+	<!-- <complect name="GeoFormatsImporter" id="GeoFormatsImporter" tag="Новинка" tag_end="01.03.2017" file="pGeoFormatsImporter" img="pGeoFormatsImporter_Z.jpg">
+		<description>Программа GeoFormatsImporter предназначена для передачи данных статического зондирования в программу GeoExplorer.
+		</description>
+		<variants>
+			<variant name="GeoFormatsImporter" id="GeoFormatsImporter"/>
+		</variants>
+	</complect>	 -->    
+
+</complects>

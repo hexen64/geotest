@@ -36,7 +36,8 @@ class VariantsType extends AbstractType
                 'mapped' => false,
                 'data' => $options['base_rows'],
                 'attr' => [
-                    'class' => 'row variant-row'
+                    'class' => 'row variant-row',
+                    'style' => 'display:none'
                 ],
             ])
             ->add('not_base', CollectionType::class, [
@@ -49,7 +50,8 @@ class VariantsType extends AbstractType
                 'mapped' => false,
                 'data' => $options['not_base_rows'],
                 'attr' => [
-                    'class' => 'row variant-row'
+                    'class' => 'row variant-row',
+                    'style' => 'display:none'
                 ]
             ])
             ->add('cnt', TextType::class, [

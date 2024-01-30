@@ -1,0 +1,15 @@
+<root>
+	<block>
+		<p>Предназначен для использования тензометрического зонда со <link_row to="ШтКТ8">штангами КТ Ø36х9</link_row>.</p>		
+		<gallery title="Фотографии"> 
+			<img src="szPerehK.jpg" alt="Общий вид." />
+			<img src="szPerehK2.jpg" alt="Общий вид." />
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

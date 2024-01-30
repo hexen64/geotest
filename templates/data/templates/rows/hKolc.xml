@@ -1,0 +1,12 @@
+<root>
+	<block>	
+		<p><link_row to="ГР.00.01.00">Грунтоотборник Ø65x146</link_row>.</p>
+		<img src="/i/hKolc.jpg" alt="Общий вид." />
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

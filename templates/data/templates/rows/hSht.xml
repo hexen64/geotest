@@ -1,0 +1,16 @@
+<root>
+	<block>
+		<gallery title="Фотографии">
+			<img src="hSht.jpg" alt="Ленточная резьба" />
+			<img src="hShtk.jpg" alt="Коническая резьба" />
+			<img src="hKR1.jpg" alt="Коническая резьба" />
+			<img src="hKR2.jpg" alt="Ленточная резьба" />
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

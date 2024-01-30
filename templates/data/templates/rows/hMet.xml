@@ -1,0 +1,14 @@
+<root>
+	<block>
+		<gallery title="Фотографии">
+			<img src="hMet.jpg" alt="Металлический ящик" />
+			<img src="hMet1.jpg" alt="Металлический ящик" />
+		</gallery>
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

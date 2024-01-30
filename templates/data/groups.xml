@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<groups>
+	<group id="СЗ" name="Статическое зондирование" fullname="Оборудование для статического зондирования грунтов"
+		   img="" order="1" file="sz" news="5">
+		<complects>			
+			<complect id="ТЕСТ-К2М" order="1"/>
+			<complect id="ТЕСТ-К4М" order="2"/>
+			<complect id="ТЕСТ-12" order="3"/>
+			<complect id="ТЕСТ-К4U" order="4"/>
+			<complect id="УСЗ" order="5"/>
+			<complect id="ПУСЗ" order="6"/>
+			<complect id="БПД" order="7"/>
+			<complect id="ПРОБ" order="8"/>
+			<complect id="ФО5" order="9"/>
+		</complects>
+	</group>
+	<group id="ДЗ" name="Динамическое зондирование" fullname="Оборудование для динамического зондирования грунтов"
+		   img="" order="2" file="dz">
+		<complects>
+			<complect id="АДЗ" order="1"/>
+			<complect id="РДК" order="2"/>
+			<complect id="AdzFo" order="3"/>
+		</complects>
+	</group>
+	<group id="ПИ" name="Прессиометрические испытания" fullname="Оборудование для прессиометрических испытаний"
+		   img="" order="3" file="press" news="2" > <!--  -->
+		<complects>
+			<complect id="ПЭВ" order="1"/>
+			<!-- <complect id="ПЭВ_КАП" order="2"/> -->
+			<complect id="БД" order="3"/>
+			<complect id="ПЭВ+БП" order="4"/>
+			<complect id="УБ_П" order="5"/>
+		</complects>
+	</group>
+	<group id="ШИ" name="Штамповые испытания" fullname="Оборудование для штамповых испытаний" order="4" file="shw" news="2" >
+		<complects>
+			<complect id="ШВ" order="1"/>
+			<complect id="ШП" order="2"/>
+			<complect id="ШВ_КРП" order="3" />			
+			<complect id="ШП_КРП" order="4" />
+			<!-- <complect id="ШВ_КАП" order="5" /> -->
+			<complect id="ШГ" order="6"/>
+			<complect id="Ворот" order="7" />
+			<complect id="Компенсатор" order="8" />
+			<complect id="БД_Ш" order="9"/>
+			<complect id="ШВ+КРП+БП" order="10"/>
+			<complect id="ШП+КРП+ВД+БП" order="11"/>
+			<complect id="УБ_Ш" order="12"/>
+		</complects>
+	</group>
+	<group id="РИ" name="Ручной инструмент" fullname="Ручное буровое оборудование" img="" order="5">
+		<complects>
+			<complect id="РБК" order="1"/>
+			<complect id="КР" order="2"/>
+			<complect id="ПН" order="3"/>
+		</complects>
+	</group>
+	<group id="Р" name="Разное" fullname="Оборудование для испытаний трещиноватых скальных грунтов на водопроницаемость" img="" order="6">
+		<complects>
+			<complect id="КВП" order="1"/>
+		</complects>
+	</group>
+	<group id="ПР" name="Программное обеспечение" fullname="Программное обеспечение" img="" order="7">
+		<complects>
+			<complect id="GeoExplorer" order="1"/>
+			<complect id="GeoPush" order="2"/>
+			<!-- <complect id="PressPW" order="3"/> -->
+			<complect id="ShwPW" order="4"/>			
+			<complect id="Pneumator" order="5"/>
+			<complect id="Impeller" order="6"/>			
+			<complect id="Cheker" order="7"/>
+			<!-- <complect id="GeoFormatsImporter" order="8"/> -->
+		</complects>
+	</group>
+</groups>

@@ -1,0 +1,633 @@
+<?xml version="1.0" ?>
+<root>
+	<groups>
+		<group id="СЗ" name="Статическое зондирование" fullname="Оборудование для статического зондирования грунтов" img="" order="1">
+			<complects>
+				<complect id="ОБЗОР" order="1" />
+				<complect id="ТЕСТ-К2М" order="2" />
+				<complect id="ТЕСТ-К4" order="3" />
+				<complect id="ТЕСТ-12" order="4" />
+				<complect id="УСЗ" order="5" />
+				<complect id="БПД" order="6" />
+				<complect id="ПРОБ" order="7" />
+			</complects>
+		</group>
+		<group id="ДЗ" name="Динамическое зондирование" fullname="Оборудование для динамического зондирования грунтов" img="" order="2">
+			<complects>
+				<complect id="АДЗ" order="1" />
+				<complect id="РДК" order="2" />
+			</complects>
+		</group>
+		<group id="ПИ" name="Прессиометрические испытания" fullname="Оборудование для прессиометрических испытаний" img="" order="3">
+			<complects>
+				<complect id="ПЭВ" order="1" />
+				<complect id="КАП" order="2" />
+			</complects>
+		</group>
+		<group id="ШИ" name="Штамповые испытания" fullname="Оборудование для штамповых испытаний" img="" order="4">
+			<complects>
+				<complect id="ШВ" order="1" />
+				<complect id="ШП" order="2" />
+				<complect id="ШГ" order="3" />
+				<complect id="КРП" order="4" />
+				<complect id="КАП" order="5" />
+			</complects>
+		</group>
+		<group id="РИ" name="Ручной инструмент" fullname="Ручное буровое оборудование" img="" order="5">
+			<complects>
+				<complect id="РБК" order="1" />
+				<complect id="КР" order="2" />
+				<complect id="ПН" order="3" />
+			</complects>
+		</group>
+		<group id="Р" name="Разное" fullname="Разное" img="" order="6">
+			<complects>
+				<complect id="КВП" order="2" />
+			</complects>
+		</group>
+		<group id="ПР" name="Программное обеспечение" fullname="Программное обеспечение" img="" order="7">
+			<complects>
+				<complect id="GeoExplorer" order="1" />
+				<complect id="GeoPush" order="2" />
+				<complect id="PressPW" order="3" />
+				<complect id="ShwPW" order="4" />
+				<complect id="ShwKRP" order="5" />
+				<complect id="Pneumator" order="6" />
+				<complect id="Impeller" order="7" />
+			</complects>
+		</group>
+	</groups>
+	
+	<rows>
+		<!-- СТАТИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+		<row name="Резервный измерительный прибор ТЕСТ-АМ" id="АМ.02.02.01" price="69500" file="szpAM">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="2" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="2" />
+			</complects>
+		</row>
+		<row name="Контроллер ТЕСТ-К2М" id="К2М.02.02.01" price="89500" file="szkK2">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="1" />				
+			</complects>
+		</row>
+		<row name="Контроллер ТЕСТ-12" id="К12" price="99500" file="szkK12">
+			<complects>
+				<complect id="ТЕСТ-12" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Минипринтер CBM-910" id="СВМ-910" price="18500" file="szMPrint">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="2" />
+				<complect id="ТЕСТ-К4" count="0" base="0" order="2" />
+				<complect id="ТЕСТ-12" count="0" base="0" order="2" />				
+			</complects>
+		</row>
+		<row name="Радиокнопка РК-11" id="РК.05.01.01" price="9900" file="szRBut">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="3" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="3" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="3" />				
+			</complects>
+		</row>
+		<row name="Зонд тензометрический А2/150" id="А2М.15.02.00.00" price="25800" file="szZA2-150">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="5" />
+			</complects>
+		</row>
+		<row name="Зонд тензометрический А2/250" id="А2М.25.02.00.00" price="25800" file="szZA2-250">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="6" />
+			</complects>
+		</row>
+		<row name="Зонд тензометрический А2/350" id="А2М.35.02.00.00" price="25800" file="szZA2-350">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="3" base="1" order="6" />
+				<complect id="ТЕСТ-12" count="3" base="1" order="6" />
+			</complects>
+		</row>
+		<row name="Зонд тензометрический А3/350" id="А3М.25.01.00.00" price="45000" file="szZA3">
+			<complects>
+				<complect id="ТЕСТ-К4" count="3" base="1" order="6" />
+			</complects>
+		</row>		
+		<row name="Кабель зонда 30 м" id="К2М.02.30.01" price="9600" file="szKab">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="3" base="1" order="7" />
+				<complect id="ТЕСТ-К4" count="3" base="1" order="7" />
+				<complect id="ТЕСТ-12" count="3" base="1" order="7" />
+			</complects>
+		</row>
+		<row name="Кабель контрольный 3 м" id="КБ.02.30.01" price="1600" file="szKabKont">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="8" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="8" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="8" />
+			</complects>
+		</row>
+		<row name="Штанга зондировочная Ø36х8, ст.40Х, длина 1м" id="КЗАМ.02.07.00.01" price="2040" file="szSht">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="14" />
+				<complect id="ТЕСТ-К4" count="0" base="0" order="14" />
+				<complect id="ТЕСТ-12" count="0" base="0" order="14" />
+			</complects>
+		</row>
+		<row name="Штанга зондировочная КТ Ø36х10, длина 1м" id="ШтКТ10" price="3400" file="szSht10">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="14" />
+				<complect id="ТЕСТ-К4" count="0" base="0" order="14" />
+				<complect id="ТЕСТ-12" count="0" base="0" order="14" />
+			</complects>
+		</row>
+		<row name="Штанга зондировочная КТ Ø36х8, длина 1м" id="ШтКТ8" price="3200" file="szShtKTU">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="20" base="1" order="6" />
+				<complect id="ТЕСТ-К4" count="20" base="1" order="6" />
+				<complect id="БПД" count="2" base="1" order="6" />
+				<complect id="ТЕСТ-12" count="20" base="1" order="6" />
+			</complects>
+		</row>
+		<row name="Штанга зондировочная ЭК Ø36х10, длина 1м" id="ШтЭК10" price="6000" file="szShtEK">
+			<complects>
+				<complect id="БПД" count="20" base="1" order="9" />
+			</complects>
+		</row>
+		<row name="Наголовник З-50" id="КЗАМ.02.05.03.00" price="7200" file="szNagol">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="1" order="12" />
+				<complect id="ТЕСТ-К4" count="0" base="1" order="12" />
+				<complect id="ТЕСТ-12" count="0" base="1" order="12" />
+			</complects>
+		</row>
+		<row name="Наголовник Ш-55" id="КЗАМ.02.10.02.00" price="7200" file="szNagol55">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="11" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="11" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="11" />
+			</complects>
+		</row>
+		<row name="Вилка" id="КЗАМ.02.11.00.00" price="3800" file="szVilka">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="2" base="1" order="13" />
+				<complect id="ТЕСТ-К4" count="2" base="1" order="13" />
+				<complect id="ТЕСТ-12" count="2" base="1" order="13" />
+			</complects>
+		</row>
+		<row name="Устройство Т" id="УСЗН.93.00.00.00-01" price="14600" file="szTarU">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="10" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="10" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="10" />
+			</complects>
+		</row>
+		<row name="Образцовый динамометр ДОСМ 3-50У" id="ДОСМ 3-50" price="33800" file="szDosm">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="9" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="9" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="9" />
+			</complects>
+		</row>
+		<row name="Расширитель Л" id="КЗАМ.02.09.00.00" price="3700" file="szRashL">			
+			<id type="l" name="КЗАМ.02.09.00.00" />
+			<complects>
+				<complect id="ТЕСТ-К4" count="0" base="0" order="15" />
+			</complects>
+		</row>
+		<row name="Расширитель К" id="" price="3700" file="szRashK">
+			<id type="k" name="" />
+			<complects>
+				<complect id="ТЕСТ-К2М" count="2" base="1" order="15" />
+				<complect id="ТЕСТ-К4" count="2" base="1" order="15" />
+				<complect id="ТЕСТ-12" count="2" base="1" order="15" />
+			</complects>
+		</row>
+		<row name="Переходник К" id="" price="3700" file="szPerehK">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="2" base="1" order="16" />
+				<complect id="ТЕСТ-К4" count="2" base="1" order="16" />
+				<complect id="ТЕСТ-12" count="2" base="1" order="16" />
+			</complects>
+		</row>
+		<row name="Программа GeoExplorer" id="pGeoExplorer" price="25000" file="pGeoExplorer" tag="" tag_end="">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="5" />
+				<complect id="ТЕСТ-К4" count="1" base="1" order="5" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="5" />
+			</complects>
+		</row>
+		<row name="Прибор проверки кабелей и зондов ППКЗ-1" id="ППКЗ.01.00.00.00" price="11300" file="szPPKZ">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="1" base="1" order="4" />
+				<complect id="ТЕСТ-К4" count="0" base="0" order="4" />
+				<complect id="ТЕСТ-12" count="1" base="1" order="4" />
+			</complects>
+		</row>
+		<row name="Анкерная свая Ø350мм" id="КЗАМ.02.05.00.00" price="39500" file="szAnkSv">
+			<complects>
+				<complect id="ТЕСТ-К2М" count="0" base="0" order="2" />
+				<complect id="ТЕСТ-К4" count="0" base="0" order="2" />
+				<complect id="ТЕСТ-12" count="0" base="0" order="2" />
+			</complects>
+		</row>
+		<row name="Пробоотборник Р45/100" id="Проботб" price="38000" file="szProb">
+			<complects>
+				<complect id="УСЗ" count="0" base="0" order="8" />
+				<complect id="ПРОБ" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Гильза пробоотборника" id="szGilza" price="250" file="szGilza">
+			<complects>
+				<complect id="ПРОБ" count="0" base="0" order="2" />
+			</complects>
+		</row>
+		<row name="Контейнер пробоотборника" id="szKontProb" price="250" file="szKontProb">
+			<complects>
+				<complect id="ПРОБ" count="0" base="0" order="2" />
+			</complects>
+		</row>
+		<row name="Контроллер ТЕСТ-К4" id="К4.01.00.00.00" price="89500" file="szkK4">
+			<complects>
+				<complect id="ТЕСТ-К4" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Блок связи БС-3" id="К4.02.00.00.00" price="47900" file="szBlokS">
+			<complects>
+				<complect id="ТЕСТ-К4" count="1" base="1" order="2" />
+			</complects>
+		</row>
+		
+		<!-- УСЗ -->
+		<row name="Установка статического зондирования" id="" price="995000" file="" fixed="1">			
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="УСЗ" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Формирователь отсчетов ФО (глубиномер) для УСЗ" id="ФО" price="121000" file="uszFO">
+			<complects>
+				<complect id="УСЗ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		
+		<!-- БПД -->
+		<row name="Комплект БПД1" id="" price="53600" file="" fixed="1">			
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="БПД" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		
+		<!-- ДИНАМИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+		<row name="Штанга для динамического зондирования Ø42х9, ст.40Х, длина 1м" id="АДЗ1.00.00.00.01" price="2300"
+		file="dzSht">
+			<complects>
+				<complect id="АДЗ" count="30" base="1" order="1" />
+			</complects>
+		</row>
+										<!-- в цену комплекта входят еще 30 штанг по 2300 (+46000) -->
+		<row name="Адаптер динамического зондирования" id="АДЗ2.00.00.00.00" price="701000" file="" fixed="1"> 
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="АДЗ" count="1" base="1" order="1" />
+			</complects>
+		</row>		
+		<row name="Ручной динамический комплект РДК" id="" price="295000" file="" fixed="1">			
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="РДК" count="1" base="1" order="1" />
+			</complects>
+		</row>
+
+		<!-- ПРЕССИОМЕТРИЯ -->
+		<row name="Электровоздушный радиальный прессиометр ПЭВ-89МК" id="ПЭВБ.00.00.00.00" price="465000" file="" fixed="1">	
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="ПЭВ" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект автоматизации полевых испытаний грунтов КАП1" id="КАП1.00.00.00.00" price="335000" file="KAP">
+			<complects>
+				<complect id="ПЭВ" count="0" base="0" order="1" />
+				<complect id="ШВ" count="0" base="0" order="8" />
+				<complect id="КАП" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Стакан буровой Ø89х600" id="ПЭВБ.07.00.00.00" price="8800" file="prStakan">
+			<complects>
+				<complect id="ПЭВ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+
+		<!-- ШТАМП -->
+		<row name="Штамп ШВ60" id="ШВ60.00.00.00.00" price="799400" file="" fixed="1">
+			<complects> <!--(КОМПЛЕКТ) цена складывается из: Штамп + Переводник + Плоский штамп + КА А3 -->
+				<complect id="ШВ" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Штамп ШП20 с гидравлической нагрузочной системой" id="ШП20.00.00.00.00" price="1050000" file="" fixed="1">
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="ШП" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Штамп горячий ШП5000Т" id="ШП20.16.00.00.00" price="885000" file="" fixed="1"> 
+			<complects> <!--(КОМПЛЕКТ)-->
+				<complect id="ШГ" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект регистрации результатов штампового опыта КРП1" id="КРП1.00.00.00.00" price="335000" file="KRP">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="7" />
+				<complect id="КРП" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект анкерный А1" id="А1Ш.00.00.00.00" price="109300" file="sA1">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект анкерный А3" id="А3Ш.00.00.00.00" price="169100" file="sA3">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект анкерный А4" id="А4Ш.00.00.00.00" price="385000" file="sA4">
+			<complects>
+				<complect id="ШП" count="0" base="0" order="1" />
+				<complect id="ШГ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Комплект анкерный А5" id="А5Ш.00.00.00.00" price="395000" file="sA5">т
+			<complects>
+				<complect id="ШП" count="0" base="0" order="1" />
+				<complect id="ШГ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Переводник 127/146" id="ШВ60.00.00.00.04" price="35400" file="sPerev">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Удлинитель А" id="ШВ60.04.08.00.00" price="9900" file="sUdl">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Плоский штамп Ш-III" id="Ш-III" price="47400" file="sPlosk">
+			<complects>
+				<complect id="ШВ" count="0" base="0" order="1" />
+			</complects>
+		</row> 
+
+		<!-- РУЧНОЙ ИНСТРУМЕНТ -->
+		<row name="Комплектующие сдвигомера-крыльчатки" id="" price="48700" file="" fixed="1">
+			<complects>
+				<complect id="КР" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Комплектующие ручного пенетрометра РП-1" id="" price="46600" file="" fixed="1">
+			<complects>
+				<complect id="ПН" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Деревянный ящик" id="РБК.09.00" price="0.00" file="hWood">
+			<complects>
+				<complect id="РБК" count="1" base="1" order="6" />
+			</complects>
+		</row>
+		<row name="Металлический ящик" id="РБК.08.00" price="2000" file="hMet">
+			<complects>
+				<complect id="РБК" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Штанга буровая Ø25x1000" id="РБК.09.00" price="1250" file="hSht">
+			<id type="k" name="РБКК.02.00" />
+			<id type="l" name="РБК.02.00" />
+			<complects>
+				<complect id="РБК" count="10" base="1" order="1" />
+				<complect id="КР" count="10" base="1" order="1" />
+				<complect id="ПН" count="10" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Вороток разъемный под ключ 19 мм" id="РБК.01.00" price="3700" file="hVorot">
+			<id type="k" name="РБКК.01.00" />
+			<id type="l" name="РБК.01.00" />
+			<complects>
+				<complect id="РБК" count="1" base="1" order="5" />
+				<complect id="КР" count="1" base="1" order="5" />
+				<complect id="ПН" count="1" base="1" order="5" />
+			</complects>
+		</row>
+		<row name="Буровой стакан Ø73x250" id="РБК.05.00" price="2400" file="hStak">
+			<id type="k" name="РБКК.05.00" />
+			<id type="l" name="РБК.05.00" />
+			<complects>
+				<complect id="РБК" count="1" base="1" order="3" />
+				<complect id="КР" count="1" base="1" order="3" />
+				<complect id="ПН" count="1" base="1" order="3" />
+			</complects>
+		</row>
+		<row name="Шнек Ø62x200" id="РБК.04.00" price="1600" file="hShnek">
+			<id type="k" name="РБКК.04.00" />
+			<id type="l" name="РБК.04.00" />
+			<complects>
+				<complect id="РБК" count="1" base="1" order="2" />
+				<complect id="КР" count="1" base="1" order="2" />
+				<complect id="ПН" count="1" base="1" order="2" />
+			</complects>
+		</row>
+		<row name="Шнек Ø73x200" id="" price="1900" file="hShnek">
+			<id type="k" name="" />
+			<id type="l" name="" />
+			<complects>
+				<complect id="РБК" count="0" base="0" order="2" />
+				<complect id="КР" count="0" base="0" order="2" />
+				<complect id="ПН" count="0" base="0" order="2" />
+			</complects>
+		</row>
+		<row name="Змеевик Ø30x300" id="РБК.03.00" price="2000" file="hZmeev">
+			<id type="k" name="РБКК.03.00" />
+			<id type="l" name="РБК.03.00" />
+			<complects>
+				<complect id="РБК" count="1" base="1" order="4" />
+				<complect id="КР" count="1" base="1" order="4" />
+				<complect id="ПН" count="1" base="1" order="4" />
+			</complects>
+		</row>
+		<row name="Грунтоотборник Ø65x146" id="ГР.00.01.00" price="9900" file="hGrunt">
+			<id type="k" name="ГР.00.01.00-01" />
+			<id type="l" name="ГР.00.01.00" />
+			<complects>
+				<complect id="РБК" count="0" base="0" order="3" />
+				<complect id="КР" count="0" base="0" order="1" />
+				<complect id="ПН" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Кольцо к грунтоотборнику Ø56x24" id="ГР.00.01.03" price="200" file="hKolc">
+			<complects>
+				<complect id="РБК" count="0" base="0" order="10" />
+				<complect id="КР" count="0" base="0" order="1" />
+				<complect id="ПН" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Чехол брезентовый для ручного бурового инструмента" id="РБК.07.00" price="1900" file="hCheh">
+			<complects>
+				<complect id="РБК" count="0" base="0" order="2" />
+				<complect id="КР" count="0" base="0" order="1" />
+				<complect id="ПН" count="0" base="0" order="1" />
+			</complects>
+		</row>
+		<row name="Ложка буровая Ø59x370" id="РБК.05.05" price="3900" file="hLozk">
+		    <id type="k" name="РБКК.05.05" />
+			<id type="l" name="РБК.05.05" />
+			<complects>
+				<complect id="РБК" count="0" base="0" order="10" />
+				<complect id="КР" count="0" base="0" order="1" />
+				<complect id="ПН" count="0" base="0" order="1" />
+			</complects>
+		</row>
+
+		<!-- РАЗНОЕ -->
+		<row name="Комплект оборудования КВП1" id="" price="745000" file="" fixed="1"> <!--(КОМПЛЕКТ)-->
+			<complects>
+				<complect id="КВП" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		
+		<!-- ПРОГРАММЫ -->
+		<row name="Программа GeoExplorer" id="" price="25000" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="GeoExplorer" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа GeoPush" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="GeoPush" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа Pneumator" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="Pneumator" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа PressPW.MA" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="PressPW" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа ShwPW" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="ShwPW" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа ShwKRP" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->		
+			<complects>
+				<complect id="ShwKRP" count="1" base="1" order="1" />
+			</complects>
+		</row>
+		<row name="Программа Impeller" id="" price="0" file="" fixed="1"> <!--(КОМПЛЕКТ ПРОГРАММА)-->	
+			<complects>
+				<complect id="Impeller" count="1" base="1" order="1" />
+			</complects>
+		</row>		
+	</rows>		
+	
+	<complects>
+	
+		<!-- СТАТИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+		<complect name="Краткий обзор оборудования" id="ОБЗОР" tag="Описание" tag_end="31.12.2015" file="review" img="test-am_Z.jpg">
+			<description></description>
+		</complect>
+		<complect name="Комплект ТЕСТ-К2M" id="ТЕСТ-К2М" tag="" tag_end="" file="test-k2m" img="test-k2m_Z.jpg">
+			<description>Предназначен для зондирования немерзлых песчаных и глинистых грунтов электрическими аналоговыми зондами А2/350</description>
+		</complect>
+		<complect name="Комплект ТЕСТ-К4" id="ТЕСТ-К4" tag="" tag_end="" file="test-k4" img="test-k4_Z.jpg">
+			<description>Предназначен для зондирования трех- и четырехканальными цифровыми зондами, дополненными инклинометром, датчиком порового давления или температуры</description>
+		</complect>
+		<complect name="Комплект ТЕСТ-12" id="ТЕСТ-12" tag="Новинка" tag_end="27.11.2015" file="test-12" img="test-12_Z.jpg">
+			<description>Аналоговый комплект, модификация ТЕСТ-К2М, имеет расширенную шкалу измерений (1000 делений) и возможность сохранения в памяти тарировочных параметров пяти зондов</description>
+		</complect>		
+		<complect name="Комплект БПД1" id="БПД" tag="Новинка" tag_end="31.12.2015" file="BPD" img="szBPD_Z.jpg">
+			<description>Предназначен для передачи данных зондирования от цифровых зондов А3, А4/350 к измерительному прибору ТЕСТ-К4</description>
+		</complect>	
+		
+			<!-- УСЗ -->
+		<complect name="Установка статического зондирования грунтов УСЗ 15/36А (15/36Г)" id="УСЗ" tag="" tag_end="" file="usz" img="usz2_Z.jpg">
+			<description>Предназначена для статического зондирования грунтов по ГОСТ 19912-2012.</description>
+		</complect>
+		
+			<!-- Пробоотборник -->
+		<complect name="Пробоотборник Р45/100" id="ПРОБ" tag="" tag_end="" file="Prob" img="szProbKomp_Z.jpg">
+			<description>Пробоотборник Р 45/100 предназначен для отбора проб глинистых и песчаных грунтов, с помощью установок статического зондирования.</description>
+		</complect>
+		
+		<!-- ДИНАМИЧЕСКОЕ ЗОНДИРОВАНИЕ -->
+		<complect name="Адаптер динамического зондирования АДЗ-2" id="АДЗ" tag="" tag_end="" file="dzADZ" img="dzADZ2_Z.jpg">
+			<description>Предназначен для динамического зондирования грунтов по ГОСТ 19912-2012.</description>
+		</complect>
+		<complect name="Ручной динамический комплект РДК" id="РДК" tag="" tag_end="" file="dzRDK" img="dzRDK_Z.jpg">
+			<description>Предназначен для динамического зондирования грунтов и относится к установкам легкого типа.</description>
+		</complect>
+		
+		<!-- ПРЕССИОМЕТРИЯ -->
+		<complect name="Электровоздушный радиальный прессиометр ПЭВ-89МК" id="ПЭВ" tag="" tag_end="" file="PEV" img="prPEV_Z.jpg">
+			<description>Предназначен для определения деформационных характеристик грунтов в буровых скважинах.</description>
+		</complect>
+		<complect name="Комплект автоматизации КАП1" id="КАП" tag="" tag_end="" file="KAP" img="KAP_Z.jpg">
+			<description>Предназначен для использования с прессиометрами ПЭВ-89МК и штампами ШВ60. Комплект КАП1 позволяет полностью автоматизировать процесс выполнения полевых испытаний грунтов прессиометрами или штампами, сохранить и обработать результаты испытаний.</description>
+		</complect>		
+		
+		<!-- ШТАМП -->
+		<complect name="Штамп ШВ60" id="ШВ" tag="" tag_end="" file="SHW"
+		img="SHW_Z.jpg">
+			<description>Предназначен для определения деформационных характеристик грунтов в буровых скважинах.</description>
+		</complect>
+		<complect name="Штамп ШП20" id="ШП" tag="" tag_end="" file="SHP" img="SHP_Z.jpg">
+			<description>Предназначен для определения деформационных характеристик грунтов в забое горной выработки.</description>
+		</complect>
+		<complect name="Штамп горячий ШП5000Т" id="ШГ" tag="" tag_end="" file="SHG" img="SHG_Z.jpg">
+			<description>Предназначен для определения деформационных характеристик мерзлых грунтов.</description>
+		</complect>
+		<complect name="Комплект регистрации результатов штампового опыта КРП1" id="КРП" tag="" tag_end="" file="KRP" img="KRP_Z.jpg">
+			<description>Комплект КРП1 используется в составе винтового штампа ШВ60 и предназначен для проведения штамповых испытаний в полуавтоматическом режиме, в соответствии с требованиями ГОСТ 20276–2012.</description>
+		</complect>				
+		
+		<!-- РУЧНОЙ ИНСТРУМЕНТ -->
+		<complect name="Ручной буровой комплект геолога" id="РБК" tag="" tag_end="" file="hRBK" img="hRBK_Z.jpg">
+			<description>Предназначен для бурения скважин вручную в труднодоступных для техники местах.</description>
+		</complect>
+		<complect name="Сдвигомер-крыльчатка" id="КР" tag="" tag_end="" file="hKR" img="hKR_Z.jpg">
+			<description>Предназначен для испытаний слабых грунтов методом вращательного среза.</description>
+		</complect>
+		<complect name="Ручной пенетрометр РП-1" id="ПН" tag="" tag_end="" file="hPN" img="hPN_Z.jpg">
+			<description>Предназначен для испытаний слабых грунтов методом зондирования.</description>
+		</complect>
+		
+		<!-- РАЗНОЕ -->
+		<!-- <complect name="Уровнемер акустический УА-50" id="УА" tag="" tag_end="" file="rUA" img="rUA_Z.jpg">
+			<description>Предназначен для замера уровня воды в скважинах глубиной до 50 метров при производстве инженерно-геологических изысканий.</description>
+		</complect> -->
+		<complect name="Комплект оборудования КВП1" id="КВП" tag="" tag_end="" file="rKVP" img="rKVP_Z.jpg">
+			<description>Предназначен для определения в полевых условиях относительной водопроницаемости трещиноватых скальных грунтов в массиве.</description>
+		</complect>
+		
+		<!-- ПРОГРАММЫ -->
+		<complect name="GeoExplorer" id="GeoExplorer" tag="" tag_end="" file="pGeoExplorer" img="pGeoExplorer_Z.jpg">
+			<description>Программы серии Geoexplorer предназначены для обработки результатов статического зондирования грунтов и используются с комплектами аппаратуры ТЕСТ-К4, ТЕСТ-К2М, ТЕСТ-12</description>
+		</complect>
+		<complect name="GeoPush" id="GeoPush" tag="" tag_end="" file="pGeoPush" img="pGeoPush_Z.jpg">
+			<description>Программы серии Geoepush предназначены для обработки результатов динамического зондирования грунтов
+			и используются с комплектами оборудования Адаптер динамического зондирования АДЗ-2 и Ручной динамический комплект РДК</description>
+		</complect>		
+		<complect name="Pneumator" id="Pneumator" tag="" tag_end="" file="pPneumator" img="pPneumator_Z.jpg">
+			<description>Программа Pneumator предназначена для автоматизации проведения прессиометрических и штамповых испытаний с использованием комплекта КАП1</description>
+		</complect>
+		<complect name="PressPW" id="PressPW" tag="" tag_end="" file="pPressPW" img="pPressPW_Z.jpg">
+			<description>Программа PressPW.MA предназначена для обработки данных результатов испытаний грунтов радиальным прессиометром	ПЭВ-89МК</description>
+		</complect>
+		<complect name="ShwPW" id="ShwPW" tag="" tag_end="" file="pShwPW" img="pShwPW_Z.jpg">
+			<description>Программа ShwPW предназначена для обработки результатов штамповых опытов проведенных с применением штампов серии ШВ60 и ШП20</description>
+		</complect>
+		<complect name="Штамп-КРП" id="ShwKRP" tag="" tag_end="" file="pShwKRP" img="pShwKRP_Z.jpg">
+			<description>Программа Штамп-КРП предназначена для автоматической обработки результатов штамповых опытов проведенных штампом ШВ60 с комплектом регистрации КРП1</description>
+		</complect>
+		<complect name="Impeller" id="Impeller" tag="" tag_end="" file="pImpeller" img="pImpeller_Z.jpg">
+			<description>Программа Impeller предназначена для обработки результатов испытаний слабых грунтов методом вращательного среза cдвигомером-крыльчаткой и методом статического зондирования, выполняемым ручным пенетрометром</description>
+		</complect>
+		
+	</complects>
+</root>

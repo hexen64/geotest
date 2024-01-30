@@ -1,0 +1,20 @@
+<root>
+	<block>
+		<p>Предназначен для погружения зондировочных штанг буровыми установками типа УРБ-2А2, присоединительная резьба З-50</p>
+		<!-- <img src="/i/szNagol.jpg" alt="Общий вид." /> -->
+	</block>
+	
+	<block>		
+		<gallery title="Фотографии">		
+			<img src="szNagol.jpg" />
+		</gallery>
+	</block>		
+	
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>

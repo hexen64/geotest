@@ -30,6 +30,9 @@ class Variants
     #[ORM\Column(type: "boolean", options: ["default" => 0])]
     private $isBase;
 
+    #[ORM\Column(type: "integer",  options: ["default" => 0])]
+    private $position;
+
     #[ORM\Column(type: "boolean", options: ["default" => 1])]
     private $visible;
 
@@ -49,7 +52,7 @@ class Variants
     private Collection $orders;
 
 
-    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "variant", orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: VariantsRows::class, mappedBy: "variant", cascade: ['persist'], orphanRemoval: true)]
     #[Assert\Valid]
     private Collection $variantsRows;
 
@@ -132,6 +135,16 @@ class Variants
         $this->isBase = $isBase;
 
         return $this;
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): void
+    {
+        $this->position = $position;
     }
 
     public function isVisible(): ?bool
