@@ -1,0 +1,11 @@
+<root>
+	<block>
+		<p>см. <link to="БД_Ш">Блок Давления БД-1 (КРП1)</link></p> 
+	</block>
+	<block title="Добавить в заявку">
+		<order />
+	</block>
+	<block title="Применимость">
+		<usage />
+	</block>
+</root>
