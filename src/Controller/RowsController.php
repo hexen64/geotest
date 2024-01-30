@@ -38,32 +38,28 @@ class RowsController extends AbstractController
             throw $this->createNotFoundException();
         }
         $group = null;
-
+        $leftMenu = [];
         if ($groupId) {
             $group = $this->entityManager->getRepository(Groups::class)->find($groupId);
-        }
-
-
-        $leftMenu = [];
-
-        $qb = $this->entityManager->createQueryBuilder()
-            ->select('r.id', 'r.name', 'r.price', 'r.visible', 'r.fixed')
-            ->from(Rows::class, 'r')
-            ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'vr.rowId = r.id')
-            ->leftJoin('App:Variants', 'v', 'WITH', 'v.id = vr.variantId')
-            ->leftJoin('App:GroupsComplects', 'gc', 'WITH', 'gc.complectId = v.complectId')
-            ->leftJoin('App:Groups', 'g', 'WITH', 'g.id = gc.groupId')
-            ->where('gc.groupId = :group_id')
-            ->andWhere('r.visible = :visible')
-            ->andWhere('r.fixed = :fixed')
-            ->orderBy('r.price', 'DESC')
-            ->distinct()
-            ->setParameter('group_id', $groupId)
-            ->setParameter('visible', 1)
-            ->setParameter('fixed', 0);
-        $rows = $qb->getQuery()->getResult();
-        foreach ($rows as $rowItem) {
-            $leftMenu[] = $rowItem;
+            $qb = $this->entityManager->createQueryBuilder()
+                ->select('r.id', 'r.name', 'r.price', 'r.visible', 'r.fixed')
+                ->from(Rows::class, 'r')
+                ->leftJoin('App:VariantsRows', 'vr', 'WITH', 'vr.rowId = r.id')
+                ->leftJoin('App:Variants', 'v', 'WITH', 'v.id = vr.variantId')
+                ->leftJoin('App:GroupsComplects', 'gc', 'WITH', 'gc.complectId = v.complectId')
+                ->leftJoin('App:Groups', 'g', 'WITH', 'g.id = gc.groupId')
+                ->where('gc.groupId = :group_id')
+                ->andWhere('r.visible = :visible')
+                ->andWhere('r.fixed = :fixed')
+                ->orderBy('r.price', 'DESC')
+                ->distinct()
+                ->setParameter('group_id', $groupId)
+                ->setParameter('visible', 1)
+                ->setParameter('fixed', 0);
+            $rows = $qb->getQuery()->getResult();
+            foreach ($rows as $rowItem) {
+                $leftMenu[] = $rowItem;
+            }
         }
 
         $form = $this->createForm(RowType::class, $row);
