@@ -16,6 +16,10 @@ import 'owl.carousel';
 
 $(document).ready(function() {
     $('.owl-carousel').owlCarousel({
-        // Configure Owl Carousel options here
+        loop: false,
+        nav: true,
+        navText: ['', ''],
+        dots: false,
+        autoWidth: true
     });
 });
