@@ -237,9 +237,9 @@ final class XmlRenderer
             $thumb = $matches[1] . '_' . $params[$type]['thumb'] . '.' . $matches[2];
             $md5 = md5_file($img_dir . '/' . $file);
 
-            if (file_exists($img_dir . '/' . $thumb)) {
-                $exif = exif_read_data($img_dir . '/' . $thumb);
-            }
+//            if (file_exists($img_dir . '/' . $thumb)) {
+//                $exif = exif_read_data($img_dir . '/' . $thumb);
+//            }
 
 //            if (!isset($exif) or !isset($exif['COMMENT'][0]) or $exif['COMMENT'][0] != $md5) {
 //                $cmd = 'gm convert -interlace line -resize ' . $params[$type]['resize'] . ' -comment \'' . $md5 . '\' ' . $img_dir . '/' . $file . ' ' . $img_dir . '/' . $thumb;
