@@ -40,7 +40,7 @@ class RowsType extends AbstractType
                     $nameRoute = $this->router->generate('app_row_show', [
                         'rowId' => $rowId,
                         'groupId' => null
-                    ], UrlGeneratorInterface::ABSOLUTE_URL);
+                    ], UrlGeneratorInterface::ABSOLUTE_PATH);
                     $name = '<a href="' . $nameRoute . '">' . $data->getName() . '</a>';
                 }
 
