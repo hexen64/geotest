@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Orders;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -12,11 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -71,7 +71,7 @@ class OrdersType extends AbstractType
                 'fio',
                 TextType::class,
                 [
-                    'required' => true,
+                    'required' => false,
                     'label' => false,
                     'attr' => [
                         'placeholder' => 'Как вас зовут',
@@ -99,7 +99,7 @@ class OrdersType extends AbstractType
                 'email',
                 TextType::class,
                 [
-                    'required' => true,
+                    'required' => false,
                     'label' => false,
                     'attr' => [
                         'placeholder' => 'E-mail',
@@ -159,6 +159,17 @@ class OrdersType extends AbstractType
                         'style' => 'display:none',
                     ],
                 ]
+            )->add('terms', CheckboxType::class, [
+                    'required' => false,
+                    'mapped' => false,
+                    'label' => false,
+                    'attr' => ['id' => 'terms_checkbox'], // Добавляем ID для JavaScript
+                    'constraints' => [
+                        new IsTrue([
+                            'message' => 'Необходимо подтвердить согласие на обработку персональных данных'
+                        ])
+                    ]
+                ]
             )->add(
                 'ordersVariants',
                 CollectionType::class,
@@ -204,7 +215,7 @@ class OrdersType extends AbstractType
         ]);
     }
 
-    public static function getDelivery ()
+    public static function getDelivery()
     {
         return self::$delivery;
     }

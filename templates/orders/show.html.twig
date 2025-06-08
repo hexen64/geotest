@@ -134,9 +134,14 @@
                 (Глава&nbsp;26.2
                 Налогового кодекса&nbsp;РФ).</p>
 
-            <div class="form-row">
+            <div class="form-row {% if form.fio.vars.errors|length > 0 %}has-error{% endif %}">
                 {{ form_widget(form.fio) }}
-                {{ form_errors(form.fio) }}
+                {% if form.fio.vars.errors|length > 0 %}
+                    {% for error in form.fio.vars.errors %}
+                        <div class="error-text">   {{ error.message }}<br>
+                    {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             <div class="form-row">
                 {{ form_widget(form.firm) }}
@@ -146,9 +151,14 @@
                 {{ form_widget(form.phone) }}
                 {{ form_errors(form.phone) }}
             </div>
-            <div class="form-row">
+            <div class="form-row {% if form.email.vars.errors|length > 0 %}has-error{% endif %}">
                 {{ form_widget(form.email) }}
-                {{ form_errors(form.email) }}
+                {% if form.email.vars.errors|length > 0 %}
+                    {% for error in form.email.vars.errors %}
+                        <div class="error-text">   {{ error.message }}<br>
+                    {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             <div class="form-row">
                 {{ form_widget(form.address) }}
@@ -161,7 +171,8 @@
             <div class="form-row">
                 <label for="orders_delivery">Способ доставки</label>
                 <ul class="radio_list">
-                    <li><input name="orders[delivery]" type="radio" value="firm"
+                    <li>
+                        <input name="orders[delivery]" type="radio" value="firm"
                                id="orders_delivery_firm"/>&nbsp;<label for="orders_delivery_firm">На склад
                             заказчика</label>
                     </li>
@@ -174,17 +185,74 @@
                     </li>
                 </ul>
             </div>
-            {{ form_rest(form) }}
-            {#            {{ form_widget(form.save, { #}
-            {#                'attr': {'class': 'btn btn-primary btn-lg w100 btn_order'} #}
-            {#            }) }} #}
-            <p class="text-center">Мы свяжемся с вами в течение рабочего дня</p>
+            <div class="form-row">
+
+                <div class="form-row">
+                    {{ form_widget(form.terms) }}
+                    <span style="font-size: 15px">Я&nbsp;даю свое согласие на&nbsp;обработку моих персональных данных,
+                    в&nbsp;соответствии с&nbsp;Федеральным законом от&nbsp;27.07.2006 года &#8470;&nbsp;152-ФЗ &laquo;О&nbsp;персональных данных&raquo;, на&nbsp;условиях и&nbsp;для целей, определенных в&nbsp;
+                </span>
+                    <div class="terms">
+                        <div class="overview-link" style="display: inline; font-size: 15px">
+                            <a href="#">Согласии на&nbsp;обработку персональных данных</a>
+                        </div>
+                        <div class="overview-popup">
+                            <div class="overview-popup-text">
+                                <div class="overview-popup-close"></div>
+                                {{ include('html/terms.htm') }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if form.terms.vars.errors|length > 0 %}
+                        {% for error in form.terms.vars.errors %}
+                            <div class="error-text">{{ error.message }}<br>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                {{ form_rest(form) }}
+                {#            {{ form_widget(form.save, { #}
+                {#                'attr': {'class': 'btn btn-primary btn-lg w100 btn_order'} #}
+                {#            }) }} #}
+                <p class="text-center">Мы свяжемся с вами в течение рабочего дня</p>
+            </div>
         </div>
     </div>
     </form>
 {% endblock %}
 {% block javascripts %}
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const overviewLink = document.querySelector('.overview-link');
+            const overviewPopup = document.querySelector('.overview-popup');
+            const overviewPopupClose = document.querySelector('.overview-popup-close');
+            const overviewPopupText = document.querySelector('.overview-popup-text');
+
+            overviewLink.addEventListener('click', function (e) {
+                overviewPopup.style.display = 'block';
+                document.body.classList.add('no-scroll');
+                e.stopPropagation();
+            });
+
+            overviewPopupClose.addEventListener('click', function (e) {
+                overviewPopup.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+                e.stopPropagation();
+            });
+
+            overviewPopupText.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+
+            window.addEventListener('click', function () {
+                overviewPopup.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+            });
+        });
+
         function deleteItem(itemId, type) {
             if (confirm('Удалить?')) {
                 let route;

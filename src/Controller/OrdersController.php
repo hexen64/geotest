@@ -78,36 +78,34 @@ class OrdersController extends AbstractController
     }
 
     #[Route('/order/{orderId}', name: 'app_order_save', methods: ['POST'])]
-    public function save(int $orderId, Request $request)
+    public function save(int $orderId, Request $request): Response
     {
         $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
         $form = $this->createForm(OrdersType::class, $order);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $response = new Response();
-                $response->headers->clearCookie('order_id');
-                $response->headers->setCookie(new Cookie('email', $order->getEmail(), time() + $this->getParameter('app_cookie_expire')));
-                $response->sendHeaders();
-                $order = $form->getData();
-                $this->entityManager->flush();
-                return $this->redirectToRoute('app_order_done', ['orderId' => $order->getId()]);
-            }
-            $formErrors = $form->getErrors(true, true);
-            foreach ($formErrors as $error) {
-                $fieldName = $error->getOrigin()->getName();
-                $fieldError = $error->getMessage();
-                $errors['form'][$fieldName] = $fieldError;
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $response = new Response();
+            $response->headers->clearCookie('order_id');
+            $response->headers->setCookie(new Cookie('email', $order->getEmail(), time() + $this->getParameter('app_cookie_expire')));
+            $response->sendHeaders();
+
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_order_done', ['orderId' => $order->getId()]);
         }
 
-        return $this->redirectToRoute('app_order', ['orderId' => $order->getId()]);
+        $orderTotal = $this->orderService->getTotal($order->getId());
+
+        return $this->render('orders/show.html.twig', [
+            'form' => $form->createView(),
+            'orderId' => $order->getId(),
+            'order_total' => $orderTotal,
+        ]);
     }
 
 
     #[Route('/order/done/{orderId}', name: 'app_order_done', methods: ['GET'])]
-    public function done(int $orderId, Request $request)
+    public function done(int $orderId, Request $request):  Response
     {
         $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
         $orderData = $this->receiptService->create($order);
