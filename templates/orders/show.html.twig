@@ -171,20 +171,16 @@
             <div class="form-row">
                 <label for="orders_delivery">Способ доставки</label>
                 <ul class="radio_list">
-                    <li>
-                        <input name="orders[delivery]" type="radio" value="firm"
-                               id="orders_delivery_firm"/>&nbsp;<label for="orders_delivery_firm">На склад
-                            заказчика</label>
-                    </li>
-                    <li><input name="orders[delivery]" type="radio" value="firm+sklad"
-                               id="orders_delivery_firm_sklad"/>&nbsp;<label for="orders_delivery_firm_sklad">На
-                            склад транспортной компании</label></li>
-                    <li><input name="orders[delivery]" type="radio" value="self"
-                               id="orders_delivery_self"/>&nbsp;<label
-                                for="orders_delivery_self">Самовывоз</label>
-                    </li>
+                    {% for child in form.delivery %}
+                        <li>
+                            {{ form_widget(child) }}
+                            {{ form_label(child) }}
+                        </li>
+                    {% endfor %}
                 </ul>
+                {{ form_errors(form.delivery) }}
             </div>
+
             <div class="form-row">
 
                 <div class="form-row">
@@ -226,6 +222,7 @@
 {% block javascripts %}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
             const overviewLink = document.querySelector('.overview-link');
             const overviewPopup = document.querySelector('.overview-popup');
             const overviewPopupClose = document.querySelector('.overview-popup-close');
@@ -251,7 +248,22 @@
                 overviewPopup.style.display = 'none';
                 document.body.classList.remove('no-scroll');
             });
+
+
+            const firstError = document.querySelector('.has-error, .error-text');
+            if (firstError) {
+                firstError.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                const errorInput = firstError.querySelector('input, textarea');
+                if (errorInput) {
+                    errorInput.focus();
+                }
+            }
         });
+
 
         function deleteItem(itemId, type) {
             if (confirm('Удалить?')) {

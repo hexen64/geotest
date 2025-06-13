@@ -149,17 +149,17 @@ class OrdersType extends AbstractType
                 ]
             )
             ->add('delivery', ChoiceType::class, [
-                    'required' => false,
-                    'label' => false,
-                    'choices' => self::$delivery,
-                    'expanded' => true,
-                    'multiple' => false,
-                    'data' => 'firm',
-                    'attr' => [
-                        'style' => 'display:none',
-                    ],
-                ]
-            )->add('terms', CheckboxType::class, [
+                'required' => true,
+                'label' => 'Способ доставки',
+                'choices' => self::$delivery,
+                'expanded' => true,
+                'multiple' => false,
+                'data' => 'firm',
+                'label_attr' => ['style' => 'display:none'],
+                'constraints' => [
+                    new NotBlank(['message' => 'Выберите способ доставки']),
+                ],
+            ])->add('terms', CheckboxType::class, [
                     'required' => false,
                     'mapped' => false,
                     'label' => false,
@@ -201,10 +201,11 @@ class OrdersType extends AbstractType
                 ]
             )
             ->add('save', SubmitType::class, ['label' => 'Отправить заказ', 'attr' => [
-                'class' => 'btn btn-primary btn-lg w100 btn_order'
+                'class' => 'btn btn-primary btn-lg w100 btn_order',
+                'data-index' => $order->getId(),
             ]]);
 
-        $builder->get('delivery')->resetViewTransformers();
+//        $builder->get('delivery')->resetViewTransformers();
     }
 
     public function configureOptions(OptionsResolver $resolver): void
