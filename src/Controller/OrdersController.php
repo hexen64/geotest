@@ -221,7 +221,10 @@ class OrdersController extends AbstractController
             }
 
             $entity = $entityMap[$id];
-            $entity->setCnt($item['cnt']);
+            if (is_int($item['cnt'])) {
+                $entity->setCnt($item['cnt']);
+            }
+
         }
     }
 
