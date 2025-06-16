@@ -80,6 +80,27 @@ class OrdersController extends AbstractController
     #[Route('/order/{orderId}', name: 'app_order_save', methods: ['POST'])]
     public function save(int $orderId, Request $request): Response
     {
+
+        $data = $request->request->all()['orders'];
+        $variantData = $data['ordersVariants'] ?? [];
+        $rowData = $data['ordersRows'] ?? [];
+
+        if (!empty($variantData)) {
+            $this->updateEntitiesCount(
+                OrdersVariants::class,
+                $variantData,
+            );
+        }
+
+        if (!empty($rowData)) {
+            $this->updateEntitiesCount(
+                OrdersRows::class,
+                $rowData,
+            );
+        }
+
+        $this->entityManager->flush();
+
         $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
         $form = $this->createForm(OrdersType::class, $order);
         $form->handleRequest($request);
