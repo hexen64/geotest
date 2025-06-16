@@ -126,7 +126,7 @@ class OrdersController extends AbstractController
 
 
     #[Route('/order/done/{orderId}', name: 'app_order_done', methods: ['GET'])]
-    public function done(int $orderId, Request $request):  Response
+    public function done(int $orderId, Request $request): Response
     {
         $order = $this->entityManager->getRepository(Orders::class)->find($orderId);
         $orderData = $this->receiptService->create($order);
@@ -193,6 +193,36 @@ class OrdersController extends AbstractController
             return new JsonResponse(['success' => true]);
         }
         return new JsonResponse(['success' => false]);
+    }
+
+    private function updateEntitiesCount(
+        string $entityClass,
+        array  $items,
+    ): void
+    {
+        if (empty($items)) {
+            return;
+        }
+
+        $ids = array_column($items, 'id');
+        $repository = $this->entityManager->getRepository($entityClass);
+        $entities = $repository->findBy(['id' => $ids]);
+
+        $entityMap = [];
+        foreach ($entities as $entity) {
+            $entityMap[$entity->getId()] = $entity;
+        }
+
+        foreach ($items as $item) {
+            $id = $item['id'] ?? null;
+
+            if (!$id || !isset($entityMap[$id])) {
+                continue;
+            }
+
+            $entity = $entityMap[$id];
+            $entity->setCnt($item['cnt']);
+        }
     }
 
 }
